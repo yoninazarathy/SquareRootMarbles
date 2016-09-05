@@ -8,7 +8,14 @@
 
 import Foundation
 
+
+//This class contains a representation of game level
+//This includes: 
+//              (1) The design of the level.
+//              (2) The current playing information 
+//              (3) History of playing (e.g. high scores/played, not played etc...)
 class GameLevelModel{
     
-    // test
+
+    
 }

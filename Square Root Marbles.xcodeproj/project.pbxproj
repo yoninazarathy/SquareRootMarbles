@@ -15,6 +15,10 @@
 		204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 204663DD1D795A4C0019B96A /* Assets.xcassets */; };
 		204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204663DF1D795A4C0019B96A /* LaunchScreen.storyboard */; };
 		204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663E81D79615A0019B96A /* GameLevelModel.swift */; };
+		204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */; };
+		204663EF1D7963ED0019B96A /* GameLevelPlayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */; };
+		206540981D7C0C0F0082D92D /* HexagonsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */; };
+		2065409A1D7C16590082D92D /* GraphicsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540991D7C16590082D92D /* GraphicsConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		204663E01D795A4C0019B96A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		204663E21D795A4C0019B96A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		204663E81D79615A0019B96A /* GameLevelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelModel.swift; sourceTree = "<group>"; };
+		204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelDesignInfo.swift; sourceTree = "<group>"; };
+		204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelPlayInfo.swift; sourceTree = "<group>"; };
+		206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonsHelpers.swift; sourceTree = "<group>"; };
+		206540991D7C16590082D92D /* GraphicsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,7 @@
 		204663C61D795A4C0019B96A = {
 			isa = PBXGroup;
 			children = (
+				204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */,
 				204663D11D795A4C0019B96A /* Square Root Marbles */,
 				204663D01D795A4C0019B96A /* Products */,
 			);
@@ -63,7 +72,10 @@
 				204663D21D795A4C0019B96A /* AppDelegate.swift */,
 				204663D41D795A4C0019B96A /* GameScene.sks */,
 				204663D61D795A4C0019B96A /* GameScene.swift */,
+				206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */,
+				206540991D7C16590082D92D /* GraphicsConstants.swift */,
 				204663E81D79615A0019B96A /* GameLevelModel.swift */,
+				204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */,
 				204663D81D795A4C0019B96A /* GameViewController.swift */,
 				204663DA1D795A4C0019B96A /* Main.storyboard */,
 				204663DD1D795A4C0019B96A /* Assets.xcassets */,
@@ -145,7 +157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2065409A1D7C16590082D92D /* GraphicsConstants.swift in Sources */,
 				204663D71D795A4C0019B96A /* GameScene.swift in Sources */,
+				204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */,
+				206540981D7C0C0F0082D92D /* HexagonsHelpers.swift in Sources */,
+				204663EF1D7963ED0019B96A /* GameLevelPlayInfo.swift in Sources */,
 				204663D91D795A4C0019B96A /* GameViewController.swift in Sources */,
 				204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */,
 				204663D31D795A4C0019B96A /* AppDelegate.swift in Sources */,
@@ -298,6 +314,7 @@
 				204663E71D795A4C0019B96A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
