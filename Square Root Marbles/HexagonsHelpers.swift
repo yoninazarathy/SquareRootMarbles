@@ -26,6 +26,24 @@ func ==(lhs: HexCoordinates, rhs: HexCoordinates) -> Bool {
     return lhs.values == rhs.values
 }
 
+
+struct SquareCoordinates: Hashable{
+    let values : (i: Int,j: Int)
+    
+    var hashValue : Int {
+        get {
+            let (a,b) = values
+            return a.hashValue &* 31 &+ b.hashValue
+        }
+    }
+
+}
+// comparison function for conforming to Equatable protocol
+func ==(lhs: SquareCoordinates, rhs: SquareCoordinates) -> Bool {
+    return lhs.values == rhs.values
+}
+
+
 func hexagonPointArray(cx:CGFloat,cy:CGFloat,radius:CGFloat)->[CGPoint] {
     let angleDelta = CGFloat(M_PI/3)
     let angleOffset = CGFloat(M_PI/6)

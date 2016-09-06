@@ -17,11 +17,36 @@ extension CGPoint: Hashable {
 }
 
 
+struct ObstacleInfo{
+    
+}
+
+struct SinkInfo{
+    let sinkLocation: CGPoint
+    
+    init(location: CGPoint){
+        sinkLocation = location
+    }
+}
 
 
+//QQQQ? Class or Struct
+//QQQQ? How to init the dictionary and set
 class GameLevelDesignInfo{
+    let levelNumber:    Int
+    let startLocation:  CGPoint
+    let sinkInfo:       SinkInfo
+    let locationsOfSquarers:        Set<CGPoint>? = nil
+    let locationOfSquareRooters:    Set<CGPoint>? = nil
+    let obstacleMap:                Dictionary<SquareCoordinates,ObstacleInfo>
     
-    let locationsOfSquarers:    Set<CGPoint>? = nil
-    
-    
+    init(level: Int){
+        levelNumber = level
+        
+        //QQQQ Read here from JSON File
+        startLocation = CGPoint(x: 0,y: 0)
+        sinkInfo = SinkInfo(location: CGPoint(x:0,y:0))
+        obstacleMap = Dictionary<SquareCoordinates,ObstacleInfo>()
+        
+    }
 }

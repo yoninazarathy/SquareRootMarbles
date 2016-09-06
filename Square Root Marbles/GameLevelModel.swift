@@ -15,7 +15,11 @@ import Foundation
 //              (2) The current playing information 
 //              (3) History of playing (e.g. high scores/played, not played etc...)
 class GameLevelModel{
+    let levelNumber:    Int
+    let designInfo: GameLevelDesignInfo
     
-
-    
+    init(level: Int){
+        levelNumber = level
+        designInfo = GameLevelDesignInfo(level: level)
+    }
 }
