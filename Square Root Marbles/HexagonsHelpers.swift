@@ -10,6 +10,58 @@ import Foundation
 import UIKit
 import SpriteKit
 
+
+
+struct SquareCoordinates: Hashable{
+    let values : (sx: Int,sy: Int)
+    
+    var hashValue : Int {
+        get {
+            let (a,b) = values
+            return a.hashValue &* 31 &+ b.hashValue
+        }
+    }
+    
+    func rect() -> CGRect{
+        let x = centerPointX + Double(values.sx) * obstacleWidth
+        let y = centerPointY + Double(values.sy) * obstacleHeight
+        return CGRect(origin: CGPoint(x: x,y: y), size: CGSize(width: obstacleWidth,height: obstacleHeight))
+    }
+}
+
+// comparison function for conforming to Equatable protocol
+func ==(lhs: SquareCoordinates, rhs: SquareCoordinates) -> Bool {
+    return lhs.values == rhs.values
+}
+
+//QQQQ Not sure if to use that
+extension Dictionary {
+    static func loadJSONFromBundle(filename: String) -> Dictionary <String, AnyObject>? {
+        var dataOK: NSData
+        var dictionaryOK: NSDictionary = NSDictionary()
+        if let path = NSBundle.mainBundle().pathForResource(filename, ofType: ".json") {
+            let _: NSError?
+            do {
+                let data = try NSData(contentsOfFile: path, options: NSDataReadingOptions()) as NSData!
+                dataOK = data
+            }
+            catch {
+                print("Could not load level file: \(filename), error: \(error)")
+                return nil
+            }
+            do {
+                let dictionary = try NSJSONSerialization.JSONObjectWithData(dataOK, options: NSJSONReadingOptions()) as AnyObject!
+                dictionaryOK = (dictionary as! NSDictionary as? Dictionary <String, AnyObject>)!
+            }
+            catch {
+                print("Level file '\(filename)' is not valid JSON: \(error)")
+                return nil
+            }
+        }
+        return dictionaryOK as? Dictionary <String, AnyObject>
+    }
+}
+
 struct HexCoordinates: Hashable{
     let values : (q: Int,r: Int)
     
@@ -23,23 +75,6 @@ struct HexCoordinates: Hashable{
 
 // comparison function for conforming to Equatable protocol
 func ==(lhs: HexCoordinates, rhs: HexCoordinates) -> Bool {
-    return lhs.values == rhs.values
-}
-
-
-struct SquareCoordinates: Hashable{
-    let values : (i: Int,j: Int)
-    
-    var hashValue : Int {
-        get {
-            let (a,b) = values
-            return a.hashValue &* 31 &+ b.hashValue
-        }
-    }
-
-}
-// comparison function for conforming to Equatable protocol
-func ==(lhs: SquareCoordinates, rhs: SquareCoordinates) -> Bool {
     return lhs.values == rhs.values
 }
 
@@ -74,6 +109,14 @@ func hexagonBezier(cx:CGFloat, cy:CGFloat, radius:CGFloat) -> UIBezierPath {
     bez.fill()
     return bez
 }
+
+
+func squareOfPoint(x: Double, y: Double) -> SquareCoordinates{
+    let sx = Int(round((x-centerPointX+obstacleWidth/2)/obstacleWidth))-1
+    let sy = Int(round((y-centerPointY+obstacleHeight/2)/obstacleHeight))-1
+    return SquareCoordinates(values: (sx, sy))
+}
+
 
 
 //QQQQ This uses stuff from GraphicsConstants.swift, MAYBE ENCAPSULATE

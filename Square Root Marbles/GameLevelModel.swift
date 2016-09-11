@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum BallsState{
+    case line
+    case square
+}
 
 //This class contains a representation of game level
 //This includes: 
@@ -18,8 +22,11 @@ class GameLevelModel{
     let levelNumber:    Int
     let designInfo: GameLevelDesignInfo
     
+    var ballsState: BallsState
+    
     init(level: Int){
         levelNumber = level
         designInfo = GameLevelDesignInfo(level: level)
+        ballsState = BallsState.square //QQQQ maybe want to start as line sometimes
     }
 }

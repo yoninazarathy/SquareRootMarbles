@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SpriteKit
+
 
 class GameModel{
     

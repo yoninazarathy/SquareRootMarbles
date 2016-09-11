@@ -8,45 +8,24 @@
 
 import SpriteKit
 
-class IntroScene: SKScene {
+class IntroScene: GeneralScene {
     
-    var obstacleMap = Dictionary<HexCoordinates,SKShapeNode>()
-    
-    func createObstacleNode(q: Int, r: Int) -> SKShapeNode{
-        let path = hexagonPath(0, cy: 0, radius: CGFloat(hexSize))
-        let node = SKShapeNode(path: path)
-        node.position = pointOfHexagonCenter(q, r: r)
-        node.fillColor = SKColor.blueColor()
-        node.strokeColor = SKColor.redColor()
-        node.lineWidth = 0
-        return node
-    }
+    var timer: NSTimer? = nil
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.blackColor()
-        
+        //QQQQ problem if clicked before - need to kill timer
+        timer = NSTimer.scheduledTimerWithTimeInterval(timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
+
     }
     
+    func timerExpired(){
+            gameAppDelegate!.changeView(AppState.menuScene)
+    }
+
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let hexCoords = hexagonOfPoint(Double(location.x), y: Double(location.y))
-            
-            var node = obstacleMap[hexCoords]
-            if node == nil{
-                node = createObstacleNode(hexCoords.values.q, r: hexCoords.values.r)
-                node!.fillColor = SKColor.whiteColor()
-                obstacleMap[hexCoords] = node
-                self.addChild(node!)
-            }else{
-                //node!.fillColor = SKColor.blackColor()
-                node?.removeFromParent()
-                obstacleMap[hexCoords] = nil
-            }
-            
-        }
+        timer!.invalidate()
+        gameAppDelegate!.changeView(AppState.menuScene)
     }
     
     override func update(currentTime: CFTimeInterval) {

@@ -8,45 +8,68 @@
 
 import SpriteKit
 
-class InstructionsScene: SKScene {
+class InstructionsScene: GeneralScene {
     
-    var obstacleMap = Dictionary<HexCoordinates,SKShapeNode>()
+    var sceneCam: SKCameraNode!
     
-    func createObstacleNode(q: Int, r: Int) -> SKShapeNode{
-        let path = hexagonPath(0, cy: 0, radius: CGFloat(hexSize))
-        let node = SKShapeNode(path: path)
-        node.position = pointOfHexagonCenter(q, r: r)
-        node.fillColor = SKColor.blueColor()
-        node.strokeColor = SKColor.redColor()
-        node.lineWidth = 0
-        return node
-    }
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.blackColor()
+        self.backgroundColor = SKColor.orangeColor()
+        
+        //QQQQ How do I initilize an array member?
+        
+        for i in 1.stride(to: numLevels, by: 2) {
+            var x = 120
+            var y = 1300-75*(i-1)
+            var shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
+            shapeNode.zPosition = -5
+            shapeNode.fillColor = SKColor.yellowColor()
+            shapeNode.strokeColor = SKColor.blueColor()
+            self.addChild(shapeNode)
+            x = 414-120
+            y = 1300-75*(i-1)
+            
+            shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
+            shapeNode.zPosition = -5
+            shapeNode.fillColor = SKColor.yellowColor()
+            shapeNode.strokeColor = SKColor.blueColor()
+            self.addChild(shapeNode)
+        }
+        
+        sceneCam = SKCameraNode() //initialize your camera
+        sceneCam.position = CGPoint(x: size.width/2, y: size.height/2)
+        self.camera = sceneCam  //set the scene's camera
+        addChild(sceneCam) //add camera to scene
+        
         
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Called when a touch begins */
+        print("need to get out of instruction scene")
+        //(scene as! GameLevelScene).gameAppDelegate!.changeView(AppState.gameActionPaused)
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
         
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let hexCoords = hexagonOfPoint(Double(location.x), y: Double(location.y))
-            
-            var node = obstacleMap[hexCoords]
-            if node == nil{
-                node = createObstacleNode(hexCoords.values.q, r: hexCoords.values.r)
-                node!.fillColor = SKColor.whiteColor()
-                obstacleMap[hexCoords] = node
-                self.addChild(node!)
-            }else{
-                //node!.fillColor = SKColor.blackColor()
-                node?.removeFromParent()
-                obstacleMap[hexCoords] = nil
-            }
-            
+        let positionInScene = touch!.locationInNode(self)
+        let previousPosition = touch!.previousLocationInNode(self)
+        let translation = CGPoint(x: 0, y: positionInScene.y - previousPosition.y)
+        
+        var newYPosition = sceneCam.position.y - translation.y
+        //QQQQ adjust these constants and any others...
+        
+        //upper bound for scrolling up
+        if newYPosition > 750{
+            newYPosition = 750
         }
+        
+        //lower bound for scrolling down
+        if newYPosition < -800{
+            newYPosition = -800
+        }
+        
+        sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)
     }
     
     override func update(currentTime: CFTimeInterval) {

@@ -14,7 +14,6 @@
 		204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204663DF1D795A4C0019B96A /* LaunchScreen.storyboard */; };
 		204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663E81D79615A0019B96A /* GameLevelModel.swift */; };
 		204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */; };
-		204663EF1D7963ED0019B96A /* GameLevelPlayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */; };
 		206540981D7C0C0F0082D92D /* HexagonsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */; };
 		2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540991D7C16590082D92D /* GeneralConstants.swift */; };
 		2097BF991D7E252A00E59D12 /* GameLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097BF981D7E252A00E59D12 /* GameLevelScene.swift */; };
@@ -25,7 +24,9 @@
 		2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA41D7E3C5500E59D12 /* GameLevelScene.sks */; };
 		2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA61D7E3C9800E59D12 /* IntroScene.sks */; };
 		2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA81D7E3CBB00E59D12 /* InstructionsScene.sks */; };
-		2097BFAB1D7E3EE400E59D12 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097BFAA1D7E3EE400E59D12 /* GameModel.swift */; };
+		20B856A41D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */; };
+		20C565741D8105380011846E /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C565731D8105380011846E /* Plist.swift */; };
+		20C565761D82BDA50011846E /* hitMetal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20C565751D82BDA50011846E /* hitMetal.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +39,6 @@
 		204663E21D795A4C0019B96A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		204663E81D79615A0019B96A /* GameLevelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelModel.swift; sourceTree = "<group>"; };
 		204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelDesignInfo.swift; sourceTree = "<group>"; };
-		204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameLevelPlayInfo.swift; path = ../GameLevelPlayInfo.swift; sourceTree = "<group>"; };
 		206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonsHelpers.swift; sourceTree = "<group>"; };
 		206540991D7C16590082D92D /* GeneralConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralConstants.swift; sourceTree = "<group>"; };
 		2097BF981D7E252A00E59D12 /* GameLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelScene.swift; sourceTree = "<group>"; };
@@ -49,7 +49,9 @@
 		2097BFA41D7E3C5500E59D12 /* GameLevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameLevelScene.sks; sourceTree = "<group>"; };
 		2097BFA61D7E3C9800E59D12 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
 		2097BFA81D7E3CBB00E59D12 /* InstructionsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionsScene.sks; sourceTree = "<group>"; };
-		2097BFAA1D7E3EE400E59D12 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iphone6sBoundaryObstacle.plist; sourceTree = "<group>"; };
+		20C565731D8105380011846E /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
+		20C565751D82BDA50011846E /* hitMetal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitMetal.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,21 +89,22 @@
 				2097BFA21D7E3C3900E59D12 /* MenuScene.sks */,
 				2097BFA41D7E3C5500E59D12 /* GameLevelScene.sks */,
 				2097BFA81D7E3CBB00E59D12 /* InstructionsScene.sks */,
-				204663EE1D7963ED0019B96A /* GameLevelPlayInfo.swift */,
 				2097BF981D7E252A00E59D12 /* GameLevelScene.swift */,
 				2097BF9A1D7E254700E59D12 /* InstructionsScence.swift */,
 				2097BF9C1D7E256000E59D12 /* IntroScene.swift */,
 				2097BF9E1D7E257900E59D12 /* MenuScene.swift */,
+				20C565731D8105380011846E /* Plist.swift */,
 				206540971D7C0C0F0082D92D /* HexagonsHelpers.swift */,
 				206540991D7C16590082D92D /* GeneralConstants.swift */,
 				204663E81D79615A0019B96A /* GameLevelModel.swift */,
 				204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */,
 				204663D81D795A4C0019B96A /* GameViewController.swift */,
-				2097BFAA1D7E3EE400E59D12 /* GameModel.swift */,
 				204663DA1D795A4C0019B96A /* Main.storyboard */,
 				204663DD1D795A4C0019B96A /* Assets.xcassets */,
 				204663DF1D795A4C0019B96A /* LaunchScreen.storyboard */,
 				204663E21D795A4C0019B96A /* Info.plist */,
+				20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */,
+				20C565751D82BDA50011846E /* hitMetal.wav */,
 			);
 			path = "Square Root Marbles";
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B856A41D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,
 				204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */,
@@ -171,6 +175,7 @@
 				204663DC1D795A4C0019B96A /* Main.storyboard in Resources */,
 				2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */,
 				2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */,
+				20C565761D82BDA50011846E /* hitMetal.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,13 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20C565741D8105380011846E /* Plist.swift in Sources */,
 				2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */,
 				2097BF9B1D7E254700E59D12 /* InstructionsScence.swift in Sources */,
 				204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */,
 				206540981D7C0C0F0082D92D /* HexagonsHelpers.swift in Sources */,
 				2097BF9D1D7E256000E59D12 /* IntroScene.swift in Sources */,
-				2097BFAB1D7E3EE400E59D12 /* GameModel.swift in Sources */,
-				204663EF1D7963ED0019B96A /* GameLevelPlayInfo.swift in Sources */,
 				204663D91D795A4C0019B96A /* GameViewController.swift in Sources */,
 				204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */,
 				2097BF9F1D7E257900E59D12 /* MenuScene.swift in Sources */,
