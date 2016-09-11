@@ -9,12 +9,32 @@
 import Foundation
 import SpriteKit
 
-
 extension CGPoint: Hashable {
     public var hashValue: Int {
         return self.x.hashValue << sizeof(CGFloat) ^ self.y.hashValue
     }
 }
+
+
+class ActionOperator: Hashable, Equatable{
+    let location: CGPoint
+    
+    var hashValue: Int {
+        return location.x.hashValue << sizeof(CGFloat) ^ location.y.hashValue
+    }
+    
+    init(location: CGPoint){
+        self.location = location
+    }
+
+}
+
+// comparison function for conforming to Equatable protocol
+func ==(lhs: ActionOperator, rhs: ActionOperator) -> Bool {
+    return lhs.location == rhs.location
+}
+
+
 
 
 enum ObstacleType{
