@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 
 //Make true only for development purpuses
