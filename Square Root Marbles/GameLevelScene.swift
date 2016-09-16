@@ -8,49 +8,46 @@
 
 import SpriteKit
 
+struct PhysicsCategory{
+    static let  None        :   UInt32 = 0
+    static let  All         :   UInt32 = UInt32.max
+    static let  Player       :   UInt32 = 0b1
+    static let  Operator    :   UInt32 = 0b10
+    static let  Obstacle    :   UInt32 = 0b100
+    static let  Sink        :   UInt32 = 0b1000
+    static let  Background  :   UInt32 = 0b10000
+}
+
+
 struct GameLevelZPositions{
     static let obstacleZ = CGFloat(-20.0)
-    static let operatorZ = CGFloat(-10.0)
     static let sinkZ = CGFloat(-5.0)
     static let playerZ = CGFloat(0.0)
+    static let operatorZ = CGFloat(5.0)
     static let popUpMenuZ = CGFloat(10.0)
     static let popUpMenuButtonsZ = CGFloat(20.0)
 }
 
 class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
-    
     var gameLevelModel: GameLevelModel? = nil
-    
     var obstacleMap = Dictionary<SquareCoordinates,SKShapeNode>()
-    var operatorSprites = Set<SKSpriteNode>()
-    var ballsNode: SKSpriteNode! = nil
-    var sinkNode: SKShapeNode! = nil
-    var sinkNodeText: SKLabelNode! = nil
-    
+    var playerNode: PlayerNode! = nil
+    var operatorNodes: [OperatorNode!] = Array(count: upperBoundNumOperators, repeatedValue: nil)
+    var sinkNode: SinkNode! = nil
+    //QQQQ implement this
     var sinkSpring: SKPhysicsJointSpring! = nil
-    
-    var nodeSize: Double!
-    var sinkSize: Double!
-    
     var timePlayed: Int = 0
-    
     var playing: Bool = true
-
     var popUpNode: SKSpriteNode? = nil
-    
     var inEditMode: Bool  = false
+    var lastSquareCoordsMove: SquareCoordinates? = nil
 
-    var lastPlayerLocation: CGPoint? = nil
     
-    func pauseGame(){
-        playing = false
-        displayPopUp()
-        
-        lastPlayerLocation = ballsNode!.position
-        
-        //pause time
-        //QQQQ implement
-        
+    //////////////////
+    // Game Control //
+    //////////////////
+    
+    func haultAction(){
         //pause phsyics
         physicsWorld.speed = 0.0
         
@@ -58,16 +55,17 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         motionManager.stopDeviceMotionUpdates()
     }
     
-    func resetGame(){
-        lastPlayerLocation = self.gameLevelModel!.designInfo.startLocation
-    }
-    
-    func playGame(){
-        playing = true
-        
+    func startAction(){
         //put physics world in normal playing mode
         physicsWorld.speed = 1.0
-
+        
+        //QQQQ not sure if this should be here or elsewhere
+        //QQQQ not sure these four lines of code do anything. Maybe remove (or modify)
+        let sceneBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        sceneBody.friction = 1000
+        sceneBody.categoryBitMask = PhysicsCategory.Background
+        sceneBody.contactTestBitMask = PhysicsCategory.Player
+        self.physicsBody = sceneBody
         
         motionManager.startDeviceMotionUpdates()
         motionManager.deviceMotionUpdateInterval = 0.03
@@ -75,7 +73,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             (data, error) in
             //QQQQ adjust and organize these constants
             self.physicsWorld.gravity = CGVectorMake(10 * CGFloat(sin(2*data!.attitude.roll)),-10 * CGFloat(sin(2*data!.attitude.pitch)))
-            self.ballsNode.physicsBody!.applyForce(CGVectorMake(CGFloat(data!.userAcceleration.x*600), CGFloat(data!.userAcceleration.y*600)))
+            self.playerNode.physicsBody!.applyForce(CGVectorMake(CGFloat(data!.userAcceleration.x*600), CGFloat(data!.userAcceleration.y*600)))
             if let error = error { // Might as well handle the optional error as well
                 print(error.localizedDescription)
                 return
@@ -83,10 +81,27 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         }
         
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(increaseTime), userInfo: nil, repeats: true)
+    }
+    
+    func pauseGame(){
+        playing = false
+        displayPopUp()
         
         
-        //QQQQ do this on last location
-        reConfigureActionNodes()
+        //pause time
+        //QQQQ implement
+        
+        haultAction()
+    }
+    
+    func resetGame(){
+        //QQQQ implement this (or not???)
+    }
+    
+    func playGame(){
+        playing = true
+        
+        startAction()
         
         if let popUp = popUpNode{
             popUp.removeFromParent()
@@ -94,118 +109,42 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
-        var actionNode: SKNode?
-        if contact.bodyA.node!.name! == "ballsNode"{
-            actionNode = contact.bodyB.node
-        } else{
-            actionNode = contact.bodyA.node
-        }
-        
-        lastPlayerLocation = ballsNode.position
-        
-        switch (gameLevelModel!.ballsState, actionNode!.name!){
-        case (_,"obstacleNode"):
-        if contact.collisionImpulse > 2{//QQQQ make this 2 a constant
-            //QQQQ handle muting globally
-            if gameAppDelegate?.isMuted() == false{
-                self.runAction(SKAction.playSoundFileNamed("hitMetal.wav",waitForCompletion:false))
-            }
-        }
-        case (BallsState.line,"sqrtNode"):
-            print("line hit sqrt")
-            //finalizeSceneWithFailure()
-        case (BallsState.square,"sqrtNode"):
-            print("square hit sqrt")
-            gameLevelModel!.ballsState = BallsState.line
-            reConfigureActionNodes()
-        case (BallsState.line,"squaredNode"):
-            print("line hit squared")
-            gameLevelModel!.ballsState = BallsState.square
-            reConfigureActionNodes()
-        case (BallsState.square,"squaredNode"):
-            print("square hit squared")
-            //finalizeSceneWithFailure()
-        case (BallsState.square,"sinkNode"):
-            print("square hit destination")
-            finalizeSceneWithSuccess()
-        case (BallsState.line,"sinkNode"):
-            print("line hit destination")
-            finalizeSceneWithFailure()
-        default:
-            break
-        }
+    func increaseTime(){
+        //        timePlayed = timePlayed + 1
+        //        sinkNodeText.text = String(timePlayed)
     }
 
+    //////////////////////////
+    // Finalization of Game //
+    //////////////////////////
+    
+    
     func finalizeSceneWithSuccess(){
-        gameAppDelegate!.changeView(AppState.menuScene)
-
+        self.runAction(SKAction.playSoundFileNamed("chinese-gong-daniel_simon.wav",waitForCompletion:false))
+        haultAction()
         //QQQQ update score here
-        
-        //QQQQ        self.runAction(SKAction.playSoundFileNamed("chinese-gong-daniel_simon.wav",waitForCompletion:false))
-        //QQQQ maybe need to wait till move
-//        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToControlPanelScene), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToMenuScene), userInfo: nil, repeats: false)
     }
     
     func finalizeSceneWithFailure(){
-        gameAppDelegate!.changeView(AppState.menuScene)
-        //    self.runAction(SKAction.playSoundFileNamed("smashing.wav",waitForCompletion:false))
-        //    NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToControlPanelScene), userInfo: nil, repeats: false)
+        self.runAction(SKAction.playSoundFileNamed("smashing.wav",waitForCompletion:false))
+        haultAction()
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToMenuScene), userInfo: nil, repeats: false)
     }
     
     func finalizeSceneWithAbort(){
         gameAppDelegate!.changeView(AppState.menuScene)
     }
 
-    
-    func reConfigureActionNodes(){
-        if ballsNode != nil{
-            ballsNode.removeFromParent()
-        }
-        
-        switch gameLevelModel!.ballsState{
-        case BallsState.square:
-            //  lineOnlyNode.runAction(SKAction.hide())
-            ballsNode = SKSpriteNode(imageNamed: gameLevelModel!.designInfo.ballsSquareImageName)
-            ballsNode.size = CGSize(width:nodeSize, height:nodeSize)
-            for sp in operatorSprites{
-                if sp.name == "sqrtNode"{
-                    sp.texture = SKTexture(imageNamed: "bareOKsqrtNode")
-                }else{
-                    sp.texture = SKTexture(imageNamed: "bareBADsquareNode")
-                }
-            }
-        case BallsState.line:
-            //fullSquareNode.runAction(SKAction.hide())
-            ballsNode = SKSpriteNode(imageNamed: gameLevelModel!.designInfo.ballsLineImageName)
-            ballsNode.size = CGSize(width:nodeSize, height:nodeSize/Double(gameAppDelegate!.getLevel()))
-            for sp in operatorSprites{
-                if sp.name == "sqrtNode"{
-                    sp.texture = SKTexture(imageNamed: "bareBADsqrtNode")
-                }else{
-                    sp.texture = SKTexture(imageNamed: "bareOKsquareNode")
-                }
-            }
-        }
-        
-        ballsNode.anchorPoint = CGPoint(x: 0.5, y:0.5)
-        ballsNode.position = lastPlayerLocation!
-        ballsNode.zPosition = 0
-        ballsNode.name = "ballsNode"
-        ballsNode.physicsBody = SKPhysicsBody(rectangleOfSize: ballsNode.size)
-        ballsNode.physicsBody!.friction =  0.4 //QQQQ config
-        ballsNode.physicsBody?.affectedByGravity = true
-        ballsNode.physicsBody?.dynamic = true
-        ballsNode.physicsBody?.categoryBitMask = PhysicsCategory.Balls
-        ballsNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle
-        ballsNode.physicsBody?.contactTestBitMask = PhysicsCategory.All
-        self.addChild(ballsNode)
-        
-        //QQQQ
-   //     sinkSpring = SKPhysicsJointSpring.jointWithBodyA(ballsNode.physicsBody!, bodyB: sinkNode.physicsBody! ,anchorA: ballsNode.anchorPoint, anchorB: sinkNode.position)
-        
-    }
+    func moveToMenuScene(){
+        gameAppDelegate!.changeView(AppState.menuScene)
 
+    }
+    
+    ///////////////////
+    // Initilization //
+    ///////////////////
+    
     func createObstacleNode(coords: SquareCoordinates){
         let rect = coords.rect()
         let node = SKShapeNode(rect: rect)
@@ -216,69 +155,74 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         node.physicsBody = SKPhysicsBody(edgeLoopFromRect: rect)
         node.physicsBody!.dynamic = false
         node.physicsBody!.categoryBitMask = PhysicsCategory.Obstacle
-        node.physicsBody!.collisionBitMask = PhysicsCategory.Balls
-        node.physicsBody!.contactTestBitMask = PhysicsCategory.Balls
+        node.physicsBody!.collisionBitMask = PhysicsCategory.Player
+        node.physicsBody!.contactTestBitMask = PhysicsCategory.Player
         obstacleMap[coords] = node
         self.addChild(node)
     }
     
-    func createOperatorNode(location: CGPoint, type: OperatorType ,mode: OperatorMode){
-        let node: SKSpriteNode
-        switch type{
-        case OperatorType.squareRoot:
-            node = SKSpriteNode(imageNamed: "bareOKsqrtNode")
-            node.name = "sqrtNode"
-        case OperatorType.squared:
-             node = SKSpriteNode(imageNamed: "bareOKsquareNode")
-            node.name = "squaredNode"
+    func createSinkNode(){
+        sinkNode = SinkNode(target:  goalOfLevel(gameAppDelegate!.getLevel()))
+        sinkNode.position = gameLevelModel!.designInfo.sinkLocation
+        sinkNode.name = "sinkNode"
+        sinkNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 40, height: 40))
+        sinkNode.physicsBody!.dynamic = false
+        sinkNode.physicsBody!.categoryBitMask = PhysicsCategory.Sink
+        sinkNode.physicsBody!.collisionBitMask = PhysicsCategory.None
+        sinkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+        self.addChild(sinkNode)
+    }
+    
+    func createOperatorNodes(){
+        //QQQQ how to better work with this array?
+        for i in 0..<gameLevelModel!.designInfo.numOperators{
+            operatorNodes[i] = OperatorNode(operatorActionString: gameLevelModel!.designInfo.operatorTypes[i])
+            let node = operatorNodes[i]
+            node.position = gameLevelModel!.designInfo.operatorLocations[i]
+            node.zPosition = GameLevelZPositions.operatorZ
+            node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
+            node.physicsBody?.affectedByGravity = false
+            node.physicsBody?.dynamic = false
+            node.physicsBody?.categoryBitMask = PhysicsCategory.Operator
+            node.physicsBody?.collisionBitMask = PhysicsCategory.None
+            node.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+            self.addChild(node)
         }
-        node.size = CGSize(width: 90, height: 70)
-        node.anchorPoint = CGPoint(x: 0.5, y:0.5)
-        node.position = location
-        node.zPosition = 100
-        node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
-        node.physicsBody?.affectedByGravity = false
-        node.physicsBody?.dynamic = false
-        node.physicsBody?.categoryBitMask = PhysicsCategory.Sqrt
-        node.physicsBody?.collisionBitMask = PhysicsCategory.None
-        node.physicsBody?.contactTestBitMask = PhysicsCategory.Balls
-        operatorSprites.insert(node)
-        self.addChild(node)
+    }
+    
+    func createPlayerNode(){
+        playerNode = PlayerNode(initValue: gameAppDelegate!.getLevel())
+        //playerNode.anchorPoint = CGPoint(x: 0.5, y:0.5)
+        playerNode.position = gameLevelModel!.designInfo.startLocation
+        playerNode.zPosition = GameLevelZPositions.playerZ
+        playerNode.name = "playerNode"
+        playerNode.physicsBody = SKPhysicsBody(rectangleOfSize: playerNode.size)
+        playerNode.physicsBody!.friction =  0.4 //QQQQ config
+        playerNode.physicsBody?.affectedByGravity = true
+        playerNode.physicsBody?.dynamic = true
+        playerNode.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        playerNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Background
+        playerNode.physicsBody?.contactTestBitMask = PhysicsCategory.All
+        self.addChild(playerNode)
     }
 
-    
     override func didMoveToView(view: SKView) {
         
         physicsWorld.contactDelegate = self
-        
         self.backgroundColor = SKColor.blackColor()
 
         //QQQQ read the level from the controller or so....
         gameLevelModel = GameLevelModel(level: gameAppDelegate!.getLevel())
         
+        
         for (coords,_) in gameLevelModel!.designInfo.obstacleMap{
             createObstacleNode(coords)
         }
+        createSinkNode()
+        createOperatorNodes()
+        createPlayerNode()
+        updateOperatorsAndSinkStatus()
         
-        for op in gameLevelModel!.designInfo.operators{
-            //QQQQ set initial operator modes
-            createOperatorNode(op.location, type: op.type, mode: OperatorMode.accepting)
-        }
-        
-        
-        nodeSize = sizeOfPlayNode(gameLevelModel!.levelNumber)
-        sinkSize = 1.3*nodeSize
-        
-        sinkNode = SKShapeNode(rectOfSize: CGSize(width: sinkSize, height: sinkSize))
-        sinkNode.fillColor = SKColor.greenColor()
-        sinkNode.position = CGPoint(x: self.frame.size.width*0.9, y: self.frame.size.height*0.51)
-        sinkNode.name = "sinkNode"
-        sinkNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 40, height: 40))
-        sinkNode.physicsBody!.dynamic = false
-        sinkNode.physicsBody!.categoryBitMask = PhysicsCategory.Goal
-        sinkNode.physicsBody!.collisionBitMask = PhysicsCategory.None
-        sinkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Balls
-        self.addChild(sinkNode)
         
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.numberOfTapsRequired = 2
@@ -289,17 +233,70 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
     }
     
-    func handleTap(sender:UITapGestureRecognizer){
-        
-        if sender.state == .Ended {
-            var touchLocation: CGPoint = sender.locationInView(sender.view)
-            touchLocation = self.convertPointFromView(touchLocation)
-            if editModeEnabled{
-                removeObstacleIfThere(squareOfPoint(Double(touchLocation.x), y: Double(touchLocation.y)))
+    ///////////////////////
+    // Game Play Actions //
+    ///////////////////////
+    
+    
+    func updateOperatorsAndSinkStatus(){
+        for i in 0..<gameLevelModel!.designInfo.numOperators{
+            let node = operatorNodes[i]
+            if node.operatorAction!.isValid(playerNode.value){
+                node.setAsValid()
+            }else{
+                node.setAsInvalid()
             }
+        }
+        if playerNode.value == sinkNode.targetValue{
+            sinkNode.setAsValid()
+        }else{
+            sinkNode.setAsInvalid()
         }
     }
 
+    func didBeginContact(contact: SKPhysicsContact) {
+        var actionNode: SKNode?
+        if contact.bodyA.node!.name! == "playerNode"{
+            actionNode = contact.bodyB.node
+        } else{
+            actionNode = contact.bodyA.node
+        }
+        
+        switch(actionNode!.name!){
+        case "obstacleNode":
+            if contact.collisionImpulse > 2{//QQQQ make this 2 a constant
+                //QQQQ handle muting globally
+                if gameAppDelegate?.isMuted() == false{
+                    self.runAction(SKAction.playSoundFileNamed("hitMetal.wav",waitForCompletion:false))
+                }
+            }
+        case "sinkNode":
+            if playerNode.value == sinkNode.targetValue{
+                finalizeSceneWithSuccess()
+            }else{
+                finalizeSceneWithFailure()
+            }
+        default:
+            handleOperatorPass(actionNode as! OperatorNode)
+        }
+    }
+    
+    func handleOperatorPass(operatorNode: OperatorNode){
+        if operatorNode.valid!{
+            self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
+            let newValue = operatorNode.operatorAction.operate(playerNode.value)
+            playerNode.changeValue(newValue)
+            updateOperatorsAndSinkStatus()
+        }
+        else{
+            finalizeSceneWithFailure()
+        }
+    }
+
+
+    /////////////////
+    // Pause PopUp //
+    /////////////////
     
     func displayPopUp(){
         
@@ -317,7 +314,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         //QQQQ put consistant graphic anems
         
-        if editModeEnabled{            
+        if editModeEnabled{
             let editButtonNode = EditButtonNode(imageNamed: "edit-button")
             editButtonNode.userInteractionEnabled = true
             editButtonNode.name = "editButton"
@@ -341,7 +338,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         //QQQ Not sure need to set this z position
         audioButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(audioButtonNode)
-
+        
         let stopButtonNode = StopButtonNode(imageNamed: "cross-button")
         stopButtonNode.userInteractionEnabled = true
         stopButtonNode.name = "stopButton"
@@ -349,7 +346,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         stopButtonNode.position = CGPoint(x:130, y:35)
         stopButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(stopButtonNode)
-
+        
         let helpButtonNode = HelpButtonNode(imageNamed: "help")
         helpButtonNode.userInteractionEnabled = true
         helpButtonNode.name = "helpButton"
@@ -357,7 +354,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         helpButtonNode.position = CGPoint(x:180, y:35)
         helpButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(helpButtonNode)
-
+        
         let playButtonNode = PlayButtonNode(imageNamed: "play")
         playButtonNode.userInteractionEnabled = true
         playButtonNode.name = "playButton"
@@ -366,11 +363,25 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(playButtonNode)
     }
+
+    //////////////
+    // Gestures //
+    //////////////
     
-    func increaseTime(){
-//        timePlayed = timePlayed + 1
-//        sinkNodeText.text = String(timePlayed)
+    func handleTap(sender:UITapGestureRecognizer){
+        
+        if sender.state == .Ended {
+            var touchLocation: CGPoint = sender.locationInView(sender.view)
+            touchLocation = self.convertPointFromView(touchLocation)
+            if editModeEnabled{
+                removeObstacleIfThere(squareOfPoint(Double(touchLocation.x), y: Double(touchLocation.y)))
+            }
+        }
     }
+
+    //////////////////
+    // Game Editing //
+    //////////////////
     
     
     func removeObstacleIfThere(squareCoords: SquareCoordinates){
@@ -388,23 +399,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             gameLevelModel!.designInfo.obstacleMap[squareCoords] = ObstacleType.genericObstacle
         }
     }
-
-    
-//    QQQQ delete
-//    func handleObstacleUpdate(squareCoords: SquareCoordinates){
-//        let node = obstacleMap[squareCoords]
-//        if node == nil{
-//            createObstacleNode(squareCoords)
-//            gameLevelModel!.designInfo.obstacleMap[squareCoords] = ObstacleType.genericObstacle
-//        }else{
-//            //node!.fillColor = SKColor.blackColor()
-//            node?.removeFromParent()
-//            gameLevelModel!.designInfo.obstacleMap.removeValueForKey(squareCoords)
-//            obstacleMap[squareCoords] = nil
-//        }
-//    }
-//    
-    var lastSquareCoordsMove: SquareCoordinates? = nil
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !inEditMode{ return }
@@ -416,37 +410,25 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         let touch = touches.first!
 
         let positionInScene = touch.locationInNode(self)
-//        let previousPosition = touch.previousLocationInNode(self)
-//        let translation = CGPoint(  x: positionInScene.x - previousPosition.x,
-//                                    y: positionInScene.y - previousPosition.y)
         
 
-        var gotOperator = false
-        gameLevelModel!.designInfo.operators.removeAll()
-        for node in operatorSprites{
-            let type = (node.name == "sqrtNode") ? OperatorType.squareRoot : OperatorType.squared
-            if node.containsPoint(positionInScene){
-                node.position = positionInScene
-                //QQQQ this is bad implementation here!!!
-                gameLevelModel!.designInfo.operators.insert(
-                    OperatorInfo(location: positionInScene, type: type))
-                gotOperator = true
-            }else{
-                gameLevelModel!.designInfo.operators.insert(
-                    OperatorInfo(location: node.position, type: type))
+        for i in 0..<gameLevelModel!.designInfo.numOperators{
+            if operatorNodes[i].containsPoint(positionInScene){
+                operatorNodes[i].position = positionInScene
+                gameLevelModel!.designInfo.operatorLocations[i] = positionInScene
+                return
             }
-        }
-        if gotOperator{
-            return
         }
         
         if sinkNode.containsPoint(positionInScene){
             sinkNode.position = positionInScene
+            gameLevelModel!.designInfo.sinkLocation = positionInScene
             return
         }
         
-        if ballsNode.containsPoint(positionInScene){
-            ballsNode.position = positionInScene
+        if playerNode.containsPoint(positionInScene){
+            playerNode.position = positionInScene
+            gameLevelModel!.designInfo.startLocation = positionInScene
             return
         }
         
@@ -470,6 +452,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    
+    //////////////////////////////////////
+    // Internal Classes of Menu Buttons //
+    //////////////////////////////////////
     
     class HelpButtonNode : SKSpriteNode{
         override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -506,7 +493,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 (scene as! GameLevelScene).inEditMode = false
                 self.texture = SKTexture(imageNamed: "edit-button")
                 
-                // Write obstacles to file
+                //QQQQ Change this so that the writing isn't in here and also to one file
+                
+                /////////////////////////////
+                // Write obstacles to file //
+                /////////////////////////////
+                
                 var tempObstacleStringDict = Dictionary<String,String>()
                 for (coords,obs) in (scene as! GameLevelScene).gameLevelModel!.designInfo.obstacleMap{
                     tempObstacleStringDict["(\(coords.values.sx),\(coords.values.sy))"] = "\(obs)"
@@ -516,17 +508,37 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 outputObstacleDict.writeToFile(obstacleFilePath, atomically: true)
                 print("Wrote to \(obstacleFilePath)")
                 
-                // Write operators to file
+                /////////////////////////////
+                // Write operators to file //
+                /////////////////////////////
+                
                 var tempOperatorStringDict = Dictionary<String,String>()
-                for op in (scene as! GameLevelScene).gameLevelModel!.designInfo.operators{
-                    tempOperatorStringDict["(\(op.location.x),\(op.location.y))"] = "\(op.type)"
+                for i in 0..<(scene as! GameLevelScene).gameLevelModel!.designInfo.numOperators{
+                    let location = (scene as! GameLevelScene).gameLevelModel!.designInfo.operatorLocations[i]
+                    tempOperatorStringDict["\(i)"] = "(\(location.x),\(location.y))"
                 }
+                
                 let outputOperatorDict = tempOperatorStringDict as NSDictionary
                 let operatorFilePath = NSHomeDirectory() + "/Library/operators\((scene as! GameLevelScene).gameLevelModel!.levelNumber).plist"
                 outputOperatorDict.writeToFile(operatorFilePath, atomically: true)
                 print("Wrote to \(operatorFilePath)")
+                
+                ////////////////////////////////
+                // Write startAndSink to file //
+                ////////////////////////////////
+                
+                var tempStartAndSinkStringDict = Dictionary<String,String>()
+                let sinkLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.sinkLocation
+                let startLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.startLocation
+                tempStartAndSinkStringDict["0"] = "(\(startLocation.x),\(startLocation.y))"     //currently "0" is start "1" is sink
+                tempStartAndSinkStringDict["1"] = "(\(sinkLocation.x),\(sinkLocation.y))"
+                
+                let outputStartAndSinkDict = tempStartAndSinkStringDict as NSDictionary
+                let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\((scene as! GameLevelScene).gameLevelModel!.levelNumber).plist"
+                outputStartAndSinkDict.writeToFile(startAndSinkFilePath, atomically: true)
+                print("Wrote to \(startAndSinkFilePath)")
+
             }
         }
     }
-    
-}
+}//end of class

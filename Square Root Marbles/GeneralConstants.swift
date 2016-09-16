@@ -32,25 +32,22 @@ let obstaclesYSpan: Int = numObstaclesHeight/2 + 1
 let centerPointX: Double = screenWidth/2
 let centerPointY: Double = screenHeight/2
 
+//QQQQ it is assumed there aren't more than that (static allocations)
+let upperBoundNumOperators = 15
 
 let sqrt3 = 1.732050807568877 //QQQQ
 
+
+let perectSquares: [Int] = [0,1,4,9,16,25,36,49,64,81,100]
+
+//Maximum value player can take
+let maxVal = 100
 
 //let numHexWidth: Int = 20
 
 let hexSize: Double = 20
 
 let timeInIntroScreen = 5.0
-
-struct PhysicsCategory{
-    static let  None        :   UInt32 = 0
-    static let  All         :   UInt32 = UInt32.max
-    static let  Balls       :   UInt32 = 0b1
-    static let  Sqrt        :   UInt32 = 0b10
-    static let  Squared     :   UInt32 = 0b100
-    static let  Obstacle    :   UInt32 = 0b1000
-    static let  Goal        :   UInt32 = 0b10000
-}
 
 enum AppState{
     case introScene
@@ -72,7 +69,38 @@ enum StageState{
     case lineInSquareHoles
 }
 
-func sizeOfPlayNode(level: Int) -> Double{
-    return 35 + 2.5*Double(level)
+
+
+
+struct SquareCoordinates: Hashable{
+    let values : (sx: Int,sy: Int)
+    
+    var hashValue : Int {
+        get {
+            let (a,b) = values
+            return a.hashValue &* 31 &+ b.hashValue
+        }
+    }
+    
+    func rect() -> CGRect{
+        let x = centerPointX + Double(values.sx) * obstacleWidth
+        let y = centerPointY + Double(values.sy) * obstacleHeight
+        return CGRect(origin: CGPoint(x: x,y: y), size: CGSize(width: obstacleWidth,height: obstacleHeight))
+    }
 }
- 
+
+// comparison function for conforming to Equatable protocol
+func ==(lhs: SquareCoordinates, rhs: SquareCoordinates) -> Bool {
+    return lhs.values == rhs.values
+}
+
+
+
+func squareOfPoint(x: Double, y: Double) -> SquareCoordinates{
+    let sx = Int(round((x-centerPointX+obstacleWidth/2)/obstacleWidth))-1
+    let sy = Int(round((y-centerPointY+obstacleHeight/2)/obstacleHeight))-1
+    return SquareCoordinates(values: (sx, sy))
+}
+
+
+
