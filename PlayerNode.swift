@@ -32,13 +32,13 @@ class PlayerNode: SKSpriteNode{
     
     
     convenience init(initValue: Int){
-        self.init(texture: SKTexture(imageNamed: "orb"), color: SKColor.redColor(), size: CGSize(width:35, height:35))
+        self.init(texture: SKTexture(imageNamed: "orb"), color: SKColor.redColor(), size: CGSize(width:40, height:40))
         self.value = initValue
         labelNode = SKLabelNode(text: "\(value)")
-        
+        labelNode.fontName = "AmericanTypewriter-Bold"
         labelNode.fontColor = SKColor.blueColor()
         labelNode.fontSize = 23
-        //labelNode.position = ???
+        labelNode.position = CGPoint(x:0,y:-8)
         labelNode.zPosition = 1
         self.addChild(labelNode)
     }

@@ -18,6 +18,10 @@
 		204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */; };
 		2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540991D7C16590082D92D /* GeneralConstants.swift */; };
 		2079F8631D86094000F74E4E /* LevelsPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079F8621D86094000F74E4E /* LevelsPlan.swift */; };
+		208FB0161D8D540700180EAE /* MessageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FB0151D8D540700180EAE /* MessageNode.swift */; };
+		208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 208FB01B1D8D921C00180EAE /* SquareRootParticle.sks */; };
+		208FB01E1D8D921C00180EAE /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 208FB01C1D8D921C00180EAE /* spark.png */; };
+		208FB0201D8D958E00180EAE /* BadExplosionParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 208FB01F1D8D958E00180EAE /* BadExplosionParticle.sks */; };
 		2097BF991D7E252A00E59D12 /* GameLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097BF981D7E252A00E59D12 /* GameLevelScene.swift */; };
 		2097BF9B1D7E254700E59D12 /* InstructionsScence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097BF9A1D7E254700E59D12 /* InstructionsScence.swift */; };
 		2097BF9D1D7E256000E59D12 /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097BF9C1D7E256000E59D12 /* IntroScene.swift */; };
@@ -52,6 +56,10 @@
 		204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelDesignInfo.swift; sourceTree = "<group>"; };
 		206540991D7C16590082D92D /* GeneralConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralConstants.swift; sourceTree = "<group>"; };
 		2079F8621D86094000F74E4E /* LevelsPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsPlan.swift; sourceTree = "<group>"; };
+		208FB0151D8D540700180EAE /* MessageNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNode.swift; sourceTree = "<group>"; };
+		208FB01B1D8D921C00180EAE /* SquareRootParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SquareRootParticle.sks; sourceTree = "<group>"; };
+		208FB01C1D8D921C00180EAE /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		208FB01F1D8D958E00180EAE /* BadExplosionParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BadExplosionParticle.sks; sourceTree = "<group>"; };
 		2097BF981D7E252A00E59D12 /* GameLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelScene.swift; sourceTree = "<group>"; };
 		2097BF9A1D7E254700E59D12 /* InstructionsScence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsScence.swift; sourceTree = "<group>"; };
 		2097BF9C1D7E256000E59D12 /* IntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroScene.swift; sourceTree = "<group>"; };
@@ -87,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				2097BF981D7E252A00E59D12 /* GameLevelScene.swift */,
+				208FB0151D8D540700180EAE /* MessageNode.swift */,
 				200D57201D873E3E0002BFD2 /* PlayerNode.swift */,
 				20D2F9841D894D360081AA19 /* OperatorNode.swift */,
 				20415C781D8A1D4000AB1F0D /* SinkNode.swift */,
@@ -110,6 +119,7 @@
 		204663C61D795A4C0019B96A = {
 			isa = PBXGroup;
 			children = (
+				208FB0211D8D959500180EAE /* Particles */,
 				204663D11D795A4C0019B96A /* Square Root Marbles */,
 				204663D01D795A4C0019B96A /* Products */,
 			);
@@ -136,6 +146,16 @@
 				20B125891D8CBC8F0022EAFA /* Sounds */,
 			);
 			path = "Square Root Marbles";
+			sourceTree = "<group>";
+		};
+		208FB0211D8D959500180EAE /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				208FB01C1D8D921C00180EAE /* spark.png */,
+				208FB01B1D8D921C00180EAE /* SquareRootParticle.sks */,
+				208FB01F1D8D958E00180EAE /* BadExplosionParticle.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		20B125801D8CB9280022EAFA /* SupportScenes */ = {
@@ -245,12 +265,15 @@
 				20B125841D8CB9E90022EAFA /* FactScene.sks in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,
+				208FB0201D8D958E00180EAE /* BadExplosionParticle.sks in Resources */,
 				204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */,
 				20F01EB71D8ADDA800E12054 /* smashing.wav in Resources */,
 				2097BFA31D7E3C3900E59D12 /* MenuScene.sks in Resources */,
+				208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */,
 				20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */,
 				204663DC1D795A4C0019B96A /* Main.storyboard in Resources */,
 				20F01EB91D8ADDC000E12054 /* chinese-gong-daniel_simon.wav in Resources */,
+				208FB01E1D8D921C00180EAE /* spark.png in Resources */,
 				2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */,
 				20A7CC501D8AE68E00A06482 /* sms-alert-1-daniel_simon.wav in Resources */,
 				2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */,
@@ -267,6 +290,7 @@
 			files = (
 				20C565741D8105380011846E /* Plist.swift in Sources */,
 				2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */,
+				208FB0161D8D540700180EAE /* MessageNode.swift in Sources */,
 				2097BF9B1D7E254700E59D12 /* InstructionsScence.swift in Sources */,
 				20D2F9851D894D360081AA19 /* OperatorNode.swift in Sources */,
 				204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */,

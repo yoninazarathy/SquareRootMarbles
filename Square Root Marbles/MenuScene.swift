@@ -8,6 +8,13 @@
 
 import SpriteKit
 
+class LevelIconNode: SKShapeNode{
+    
+}
+
+let iconSize = 77.0
+let levelLabelSize = 50
+
 class MenuScene: GeneralScene {
         
     var selectionNodes = [SKShapeNode?]()
@@ -16,41 +23,96 @@ class MenuScene: GeneralScene {
     
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.orangeColor()
+        self.backgroundColor = SKColor.blackColor()
         
         //QQQQ How do I initilize an array member?
         
         selectionNodes.append(nil)
-        for i in 1.stride(to: numLevels, by: 2) {
-            var iconNode = SKSpriteNode(imageNamed: "sqrt\(i)")
-            iconNode.zPosition = 5
-            var x = 120
-            var y = 1300-75*(i-1)
-            iconNode.position = CGPoint(x: x, y: y)
-            iconNode.size = CGSize(width: 50, height: 50)
-            self.addChild(iconNode)
-            var shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
-            shapeNode.zPosition = -5
-            shapeNode.fillColor = SKColor.greenColor()
-            shapeNode.strokeColor = SKColor.blueColor()
-            self.addChild(shapeNode)
-            selectionNodes.append(shapeNode)
+        for i in 1.stride(to: numLevels, by: 3) {
+            let y = 1200-40*(Double(i)-1)
 
-            let j = i+1
-            iconNode = SKSpriteNode(imageNamed: "sqrt\(j)")
-            iconNode.zPosition = 5
-            x = 414-120
-            y = 1300-75*(i-1)
-            iconNode.position = CGPoint(x: x, y: y)
-            iconNode.size = CGSize(width: 50, height: 50)
-            self.addChild(iconNode)
-  
-            shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
+            var x = Double(screenWidth)/5
+            var lev = i
+            var levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
+            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            var levelNumberNode = SKLabelNode(text: "\(lev)")
+            levelNumberNode.zPosition = 5
+            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontSize = 60
+            levelNumberNode.fontName = "AmericanTypewriter-Bold"
+            levelNumberNode.position = CGPoint(x: x, y: y)
+            self.addChild(levelNumberNode)
+            var levelScoreNode = SKLabelNode(text: levelScore)
+            levelScoreNode.zPosition = 5
+            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontSize = 18
+            levelScoreNode.fontName = "AmericanTypewriter-Bold"
+            levelScoreNode.position = CGPoint(x: x, y: y-25)
+            self.addChild(levelScoreNode)
+            var shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize))
             shapeNode.zPosition = -5
-            shapeNode.fillColor = SKColor.greenColor()
-            shapeNode.strokeColor = SKColor.blueColor()
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
+            shapeNode.strokeColor = SKColor.whiteColor()
             self.addChild(shapeNode)
-            selectionNodes.append(shapeNode)
+            if levelOpen{
+                selectionNodes.append(shapeNode)
+            }
+            //QQQQ maybe be "buggy" if somehow levels open are not consecutive??? check/think
+
+
+            x = Double(screenWidth)/2
+            lev = lev + 1
+            levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            levelNumberNode = SKLabelNode(text: "\(lev)")
+            levelNumberNode.zPosition = 5
+            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontSize = 60
+            levelNumberNode.fontName = "AmericanTypewriter-Bold"
+            levelNumberNode.position = CGPoint(x: x, y: y)
+            self.addChild(levelNumberNode)
+            levelScoreNode = SKLabelNode(text: levelScore)
+            levelScoreNode.zPosition = 5
+            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontSize = 18
+            levelScoreNode.fontName = "AmericanTypewriter-Bold"
+            levelScoreNode.position = CGPoint(x: x, y: y-25)
+            self.addChild(levelScoreNode)
+            shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize))
+            shapeNode.zPosition = -5
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
+            shapeNode.strokeColor = SKColor.whiteColor()
+            self.addChild(shapeNode)
+            if levelOpen{
+                selectionNodes.append(shapeNode)
+            }
+            
+            x = (4*Double(screenWidth))/5
+            lev = lev + 1
+            levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            levelNumberNode = SKLabelNode(text: "\(lev)")
+            levelNumberNode.zPosition = 5
+            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontSize = 60
+            levelNumberNode.fontName = "AmericanTypewriter-Bold"
+            levelNumberNode.position = CGPoint(x: x, y: y)
+            levelScoreNode = SKLabelNode(text: levelScore)
+            levelScoreNode.zPosition = 5
+            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontSize = 18
+            levelScoreNode.fontName = "AmericanTypewriter-Bold"
+            levelScoreNode.position = CGPoint(x: x, y: y-25)
+            self.addChild(levelScoreNode)
+            self.addChild(levelNumberNode)
+            shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize))
+            shapeNode.zPosition = -5
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
+            shapeNode.strokeColor = SKColor.whiteColor()
+            self.addChild(shapeNode)
+            if levelOpen{
+                selectionNodes.append(shapeNode)
+            }
         }
         
         sceneCam = SKCameraNode() //initialize your camera
@@ -61,18 +123,27 @@ class MenuScene: GeneralScene {
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if dragging{
+            dragging = false
+            return
+        }
         let touch = touches.first!
         for i in 1...numLevels{
-            if selectionNodes[i]!.containsPoint(touch.locationInNode(self)){
-                gameAppDelegate!.setLevel(i)
-                gameAppDelegate!.changeView(AppState.gameActionPlaying)
-                return
+            if let node = selectionNodes[i] {
+                if node.containsPoint(touch.locationInNode(self)){
+                    gameAppDelegate!.setLevel(i)
+                    gameAppDelegate!.changeView(AppState.gameActionPlaying)
+                    return
+                }
             }
         }
     }
     
+    var dragging = false
+    
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        dragging = true
         let touch = touches.first
         
         let positionInScene = touch!.locationInNode(self)
@@ -88,8 +159,8 @@ class MenuScene: GeneralScene {
         }
         
         //lower bound for scrolling down
-        if newYPosition < -800{
-            newYPosition = -800
+        if newYPosition < 0{
+            newYPosition = 0
         }
         
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)

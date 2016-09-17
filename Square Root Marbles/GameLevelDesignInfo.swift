@@ -21,9 +21,9 @@ enum ObstacleType{
 }
 
 
-let defaultOperatorLocations = [(75,600),(75,500),(75,400),(75,300),(75,200),(75,100),
-                                (200,100),(200,200),(200,300),(200,400),(200,500),(200,600),
-                                (225,600),(225,500),(225,400),(225,300),(225,200),(225,100)]
+let defaultOperatorLocations = [(-7,27),(-7,18),(-7,9),(-7,0),(-7,-9),(-7,-18),
+                                (0,-18),(0,-9),(0,0),(0,9),(0,18),(0,27),
+                                (7,27),(7,18),(7,9),(7,0),(7,-9),(7,-18)]
 
 //QQQQ? Class or Struct
 //QQQQ? How to init the dictionary and set
@@ -32,7 +32,7 @@ class GameLevelDesignInfo{
     var startLocation:      SquareCoordinates! = nil
     var sinkLocation:       SquareCoordinates! = nil
     
-    var operatorLocations:  [CGPoint!]
+    var operatorLocations:  [SquareCoordinates!]
     let operatorTypes:      [String]
     let numOperators:       Int
     
@@ -49,7 +49,6 @@ class GameLevelDesignInfo{
         /////////////////////////
         // Read Start and Sink //
         /////////////////////////
-
         
         let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\(levelNumber).plist"
         let readStartAndSinkDict = NSDictionary(contentsOfFile: startAndSinkFilePath)
@@ -91,7 +90,9 @@ class GameLevelDesignInfo{
             var i = 0
             for (_, val) in dict{
                 var words =  val.componentsSeparatedByCharactersInSet(separators)
-                operatorLocations[i] = CGPoint(x: Double(words[1])!, y: Double(words[2])! )
+                let wrd1 = Int(words[1])!
+                let wrd2 = Int(words[2])!
+                operatorLocations[i] = SquareCoordinates(sx: wrd1, sy: wrd2 )
                 i = i + 1
             }
             print("Read operators file for level \(levelNumber)")
@@ -99,12 +100,10 @@ class GameLevelDesignInfo{
             print("No operators file for level \(levelNumber)")
             for i in 0..<operatorLocations.count{
                 let tup = defaultOperatorLocations[i]
-                operatorLocations[i] = CGPoint(x: tup.0, y: tup.1 )
+                operatorLocations[i] = SquareCoordinates(sx: tup.0, sy: tup.1 )
             }
         }
 
-        
-        
         
         ////////////////////
         // Read Obstacles //

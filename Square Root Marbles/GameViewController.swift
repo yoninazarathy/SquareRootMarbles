@@ -18,6 +18,7 @@ protocol GameAppDelegate{
     func getLevel() -> Int
     func toggleMute()
     func isMuted() -> Bool
+    func getGameLevelModel(level: Int) -> GameLevelModel!
 }
 
 class GeneralScene: SKScene {
@@ -30,6 +31,8 @@ class GameViewController: UIViewController, GameAppDelegate {
     var appState:   AppState    = AppState.introScene
     var currentlevel: Int?      = nil
     var muted: Bool             = false
+    
+    var gameLevelModels: [GameLevelModel!] = Array(count: numLevels+1, repeatedValue: nil)
     
     func toggleMute(){
         muted = !muted
@@ -46,7 +49,10 @@ class GameViewController: UIViewController, GameAppDelegate {
     func getLevel() -> Int{
         return currentlevel!
     }
-
+    
+    func getGameLevelModel(level: Int) -> GameLevelModel!{
+        return gameLevelModels[level]
+    }
 
     var currentGameScene: SKScene? = nil
     
@@ -65,6 +71,7 @@ class GameViewController: UIViewController, GameAppDelegate {
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         
+        //QQQQ factor out common code here...
         switch appState{
             case AppState.introScene:
                 //QQQQ? Don't know what to do if this fails
@@ -108,25 +115,34 @@ class GameViewController: UIViewController, GameAppDelegate {
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene)
                 }
+            case AppState.afterLevelScene:
+                //QQQQ? Don't know what to do if this fails
+                if let currentGameScene = InstructionsScene(fileNamed:"AfterLevelScene") {
+                    /* Set the scale mode to scale to fit the window */
+                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.gameAppDelegate = self
+                    skView.presentScene(currentGameScene)
+            }            
         }
     }
     
     override func viewDidLoad() {
-        //print("viewDidLoad \(self)")
         super.viewDidLoad()
-
+        for i in 1...numLevels{
+            gameLevelModels[i] = GameLevelModel(level: i)
+        }
         changeView(AppState.introScene)
     }
 
     override func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
 
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
+            return .AllButUpsideDown //QQQQ????
         } else {
-            return .All
+            return .All  //QQQQ ????
         }
     }
 

@@ -27,8 +27,9 @@ let numLevels = 30
 //QQQQ it is assumed there aren't more than that (static allocations)
 let upperBoundNumOperators = 15
 
+//QQQQ make naming common (scene/screen)
 let timeInIntroScreen = 1.0
-
+let timeInAfterLevelScene = 3.0
 
 /////////////////
 // Level World //
@@ -72,23 +73,11 @@ let gameLevelCenterPointY = screenCenterPointY - offGameVerticalSpare
 enum AppState{
     case introScene
     case menuScene
-    case gameActionPlaying
+    case gameActionPlaying //QQQQ implement the state (playing/paused)
     case gameActionPaused
+    case afterLevelScene
     case instructionScene
 }
-
-enum StageState{
-    case preStart
-    case squarePlaying
-    case linePlaying
-    case transitionSquareToLine
-    case transitionLineToSquare
-    case sqaureBouncingOverLineHoles
-    case lineBouncingOverSquareHoles
-    case lineInLineHoles
-    case lineInSquareHoles
-}
-
 
 
 

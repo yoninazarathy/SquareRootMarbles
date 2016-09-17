@@ -34,14 +34,17 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     var playerNode: PlayerNode! = nil
     var operatorNodes: [OperatorNode!] = Array(count: upperBoundNumOperators, repeatedValue: nil)
     var sinkNode: SinkNode! = nil
+    var timeLabelNode: SKLabelNode! = nil
+    var messageLabelNode: MessageNode! = nil
+
     //QQQQ implement this
     var sinkSpring: SKPhysicsJointSpring! = nil
-    var timePlayed: Int = 0
+    var centiSecondsPlayed: Int = 0
+    var timeString: String! = nil
     var playing: Bool = true
     var popUpNode: SKSpriteNode? = nil
     var inEditMode: Bool  = false
         //note: More edit mode member variables are below
-
     
     //////////////////
     // Game Control //
@@ -51,11 +54,18 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         //pause phsyics
         physicsWorld.speed = 0.0
         
+        self.removeActionForKey("timerAction")
+        
         //pause core motion
         motionManager.stopDeviceMotionUpdates()
     }
     
     func startAction(){
+        //QQQQ give thought to memory leak with this closure (or not???)... the "weak story"
+        //QQQQ note sure how exact this time is
+        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.1), SKAction.runBlock(){self.increaseTime()}])),
+                                                   withKey: "timerAction")
+        
         //put physics world in normal playing mode
         physicsWorld.speed = 1.0
         
@@ -72,36 +82,36 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue() ) {
             (data, error) in
             //QQQQ adjust and organize these constants
-            self.physicsWorld.gravity = CGVectorMake(10 * CGFloat(sin(2*data!.attitude.roll)),-10 * CGFloat(sin(2*data!.attitude.pitch)))
+            self.physicsWorld.gravity = CGVectorMake(10 * CGFloat(sin(data!.attitude.roll)),-10 * CGFloat(sin(data!.attitude.pitch)))
             self.playerNode.physicsBody!.applyForce(CGVectorMake(CGFloat(data!.userAcceleration.x*600), CGFloat(data!.userAcceleration.y*600)))
             if let error = error { // Might as well handle the optional error as well
                 print(error.localizedDescription)
                 return
             }
         }
-        
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(increaseTime), userInfo: nil, repeats: true)
     }
     
     func pauseGame(){
         playing = false
         displayPopUp()
         
-        
-        //pause time
-        //QQQQ implement
+        self.removeActionForKey("timerAction")
         
         haultAction()
     }
     
     func resetGame(){
-        //QQQQ implement this (or not???)
+        centiSecondsPlayed = 0
     }
     
     func playGame(){
         playing = true
         
-        startAction()
+        messageLabelNode.DisplayFadingMessage("Your goal: \(sinkNode.targetValue)",duration: 3.0)
+        
+        //wait for 400ms to let user see screen before gravity kicks in
+        //QQQQ change this to use SKAction
+        NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(startAction), userInfo: nil, repeats: false)
         
         if let popUp = popUpNode{
             popUp.removeFromParent()
@@ -110,8 +120,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func increaseTime(){
-        //        timePlayed = timePlayed + 1
-        //        sinkNodeText.text = String(timePlayed)
+        centiSecondsPlayed = centiSecondsPlayed + 10
+        let secondsPlayed = centiSecondsPlayed / 100 % 100
+        //timeString = String(format:"%02i:%02i", secondsPlayed, centiSecondsPlayed % 100)
+        timeString = String(format:"%02i.%02i", secondsPlayed, centiSecondsPlayed % 100)
+        timeLabelNode.text = String(timeString)
     }
 
     //////////////////////////
@@ -120,16 +133,31 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     
     func finalizeSceneWithSuccess(){
+        playing = false
         self.runAction(SKAction.playSoundFileNamed("chinese-gong-daniel_simon.wav",waitForCompletion:false))
         haultAction()
+        physicsWorld.speed = 1.0
+
+        gameLevelModel!.bestScoreString = timeString
+        
+        
+        //QQQQ Replace this spring stuff or improve it
+//        sinkSpring = SKPhysicsJointSpring.jointWithBodyA(playerNode.physicsBody!, bodyB: sinkNode.physicsBody! ,anchorA: playerNode.anchorPoint, anchorB: sinkNode.position)
+//        sinkSpring.frequency = 1.0
+//        sinkSpring.damping  = 0.0
+//        self.physicsWorld.addJoint(sinkSpring)
+
         //QQQQ update score here
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToMenuScene), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
     
     func finalizeSceneWithFailure(){
+        playing = false
         self.runAction(SKAction.playSoundFileNamed("smashing.wav",waitForCompletion:false))
+        let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
+        playerNode.addChild(badExplosionEmitterNode!)
         haultAction()
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToMenuScene), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
     
     func finalizeSceneWithAbort(){
@@ -138,8 +166,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 
     func moveToMenuScene(){
         gameAppDelegate!.changeView(AppState.menuScene)
-
     }
+    
+    func moveToAfterLevelScene(){
+        gameAppDelegate!.changeView(AppState.afterLevelScene)
+    }
+
     
     ///////////////////
     // Initilization //
@@ -165,7 +197,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         sinkNode = SinkNode(target:  goalOfLevel(gameAppDelegate!.getLevel()))
         sinkNode.position = gameLevelModel!.designInfo.sinkLocation.point()
         sinkNode.name = "sinkNode"
-        sinkNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 40, height: 40))
+        sinkNode.physicsBody = SKPhysicsBody(circleOfRadius: sinkNode.size.width/2)
         sinkNode.physicsBody!.dynamic = false
         sinkNode.physicsBody!.categoryBitMask = PhysicsCategory.Sink
         sinkNode.physicsBody!.collisionBitMask = PhysicsCategory.None
@@ -178,9 +210,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         for i in 0..<gameLevelModel!.designInfo.numOperators{
             operatorNodes[i] = OperatorNode(operatorActionString: gameLevelModel!.designInfo.operatorTypes[i])
             let node = operatorNodes[i]
-            node.position = gameLevelModel!.designInfo.operatorLocations[i]
+            node.position = gameLevelModel!.designInfo.operatorLocations[i].point()
             node.zPosition = GameLevelZPositions.operatorZ
-            node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
+            node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width/2)
             node.physicsBody?.affectedByGravity = false
             node.physicsBody?.dynamic = false
             node.physicsBody?.categoryBitMask = PhysicsCategory.Operator
@@ -192,11 +224,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func createPlayerNode(){
         playerNode = PlayerNode(initValue: gameAppDelegate!.getLevel())
-        //playerNode.anchorPoint = CGPoint(x: 0.5, y:0.5)
+        //playerNode.anchorPoint = CGPoint(x: 0.5, y:0.5) //QQQQ
         playerNode.position = gameLevelModel!.designInfo.startLocation.point()
         playerNode.zPosition = GameLevelZPositions.playerZ
         playerNode.name = "playerNode"
-        playerNode.physicsBody = SKPhysicsBody(rectangleOfSize: playerNode.size)
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: playerNode.size.width/2)
         playerNode.physicsBody!.friction =  0.4 //QQQQ config
         playerNode.physicsBody?.affectedByGravity = true
         playerNode.physicsBody?.dynamic = true
@@ -206,14 +238,34 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         self.addChild(playerNode)
     }
 
+    func createDashBoard(){
+        timeLabelNode = SKLabelNode(text: "00:00")
+        timeLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        timeLabelNode.position = CGPoint(x:340, y:620) //QQQQ handle position of this
+        timeLabelNode.color = SKColor.whiteColor()
+        timeLabelNode.fontSize = 20
+        timeLabelNode.fontName = "AmericanTypewriter-Bold"
+        self.addChild(timeLabelNode)
+        
+        messageLabelNode = MessageNode()
+        messageLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        messageLabelNode.position = CGPoint(x:20, y:620) //QQQQ handle position of this
+        messageLabelNode.color = SKColor.whiteColor()
+        messageLabelNode.fontSize = 20
+        messageLabelNode.fontName = "AmericanTypewriter-Bold"
+        self.addChild(messageLabelNode)
+    }
+    
     override func didMoveToView(view: SKView) {
         
         physicsWorld.contactDelegate = self
+        physicsWorld.speed = 0.0 //will be set to 1.0 when starting
+        physicsWorld.gravity = CGVectorMake(0,0)
+
         self.backgroundColor = SKColor.blackColor()
 
         //QQQQ read the level from the controller or so....
-        gameLevelModel = GameLevelModel(level: gameAppDelegate!.getLevel())
-        
+        gameLevelModel = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
         
         for (coords,_) in gameLevelModel!.designInfo.obstacleMap{
             createObstacleNode(coords)
@@ -222,7 +274,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         createOperatorNodes()
         createPlayerNode()
         updateOperatorsAndSinkStatus()
-        
+        createDashBoard()
         
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.numberOfTapsRequired = 2
@@ -255,6 +307,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
 
     func didBeginContact(contact: SKPhysicsContact) {
+        if !playing {return} //this is mostly a safety guard QQQQ
+        
         var actionNode: SKNode?
         if contact.bodyA.node!.name! == "playerNode"{
             actionNode = contact.bodyB.node
@@ -282,10 +336,17 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func handleOperatorPass(operatorNode: OperatorNode){
+        messageLabelNode.DisplayFadingMessage("You hit \(operatorNode.operatorAction.operationString())",duration: 1.0)
         if operatorNode.valid!{
             self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
             let newValue = operatorNode.operatorAction.operate(playerNode.value)
             playerNode.changeValue(newValue)
+            
+            
+            //QQQQ make sure to remove this and do it based on operator
+            let badExplosionEmitterNode = SKEmitterNode(fileNamed:"SquareRootParticle")
+            playerNode.addChild(badExplosionEmitterNode!)
+            
             updateOperatorsAndSinkStatus()
         }
         else{
@@ -439,7 +500,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         case CurrentEditAction.None:
             print("error with editing")//QQQQ handle this
         case CurrentEditAction.DrawingObstacle:
-            print("will find out if vert or horz")
             if squareCoords == startSquareCoordsAddObstacle{
                 //still no movment out of box
                 return
@@ -478,8 +538,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 }
             }
         case CurrentEditAction.DraggingOperator:
-            operatorNodes[currentDraggedOperator].position = positionInScene
-            gameLevelModel!.designInfo.operatorLocations[currentDraggedOperator] = positionInScene
+            operatorNodes[currentDraggedOperator].position = squareCoords.point()
+            gameLevelModel!.designInfo.operatorLocations[currentDraggedOperator] = squareCoords
 
         case CurrentEditAction.DraggingStart:
             if squareCoords != gameLevelModel!.designInfo.startLocation{
@@ -542,6 +602,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+
     }
     
     
@@ -606,7 +667,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 var tempOperatorStringDict = Dictionary<String,String>()
                 for i in 0..<(scene as! GameLevelScene).gameLevelModel!.designInfo.numOperators{
                     let location = (scene as! GameLevelScene).gameLevelModel!.designInfo.operatorLocations[i]
-                    tempOperatorStringDict["\(i)"] = "(\(location.x),\(location.y))"
+                    tempOperatorStringDict["\(i)"] = "(\(location.values.sx),\(location.values.sy))"
                 }
                 
                 let outputOperatorDict = tempOperatorStringDict as NSDictionary

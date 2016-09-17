@@ -141,14 +141,17 @@ class OperatorNode: SKSpriteNode{
     
     func setAsValid(){
         valid = true
-        color = SKColor.greenColor()
-        colorBlendFactor = 0.75
+        color = SKColor(CIColor: CIColor(red: 0.0, green: 1.0, blue: 0.0))
+        colorBlendFactor = 1
+        alpha = 1.0
     }
     
     func setAsInvalid(){
         valid = false
         color = SKColor.redColor()
-        colorBlendFactor = 0.75
+        colorBlendFactor = 1
+        alpha = 1.0
+
     }
     
     override init(texture: SKTexture!,
