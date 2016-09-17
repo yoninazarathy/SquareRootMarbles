@@ -31,7 +31,6 @@
 		20B125821D8CB97C0022EAFA /* AfterLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */; };
 		20B125841D8CB9E90022EAFA /* FactScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20B125831D8CB9E90022EAFA /* FactScene.sks */; };
 		20B125861D8CBA200022EAFA /* FactScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B125851D8CBA200022EAFA /* FactScene.swift */; };
-		20B856A41D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */; };
 		20C565741D8105380011846E /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C565731D8105380011846E /* Plist.swift */; };
 		20C565761D82BDA50011846E /* hitMetal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20C565751D82BDA50011846E /* hitMetal.wav */; };
 		20D2F9851D894D360081AA19 /* OperatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D2F9841D894D360081AA19 /* OperatorNode.swift */; };
@@ -66,7 +65,6 @@
 		20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterLevelScene.swift; sourceTree = "<group>"; };
 		20B125831D8CB9E90022EAFA /* FactScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FactScene.sks; sourceTree = "<group>"; };
 		20B125851D8CBA200022EAFA /* FactScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactScene.swift; sourceTree = "<group>"; };
-		20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iphone6sBoundaryObstacle.plist; sourceTree = "<group>"; };
 		20C565731D8105380011846E /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		20C565751D82BDA50011846E /* hitMetal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitMetal.wav; sourceTree = "<group>"; };
 		20D2F9841D894D360081AA19 /* OperatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OperatorNode.swift; path = ../OperatorNode.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				20B125881D8CBB410022EAFA /* Infrastructure */,
 				20B125871D8CBAC60022EAFA /* LevelStructure */,
 				204663DD1D795A4C0019B96A /* Assets.xcassets */,
-				20B856A31D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist */,
 				20B125891D8CBC8F0022EAFA /* Sounds */,
 			);
 			path = "Square Root Marbles";
@@ -245,7 +242,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20B856A41D803DC1000BFDE7 /* iphone6sBoundaryObstacle.plist in Resources */,
 				20B125841D8CB9E90022EAFA /* FactScene.sks in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,

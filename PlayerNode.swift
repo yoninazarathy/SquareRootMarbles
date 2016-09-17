@@ -32,7 +32,7 @@ class PlayerNode: SKSpriteNode{
     
     
     convenience init(initValue: Int){
-        self.init(texture: SKTexture(imageNamed: "orb"), color: SKColor.redColor(), size: CGSize(width:50, height:50))
+        self.init(texture: SKTexture(imageNamed: "orb"), color: SKColor.redColor(), size: CGSize(width:35, height:35))
         self.value = initValue
         labelNode = SKLabelNode(text: "\(value)")
         

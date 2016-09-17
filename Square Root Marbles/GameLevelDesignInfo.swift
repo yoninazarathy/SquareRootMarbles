@@ -29,8 +29,8 @@ let defaultOperatorLocations = [(75,600),(75,500),(75,400),(75,300),(75,200),(75
 //QQQQ? How to init the dictionary and set
 class GameLevelDesignInfo{
     let levelNumber:        Int
-    var startLocation:      CGPoint! = nil
-    var sinkLocation:       CGPoint! = nil
+    var startLocation:      SquareCoordinates! = nil
+    var sinkLocation:       SquareCoordinates! = nil
     
     var operatorLocations:  [CGPoint!]
     let operatorTypes:      [String]
@@ -57,17 +57,19 @@ class GameLevelDesignInfo{
             let separators = NSCharacterSet(charactersInString: "(,)")
             for (key, val) in dict{
                 var words =  val.componentsSeparatedByCharactersInSet(separators)
+                let wrd1 = Int(words[1])!
+                let wrd2 = Int(words[2])!
                 if (key as! NSString) == "0"{
-                    startLocation = CGPoint(x: Double(words[1])!, y: Double(words[2])! )
+                    startLocation = SquareCoordinates(sx: wrd1, sy: wrd2 )
                 }else{
-                    sinkLocation = CGPoint(x: Double(words[1])!, y: Double(words[2])! )
+                    sinkLocation =  SquareCoordinates(sx: wrd1, sy: wrd2 )
                 }
             }
             print("Read startAndSink file for level \(levelNumber)")
         }else{
             print("No startAndSink file for level \(levelNumber)")
-            startLocation = CGPoint(x: 50,y: 600)
-            sinkLocation = CGPoint(x:300,y:60)
+            startLocation = defaultStartLocation
+            sinkLocation = defaultSinkLocation
         }
         
         
@@ -109,18 +111,23 @@ class GameLevelDesignInfo{
         ////////////////////
         
         obstacleMap = Dictionary<SquareCoordinates,ObstacleType>()
-        
-        //QQQQ Update this
-        if let plist = Plist(name: "iphone6sBoundaryObstacle"){
-            let dict = plist.getValuesInPlistFile()
-            let separators = NSCharacterSet(charactersInString: "(,)")
-            for (key, _) in dict!{
-                var words =  key.componentsSeparatedByCharactersInSet(separators)
-                obstacleMap[SquareCoordinates(values:(Int(words[1])!,Int(words[2])!))] = ObstacleType.genericObstacle
-            }
-        }else{
-            //QQQQ Fatal error
+
+        //make boundary
+        var yc,xc: Int!
+        for xc in minCubeX...maxCubeX{
+            yc = minCubeY
+            obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+            yc = maxCubeY
+            obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
         }
+        for yc in minCubeY...maxCubeY{
+            xc = minCubeX
+            obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+            xc = maxCubeX
+            obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+        }
+        
+        
         
         let obstacleFilePath = NSHomeDirectory() + "/Library/obstacles\(levelNumber).plist"
         let readObstacleDict = NSDictionary(contentsOfFile: obstacleFilePath)
@@ -128,10 +135,11 @@ class GameLevelDesignInfo{
             let separators = NSCharacterSet(charactersInString: "(,)")
             for (key, _) in dict{
                 var words =  key.componentsSeparatedByCharactersInSet(separators)
-                obstacleMap[SquareCoordinates(values:(Int(words[1])!,Int(words[2])!))] = ObstacleType.genericObstacle
+                obstacleMap[SquareCoordinates(sx: Int(words[1])!, sy: Int(words[2])!)] = ObstacleType.genericObstacle
             }
             print("Read obstacle file for level \(levelNumber)")
         }else{
+            obstacleMap[SquareCoordinates(sx: 0,sy: 0)] = ObstacleType.genericObstacle
             print("No obstacle file for level \(levelNumber)")
         }
     }

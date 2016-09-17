@@ -40,7 +40,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     var playing: Bool = true
     var popUpNode: SKSpriteNode? = nil
     var inEditMode: Bool  = false
-    var lastSquareCoordsMove: SquareCoordinates? = nil
+        //note: More edit mode member variables are below
 
     
     //////////////////
@@ -163,7 +163,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func createSinkNode(){
         sinkNode = SinkNode(target:  goalOfLevel(gameAppDelegate!.getLevel()))
-        sinkNode.position = gameLevelModel!.designInfo.sinkLocation
+        sinkNode.position = gameLevelModel!.designInfo.sinkLocation.point()
         sinkNode.name = "sinkNode"
         sinkNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 40, height: 40))
         sinkNode.physicsBody!.dynamic = false
@@ -193,7 +193,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func createPlayerNode(){
         playerNode = PlayerNode(initValue: gameAppDelegate!.getLevel())
         //playerNode.anchorPoint = CGPoint(x: 0.5, y:0.5)
-        playerNode.position = gameLevelModel!.designInfo.startLocation
+        playerNode.position = gameLevelModel!.designInfo.startLocation.point()
         playerNode.zPosition = GameLevelZPositions.playerZ
         playerNode.name = "playerNode"
         playerNode.physicsBody = SKPhysicsBody(rectangleOfSize: playerNode.size)
@@ -374,7 +374,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             var touchLocation: CGPoint = sender.locationInView(sender.view)
             touchLocation = self.convertPointFromView(touchLocation)
             if editModeEnabled{
-                removeObstacleIfThere(squareOfPoint(Double(touchLocation.x), y: Double(touchLocation.y)))
+                let squarePoint = squareOfPoint(Double(touchLocation.x), y: Double(touchLocation.y))
+                let setToKill = squarePoint.NeighbourSquares()
+                for pt in setToKill{
+                    removeObstacleIfThere(pt)
+                }
             }
         }
     }
@@ -400,6 +404,26 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         }
     }
     
+    enum CurrentEditAction{
+        case None
+        case DrawingObstacle    //still not known if Vert of Horz
+        case DrawingObstacleVert
+        case DrawingObstacleHorz
+        case DraggingOperator
+        case DraggingStart
+        case DraggingSink
+    }
+
+    ////////////////////////////////////////////////
+    // Member variables associated with edit mode //
+    ////////////////////////////////////////////////
+    
+    var currentEditAction = CurrentEditAction.None
+    var currentDraggedOperator: Int! = nil
+    var drawObstacleStartPos: SquareCoordinates! = nil
+    var startSquareCoordsAddObstacle: SquareCoordinates? = nil
+
+    
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !inEditMode{ return }
         
@@ -408,45 +432,112 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         ///////////////////////////
 
         let touch = touches.first!
-
         let positionInScene = touch.locationInNode(self)
-        
-
-        for i in 0..<gameLevelModel!.designInfo.numOperators{
-            if operatorNodes[i].containsPoint(positionInScene){
-                operatorNodes[i].position = positionInScene
-                gameLevelModel!.designInfo.operatorLocations[i] = positionInScene
-                return
-            }
-        }
-        
-        if sinkNode.containsPoint(positionInScene){
-            sinkNode.position = positionInScene
-            gameLevelModel!.designInfo.sinkLocation = positionInScene
-            return
-        }
-        
-        if playerNode.containsPoint(positionInScene){
-            playerNode.position = positionInScene
-            gameLevelModel!.designInfo.startLocation = positionInScene
-            return
-        }
-        
-        
         let squareCoords = squareOfPoint(Double(positionInScene.x), y: Double(positionInScene.y))
-        //QQQQ learn how to improve this if
-        if lastSquareCoordsMove != nil{
-            if squareCoords != lastSquareCoordsMove!{
-                addObstacleIfNotThere(squareCoords)
+
+        switch currentEditAction{
+        case CurrentEditAction.None:
+            print("error with editing")//QQQQ handle this
+        case CurrentEditAction.DrawingObstacle:
+            print("will find out if vert or horz")
+            if squareCoords == startSquareCoordsAddObstacle{
+                //still no movment out of box
+                return
+            }else{
+                if squareCoords.values.sx != startSquareCoordsAddObstacle!.values.sx{
+                    currentEditAction = CurrentEditAction.DrawingObstacleHorz
+                }else{
+                    currentEditAction = CurrentEditAction.DrawingObstacleVert
+                }
+            }
+            startSquareCoordsAddObstacle = squareCoords
+        case CurrentEditAction.DrawingObstacleVert:
+            let fixedSx = startSquareCoordsAddObstacle!.values.sx
+            let fixedSy = startSquareCoordsAddObstacle!.values.sy
+            let currentSy = squareCoords.values.sy
+            if fixedSy <= currentSy{
+                for sy in fixedSy ... currentSy{
+                    addObstacleIfNotThere(SquareCoordinates(sx: fixedSx, sy: sy))
+                }
+            }else{
+                for sy in currentSy ... fixedSy{
+                    addObstacleIfNotThere(SquareCoordinates(sx: fixedSx, sy: sy))
+                }
+            }
+        case CurrentEditAction.DrawingObstacleHorz:
+            let fixedSx = startSquareCoordsAddObstacle!.values.sx
+            let fixedSy = startSquareCoordsAddObstacle!.values.sy
+            let currentSx = squareCoords.values.sx
+            if fixedSx <= currentSx{
+                for sx in fixedSx ... currentSx{
+                    addObstacleIfNotThere(SquareCoordinates(sx: sx, sy: fixedSy))
+                }
+            }else{
+                for sx in currentSx ... fixedSx{
+                    addObstacleIfNotThere(SquareCoordinates(sx: sx, sy: fixedSy))
+                }
+            }
+        case CurrentEditAction.DraggingOperator:
+            operatorNodes[currentDraggedOperator].position = positionInScene
+            gameLevelModel!.designInfo.operatorLocations[currentDraggedOperator] = positionInScene
+
+        case CurrentEditAction.DraggingStart:
+            if squareCoords != gameLevelModel!.designInfo.startLocation{
+                playerNode.position = squareCoords.point()
+                gameLevelModel!.designInfo.startLocation = squareCoords
+            }
+
+        case CurrentEditAction.DraggingSink:
+            if squareCoords != gameLevelModel!.designInfo.sinkLocation{
+                sinkNode.position = squareCoords.point()
+                gameLevelModel!.designInfo.sinkLocation = squareCoords
             }
         }
-        lastSquareCoordsMove = squareCoords
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        currentEditAction = CurrentEditAction.None
+        currentDraggedOperator = nil
+        drawObstacleStartPos = nil
+        startSquareCoordsAddObstacle = nil
+        
+        //QQQQ probably not handling multi-touch - but OK
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if playing{
             pauseGame()
         }
+        
+        if !inEditMode{ return }
+
+        
+        let touch = touches.first!
+        let positionInScene = touch.locationInNode(self)
+        let squareCoords = squareOfPoint(Double(positionInScene.x), y: Double(positionInScene.y))
+
+        for i in 0..<gameLevelModel!.designInfo.numOperators{
+            if operatorNodes[i].containsPoint(positionInScene){
+                currentEditAction = CurrentEditAction.DraggingOperator
+                currentDraggedOperator = i
+                return
+            }
+        }
+        
+        if sinkNode.containsPoint(positionInScene){
+            currentEditAction = CurrentEditAction.DraggingSink
+            return
+        }
+        
+        if playerNode.containsPoint(positionInScene){
+            currentEditAction = CurrentEditAction.DraggingStart
+            return
+        }
+        
+        //else..
+        currentEditAction = CurrentEditAction.DrawingObstacle
+        drawObstacleStartPos = squareOfPoint(positionInScene)
+        startSquareCoordsAddObstacle = squareCoords
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -530,8 +621,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 var tempStartAndSinkStringDict = Dictionary<String,String>()
                 let sinkLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.sinkLocation
                 let startLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.startLocation
-                tempStartAndSinkStringDict["0"] = "(\(startLocation.x),\(startLocation.y))"     //currently "0" is start "1" is sink
-                tempStartAndSinkStringDict["1"] = "(\(sinkLocation.x),\(sinkLocation.y))"
+                tempStartAndSinkStringDict["0"] = "(\(startLocation.values.sx),\(startLocation.values.sy))"     //currently "0" is start "1" is sink
+                tempStartAndSinkStringDict["1"] = "(\(sinkLocation.values.sx),\(sinkLocation.values.sy))"
                 
                 let outputStartAndSinkDict = tempStartAndSinkStringDict as NSDictionary
                 let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\((scene as! GameLevelScene).gameLevelModel!.levelNumber).plist"
