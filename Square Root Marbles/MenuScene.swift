@@ -102,7 +102,7 @@ class MenuScene: GeneralScene {
             var x = Double(screenWidth)/5
             var lev = i
             var levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
             var levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.blackColor()
@@ -132,7 +132,7 @@ class MenuScene: GeneralScene {
             x = Double(screenWidth)/2
             lev = lev + 1
             levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.blackColor()
@@ -160,7 +160,7 @@ class MenuScene: GeneralScene {
             x = (4*Double(screenWidth))/5
             lev = lev + 1
             levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "")
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.blackColor()

@@ -39,8 +39,98 @@
 		20C565741D8105380011846E /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C565731D8105380011846E /* Plist.swift */; };
 		20C565761D82BDA50011846E /* hitMetal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20C565751D82BDA50011846E /* hitMetal.wav */; };
 		20D2F9851D894D360081AA19 /* OperatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D2F9841D894D360081AA19 /* OperatorNode.swift */; };
+		20D779C51D8EC32500379C9E /* obstacles1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C21D8EC32500379C9E /* obstacles1.plist */; };
+		20D779C61D8EC32500379C9E /* operators1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C31D8EC32500379C9E /* operators1.plist */; };
+		20D779C71D8EC32500379C9E /* startAndSink1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C41D8EC32500379C9E /* startAndSink1.plist */; };
+		20D779CB1D8ED02E00379C9E /* obstacles2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C81D8ED02E00379C9E /* obstacles2.plist */; };
+		20D779CC1D8ED02E00379C9E /* operators2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C91D8ED02E00379C9E /* operators2.plist */; };
+		20D779CD1D8ED02E00379C9E /* startAndSink2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779CA1D8ED02E00379C9E /* startAndSink2.plist */; };
+		20D779D11D8ED27900379C9E /* obstacles3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779CE1D8ED27900379C9E /* obstacles3.plist */; };
+		20D779D21D8ED27900379C9E /* operators3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779CF1D8ED27900379C9E /* operators3.plist */; };
+		20D779D31D8ED27900379C9E /* startAndSink3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779D01D8ED27900379C9E /* startAndSink3.plist */; };
+		20D779D71D8ED57400379C9E /* obstacles4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779D41D8ED57400379C9E /* obstacles4.plist */; };
+		20D779D81D8ED57400379C9E /* operators4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779D51D8ED57400379C9E /* operators4.plist */; };
+		20D779D91D8ED57400379C9E /* startAndSink4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779D61D8ED57400379C9E /* startAndSink4.plist */; };
 		20F01EB71D8ADDA800E12054 /* smashing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20F01EB61D8ADDA800E12054 /* smashing.wav */; };
 		20F01EB91D8ADDC000E12054 /* chinese-gong-daniel_simon.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20F01EB81D8ADDC000E12054 /* chinese-gong-daniel_simon.wav */; };
+		20FB5E751D8F509C00CAACD7 /* obstacles5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E721D8F509C00CAACD7 /* obstacles5.plist */; };
+		20FB5E761D8F509C00CAACD7 /* obstacles6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E731D8F509C00CAACD7 /* obstacles6.plist */; };
+		20FB5E771D8F509C00CAACD7 /* obstacles7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E741D8F509C00CAACD7 /* obstacles7.plist */; };
+		20FB5EA91D8F50BB00CAACD7 /* obstacles8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E781D8F50BB00CAACD7 /* obstacles8.plist */; };
+		20FB5EAA1D8F50BB00CAACD7 /* obstacles9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E791D8F50BB00CAACD7 /* obstacles9.plist */; };
+		20FB5EAB1D8F50BB00CAACD7 /* obstacles10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */; };
+		20FB5EAC1D8F50BB00CAACD7 /* obstacles11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */; };
+		20FB5EAD1D8F50BB00CAACD7 /* obstacles12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */; };
+		20FB5EAE1D8F50BB00CAACD7 /* obstacles13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */; };
+		20FB5EAF1D8F50BB00CAACD7 /* obstacles14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */; };
+		20FB5EB01D8F50BB00CAACD7 /* obstacles15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */; };
+		20FB5EB11D8F50BB00CAACD7 /* obstacles16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */; };
+		20FB5EB21D8F50BB00CAACD7 /* obstacles17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */; };
+		20FB5EB31D8F50BB00CAACD7 /* obstacles18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */; };
+		20FB5EB41D8F50BB00CAACD7 /* obstacles19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */; };
+		20FB5EB51D8F50BB00CAACD7 /* obstacles20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */; };
+		20FB5EB61D8F50BB00CAACD7 /* obstacles21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */; };
+		20FB5EB71D8F50BB00CAACD7 /* obstacles22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E861D8F50BB00CAACD7 /* obstacles22.plist */; };
+		20FB5EB81D8F50BB00CAACD7 /* obstacles23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E871D8F50BB00CAACD7 /* obstacles23.plist */; };
+		20FB5EB91D8F50BB00CAACD7 /* obstacles24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E881D8F50BB00CAACD7 /* obstacles24.plist */; };
+		20FB5EBA1D8F50BB00CAACD7 /* obstacles25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E891D8F50BB00CAACD7 /* obstacles25.plist */; };
+		20FB5EBB1D8F50BB00CAACD7 /* obstacles26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */; };
+		20FB5EBC1D8F50BB00CAACD7 /* obstacles27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */; };
+		20FB5EBD1D8F50BB00CAACD7 /* obstacles28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */; };
+		20FB5EBE1D8F50BB00CAACD7 /* obstacles29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */; };
+		20FB5EBF1D8F50BB00CAACD7 /* obstacles30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */; };
+		20FB5EC01D8F50BB00CAACD7 /* operators5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8F1D8F50BB00CAACD7 /* operators5.plist */; };
+		20FB5EC11D8F50BB00CAACD7 /* operators6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E901D8F50BB00CAACD7 /* operators6.plist */; };
+		20FB5EC21D8F50BB00CAACD7 /* operators7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E911D8F50BB00CAACD7 /* operators7.plist */; };
+		20FB5EC31D8F50BB00CAACD7 /* operators8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E921D8F50BB00CAACD7 /* operators8.plist */; };
+		20FB5EC41D8F50BB00CAACD7 /* operators9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E931D8F50BB00CAACD7 /* operators9.plist */; };
+		20FB5EC51D8F50BB00CAACD7 /* operators10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E941D8F50BB00CAACD7 /* operators10.plist */; };
+		20FB5EC61D8F50BB00CAACD7 /* operators11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E951D8F50BB00CAACD7 /* operators11.plist */; };
+		20FB5EC71D8F50BB00CAACD7 /* operators12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E961D8F50BB00CAACD7 /* operators12.plist */; };
+		20FB5EC81D8F50BB00CAACD7 /* operators13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E971D8F50BB00CAACD7 /* operators13.plist */; };
+		20FB5EC91D8F50BB00CAACD7 /* operators14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E981D8F50BB00CAACD7 /* operators14.plist */; };
+		20FB5ECA1D8F50BB00CAACD7 /* operators15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E991D8F50BB00CAACD7 /* operators15.plist */; };
+		20FB5ECB1D8F50BB00CAACD7 /* operators16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */; };
+		20FB5ECC1D8F50BB00CAACD7 /* operators17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */; };
+		20FB5ECD1D8F50BB00CAACD7 /* operators18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */; };
+		20FB5ECE1D8F50BB00CAACD7 /* operators19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */; };
+		20FB5ECF1D8F50BB00CAACD7 /* operators20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */; };
+		20FB5ED01D8F50BB00CAACD7 /* operators21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */; };
+		20FB5ED11D8F50BB00CAACD7 /* operators22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA01D8F50BB00CAACD7 /* operators22.plist */; };
+		20FB5ED21D8F50BB00CAACD7 /* operators23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA11D8F50BB00CAACD7 /* operators23.plist */; };
+		20FB5ED31D8F50BB00CAACD7 /* operators24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA21D8F50BB00CAACD7 /* operators24.plist */; };
+		20FB5ED41D8F50BB00CAACD7 /* operators25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA31D8F50BB00CAACD7 /* operators25.plist */; };
+		20FB5ED51D8F50BB00CAACD7 /* operators26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA41D8F50BB00CAACD7 /* operators26.plist */; };
+		20FB5ED61D8F50BB00CAACD7 /* operators27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA51D8F50BB00CAACD7 /* operators27.plist */; };
+		20FB5ED71D8F50BB00CAACD7 /* operators28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA61D8F50BB00CAACD7 /* operators28.plist */; };
+		20FB5ED81D8F50BB00CAACD7 /* operators29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA71D8F50BB00CAACD7 /* operators29.plist */; };
+		20FB5ED91D8F50BB00CAACD7 /* operators30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA81D8F50BB00CAACD7 /* operators30.plist */; };
+		20FB5EF41D8F50CE00CAACD7 /* startAndSink5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDA1D8F50CE00CAACD7 /* startAndSink5.plist */; };
+		20FB5EF51D8F50CE00CAACD7 /* startAndSink6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDB1D8F50CE00CAACD7 /* startAndSink6.plist */; };
+		20FB5EF61D8F50CE00CAACD7 /* startAndSink7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDC1D8F50CE00CAACD7 /* startAndSink7.plist */; };
+		20FB5EF71D8F50CE00CAACD7 /* startAndSink8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDD1D8F50CE00CAACD7 /* startAndSink8.plist */; };
+		20FB5EF81D8F50CE00CAACD7 /* startAndSink9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDE1D8F50CE00CAACD7 /* startAndSink9.plist */; };
+		20FB5EF91D8F50CE00CAACD7 /* startAndSink10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */; };
+		20FB5EFA1D8F50CE00CAACD7 /* startAndSink11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */; };
+		20FB5EFB1D8F50CE00CAACD7 /* startAndSink12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */; };
+		20FB5EFC1D8F50CE00CAACD7 /* startAndSink13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */; };
+		20FB5EFD1D8F50CE00CAACD7 /* startAndSink14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */; };
+		20FB5EFE1D8F50CE00CAACD7 /* startAndSink15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */; };
+		20FB5EFF1D8F50CE00CAACD7 /* startAndSink16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */; };
+		20FB5F001D8F50CE00CAACD7 /* startAndSink17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */; };
+		20FB5F011D8F50CE00CAACD7 /* startAndSink18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */; };
+		20FB5F021D8F50CE00CAACD7 /* startAndSink19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */; };
+		20FB5F031D8F50CE00CAACD7 /* startAndSink20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */; };
+		20FB5F041D8F50CE00CAACD7 /* startAndSink21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */; };
+		20FB5F051D8F50CE00CAACD7 /* startAndSink22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEB1D8F50CE00CAACD7 /* startAndSink22.plist */; };
+		20FB5F061D8F50CE00CAACD7 /* startAndSink23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEC1D8F50CE00CAACD7 /* startAndSink23.plist */; };
+		20FB5F071D8F50CE00CAACD7 /* startAndSink24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EED1D8F50CE00CAACD7 /* startAndSink24.plist */; };
+		20FB5F081D8F50CE00CAACD7 /* startAndSink25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEE1D8F50CE00CAACD7 /* startAndSink25.plist */; };
+		20FB5F091D8F50CE00CAACD7 /* startAndSink26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */; };
+		20FB5F0A1D8F50CE00CAACD7 /* startAndSink27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */; };
+		20FB5F0B1D8F50CE00CAACD7 /* startAndSink28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */; };
+		20FB5F0C1D8F50CE00CAACD7 /* startAndSink29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */; };
+		20FB5F0D1D8F50CE00CAACD7 /* startAndSink30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,8 +168,98 @@
 		20C565731D8105380011846E /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		20C565751D82BDA50011846E /* hitMetal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitMetal.wav; sourceTree = "<group>"; };
 		20D2F9841D894D360081AA19 /* OperatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OperatorNode.swift; path = ../OperatorNode.swift; sourceTree = "<group>"; };
+		20D779C21D8EC32500379C9E /* obstacles1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles1.plist; sourceTree = "<group>"; };
+		20D779C31D8EC32500379C9E /* operators1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators1.plist; sourceTree = "<group>"; };
+		20D779C41D8EC32500379C9E /* startAndSink1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink1.plist; sourceTree = "<group>"; };
+		20D779C81D8ED02E00379C9E /* obstacles2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles2.plist; sourceTree = "<group>"; };
+		20D779C91D8ED02E00379C9E /* operators2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators2.plist; sourceTree = "<group>"; };
+		20D779CA1D8ED02E00379C9E /* startAndSink2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink2.plist; sourceTree = "<group>"; };
+		20D779CE1D8ED27900379C9E /* obstacles3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles3.plist; sourceTree = "<group>"; };
+		20D779CF1D8ED27900379C9E /* operators3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators3.plist; sourceTree = "<group>"; };
+		20D779D01D8ED27900379C9E /* startAndSink3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink3.plist; sourceTree = "<group>"; };
+		20D779D41D8ED57400379C9E /* obstacles4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles4.plist; sourceTree = "<group>"; };
+		20D779D51D8ED57400379C9E /* operators4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators4.plist; sourceTree = "<group>"; };
+		20D779D61D8ED57400379C9E /* startAndSink4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink4.plist; sourceTree = "<group>"; };
 		20F01EB61D8ADDA800E12054 /* smashing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = smashing.wav; path = ../../../../SquareRootMarblesPrototype/SquareRootMarblesPrototype/Assets.xcassets/smashing.wav; sourceTree = "<group>"; };
 		20F01EB81D8ADDC000E12054 /* chinese-gong-daniel_simon.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "chinese-gong-daniel_simon.wav"; path = "../../../../SquareRootMarblesPrototype/SquareRootMarblesPrototype/Assets.xcassets/chinese-gong-daniel_simon.wav"; sourceTree = "<group>"; };
+		20FB5E721D8F509C00CAACD7 /* obstacles5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles5.plist; sourceTree = "<group>"; };
+		20FB5E731D8F509C00CAACD7 /* obstacles6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles6.plist; sourceTree = "<group>"; };
+		20FB5E741D8F509C00CAACD7 /* obstacles7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles7.plist; sourceTree = "<group>"; };
+		20FB5E781D8F50BB00CAACD7 /* obstacles8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles8.plist; sourceTree = "<group>"; };
+		20FB5E791D8F50BB00CAACD7 /* obstacles9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles9.plist; sourceTree = "<group>"; };
+		20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles10.plist; sourceTree = "<group>"; };
+		20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles11.plist; sourceTree = "<group>"; };
+		20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles12.plist; sourceTree = "<group>"; };
+		20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles13.plist; sourceTree = "<group>"; };
+		20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles14.plist; sourceTree = "<group>"; };
+		20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles15.plist; sourceTree = "<group>"; };
+		20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles16.plist; sourceTree = "<group>"; };
+		20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles17.plist; sourceTree = "<group>"; };
+		20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles18.plist; sourceTree = "<group>"; };
+		20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles19.plist; sourceTree = "<group>"; };
+		20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles20.plist; sourceTree = "<group>"; };
+		20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles21.plist; sourceTree = "<group>"; };
+		20FB5E861D8F50BB00CAACD7 /* obstacles22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles22.plist; sourceTree = "<group>"; };
+		20FB5E871D8F50BB00CAACD7 /* obstacles23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles23.plist; sourceTree = "<group>"; };
+		20FB5E881D8F50BB00CAACD7 /* obstacles24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles24.plist; sourceTree = "<group>"; };
+		20FB5E891D8F50BB00CAACD7 /* obstacles25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles25.plist; sourceTree = "<group>"; };
+		20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles26.plist; sourceTree = "<group>"; };
+		20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles27.plist; sourceTree = "<group>"; };
+		20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles28.plist; sourceTree = "<group>"; };
+		20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles29.plist; sourceTree = "<group>"; };
+		20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles30.plist; sourceTree = "<group>"; };
+		20FB5E8F1D8F50BB00CAACD7 /* operators5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators5.plist; sourceTree = "<group>"; };
+		20FB5E901D8F50BB00CAACD7 /* operators6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators6.plist; sourceTree = "<group>"; };
+		20FB5E911D8F50BB00CAACD7 /* operators7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators7.plist; sourceTree = "<group>"; };
+		20FB5E921D8F50BB00CAACD7 /* operators8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators8.plist; sourceTree = "<group>"; };
+		20FB5E931D8F50BB00CAACD7 /* operators9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators9.plist; sourceTree = "<group>"; };
+		20FB5E941D8F50BB00CAACD7 /* operators10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators10.plist; sourceTree = "<group>"; };
+		20FB5E951D8F50BB00CAACD7 /* operators11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators11.plist; sourceTree = "<group>"; };
+		20FB5E961D8F50BB00CAACD7 /* operators12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators12.plist; sourceTree = "<group>"; };
+		20FB5E971D8F50BB00CAACD7 /* operators13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators13.plist; sourceTree = "<group>"; };
+		20FB5E981D8F50BB00CAACD7 /* operators14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators14.plist; sourceTree = "<group>"; };
+		20FB5E991D8F50BB00CAACD7 /* operators15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators15.plist; sourceTree = "<group>"; };
+		20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators16.plist; sourceTree = "<group>"; };
+		20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators17.plist; sourceTree = "<group>"; };
+		20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators18.plist; sourceTree = "<group>"; };
+		20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators19.plist; sourceTree = "<group>"; };
+		20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators20.plist; sourceTree = "<group>"; };
+		20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators21.plist; sourceTree = "<group>"; };
+		20FB5EA01D8F50BB00CAACD7 /* operators22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators22.plist; sourceTree = "<group>"; };
+		20FB5EA11D8F50BB00CAACD7 /* operators23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators23.plist; sourceTree = "<group>"; };
+		20FB5EA21D8F50BB00CAACD7 /* operators24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators24.plist; sourceTree = "<group>"; };
+		20FB5EA31D8F50BB00CAACD7 /* operators25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators25.plist; sourceTree = "<group>"; };
+		20FB5EA41D8F50BB00CAACD7 /* operators26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators26.plist; sourceTree = "<group>"; };
+		20FB5EA51D8F50BB00CAACD7 /* operators27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators27.plist; sourceTree = "<group>"; };
+		20FB5EA61D8F50BB00CAACD7 /* operators28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators28.plist; sourceTree = "<group>"; };
+		20FB5EA71D8F50BB00CAACD7 /* operators29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators29.plist; sourceTree = "<group>"; };
+		20FB5EA81D8F50BB00CAACD7 /* operators30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators30.plist; sourceTree = "<group>"; };
+		20FB5EDA1D8F50CE00CAACD7 /* startAndSink5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink5.plist; sourceTree = "<group>"; };
+		20FB5EDB1D8F50CE00CAACD7 /* startAndSink6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink6.plist; sourceTree = "<group>"; };
+		20FB5EDC1D8F50CE00CAACD7 /* startAndSink7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink7.plist; sourceTree = "<group>"; };
+		20FB5EDD1D8F50CE00CAACD7 /* startAndSink8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink8.plist; sourceTree = "<group>"; };
+		20FB5EDE1D8F50CE00CAACD7 /* startAndSink9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink9.plist; sourceTree = "<group>"; };
+		20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink10.plist; sourceTree = "<group>"; };
+		20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink11.plist; sourceTree = "<group>"; };
+		20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink12.plist; sourceTree = "<group>"; };
+		20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink13.plist; sourceTree = "<group>"; };
+		20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink14.plist; sourceTree = "<group>"; };
+		20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink15.plist; sourceTree = "<group>"; };
+		20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink16.plist; sourceTree = "<group>"; };
+		20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink17.plist; sourceTree = "<group>"; };
+		20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink18.plist; sourceTree = "<group>"; };
+		20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink19.plist; sourceTree = "<group>"; };
+		20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink20.plist; sourceTree = "<group>"; };
+		20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink21.plist; sourceTree = "<group>"; };
+		20FB5EEB1D8F50CE00CAACD7 /* startAndSink22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink22.plist; sourceTree = "<group>"; };
+		20FB5EEC1D8F50CE00CAACD7 /* startAndSink23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink23.plist; sourceTree = "<group>"; };
+		20FB5EED1D8F50CE00CAACD7 /* startAndSink24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink24.plist; sourceTree = "<group>"; };
+		20FB5EEE1D8F50CE00CAACD7 /* startAndSink25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink25.plist; sourceTree = "<group>"; };
+		20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink26.plist; sourceTree = "<group>"; };
+		20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink27.plist; sourceTree = "<group>"; };
+		20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink28.plist; sourceTree = "<group>"; };
+		20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink29.plist; sourceTree = "<group>"; };
+		20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink30.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +301,7 @@
 		204663C61D795A4C0019B96A = {
 			isa = PBXGroup;
 			children = (
+				20D779C11D8EC2F400379C9E /* levels1to30 */,
 				208FB0211D8D959500180EAE /* Particles */,
 				204663D11D795A4C0019B96A /* Square Root Marbles */,
 				204663D01D795A4C0019B96A /* Products */,
@@ -207,6 +388,103 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		20D779C11D8EC2F400379C9E /* levels1to30 */ = {
+			isa = PBXGroup;
+			children = (
+				20D779C21D8EC32500379C9E /* obstacles1.plist */,
+				20D779C31D8EC32500379C9E /* operators1.plist */,
+				20D779C41D8EC32500379C9E /* startAndSink1.plist */,
+				20D779C81D8ED02E00379C9E /* obstacles2.plist */,
+				20D779C91D8ED02E00379C9E /* operators2.plist */,
+				20D779CA1D8ED02E00379C9E /* startAndSink2.plist */,
+				20D779CE1D8ED27900379C9E /* obstacles3.plist */,
+				20D779CF1D8ED27900379C9E /* operators3.plist */,
+				20D779D01D8ED27900379C9E /* startAndSink3.plist */,
+				20D779D41D8ED57400379C9E /* obstacles4.plist */,
+				20D779D51D8ED57400379C9E /* operators4.plist */,
+				20D779D61D8ED57400379C9E /* startAndSink4.plist */,
+				20FB5E721D8F509C00CAACD7 /* obstacles5.plist */,
+				20FB5E731D8F509C00CAACD7 /* obstacles6.plist */,
+				20FB5E741D8F509C00CAACD7 /* obstacles7.plist */,
+				20FB5E781D8F50BB00CAACD7 /* obstacles8.plist */,
+				20FB5E791D8F50BB00CAACD7 /* obstacles9.plist */,
+				20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */,
+				20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */,
+				20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */,
+				20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */,
+				20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */,
+				20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */,
+				20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */,
+				20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */,
+				20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */,
+				20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */,
+				20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */,
+				20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */,
+				20FB5E861D8F50BB00CAACD7 /* obstacles22.plist */,
+				20FB5E871D8F50BB00CAACD7 /* obstacles23.plist */,
+				20FB5E881D8F50BB00CAACD7 /* obstacles24.plist */,
+				20FB5E891D8F50BB00CAACD7 /* obstacles25.plist */,
+				20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */,
+				20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */,
+				20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */,
+				20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */,
+				20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */,
+				20FB5E8F1D8F50BB00CAACD7 /* operators5.plist */,
+				20FB5E901D8F50BB00CAACD7 /* operators6.plist */,
+				20FB5E911D8F50BB00CAACD7 /* operators7.plist */,
+				20FB5E921D8F50BB00CAACD7 /* operators8.plist */,
+				20FB5E931D8F50BB00CAACD7 /* operators9.plist */,
+				20FB5E941D8F50BB00CAACD7 /* operators10.plist */,
+				20FB5E951D8F50BB00CAACD7 /* operators11.plist */,
+				20FB5E961D8F50BB00CAACD7 /* operators12.plist */,
+				20FB5E971D8F50BB00CAACD7 /* operators13.plist */,
+				20FB5E981D8F50BB00CAACD7 /* operators14.plist */,
+				20FB5E991D8F50BB00CAACD7 /* operators15.plist */,
+				20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */,
+				20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */,
+				20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */,
+				20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */,
+				20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */,
+				20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */,
+				20FB5EA01D8F50BB00CAACD7 /* operators22.plist */,
+				20FB5EA11D8F50BB00CAACD7 /* operators23.plist */,
+				20FB5EA21D8F50BB00CAACD7 /* operators24.plist */,
+				20FB5EA31D8F50BB00CAACD7 /* operators25.plist */,
+				20FB5EA41D8F50BB00CAACD7 /* operators26.plist */,
+				20FB5EA51D8F50BB00CAACD7 /* operators27.plist */,
+				20FB5EA61D8F50BB00CAACD7 /* operators28.plist */,
+				20FB5EA71D8F50BB00CAACD7 /* operators29.plist */,
+				20FB5EA81D8F50BB00CAACD7 /* operators30.plist */,
+				20FB5EDA1D8F50CE00CAACD7 /* startAndSink5.plist */,
+				20FB5EDB1D8F50CE00CAACD7 /* startAndSink6.plist */,
+				20FB5EDC1D8F50CE00CAACD7 /* startAndSink7.plist */,
+				20FB5EDD1D8F50CE00CAACD7 /* startAndSink8.plist */,
+				20FB5EDE1D8F50CE00CAACD7 /* startAndSink9.plist */,
+				20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */,
+				20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */,
+				20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */,
+				20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */,
+				20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */,
+				20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */,
+				20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */,
+				20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */,
+				20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */,
+				20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */,
+				20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */,
+				20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */,
+				20FB5EEB1D8F50CE00CAACD7 /* startAndSink22.plist */,
+				20FB5EEC1D8F50CE00CAACD7 /* startAndSink23.plist */,
+				20FB5EED1D8F50CE00CAACD7 /* startAndSink24.plist */,
+				20FB5EEE1D8F50CE00CAACD7 /* startAndSink25.plist */,
+				20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */,
+				20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */,
+				20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */,
+				20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */,
+				20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */,
+			);
+			name = levels1to30;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,23 +543,113 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20FB5EA91D8F50BB00CAACD7 /* obstacles8.plist in Resources */,
+				20FB5ED21D8F50BB00CAACD7 /* operators23.plist in Resources */,
+				20FB5EB21D8F50BB00CAACD7 /* obstacles17.plist in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
+				20FB5E771D8F509C00CAACD7 /* obstacles7.plist in Resources */,
+				20FB5ED81D8F50BB00CAACD7 /* operators29.plist in Resources */,
+				20D779CC1D8ED02E00379C9E /* operators2.plist in Resources */,
+				20FB5EFD1D8F50CE00CAACD7 /* startAndSink14.plist in Resources */,
+				20FB5ED71D8F50BB00CAACD7 /* operators28.plist in Resources */,
+				20FB5EBB1D8F50BB00CAACD7 /* obstacles26.plist in Resources */,
+				20FB5EFE1D8F50CE00CAACD7 /* startAndSink15.plist in Resources */,
+				20FB5ECF1D8F50BB00CAACD7 /* operators20.plist in Resources */,
+				20FB5EC01D8F50BB00CAACD7 /* operators5.plist in Resources */,
+				20D779D31D8ED27900379C9E /* startAndSink3.plist in Resources */,
+				20FB5EC61D8F50BB00CAACD7 /* operators11.plist in Resources */,
+				20FB5EC91D8F50BB00CAACD7 /* operators14.plist in Resources */,
+				20FB5EB61D8F50BB00CAACD7 /* obstacles21.plist in Resources */,
+				20FB5EBC1D8F50BB00CAACD7 /* obstacles27.plist in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,
 				208FB0201D8D958E00180EAE /* BadExplosionParticle.sks in Resources */,
+				20FB5ECC1D8F50BB00CAACD7 /* operators17.plist in Resources */,
 				204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */,
+				20FB5EB31D8F50BB00CAACD7 /* obstacles18.plist in Resources */,
+				20D779C71D8EC32500379C9E /* startAndSink1.plist in Resources */,
+				20FB5EF61D8F50CE00CAACD7 /* startAndSink7.plist in Resources */,
+				20FB5F0D1D8F50CE00CAACD7 /* startAndSink30.plist in Resources */,
+				20FB5EBE1D8F50BB00CAACD7 /* obstacles29.plist in Resources */,
+				20FB5EF71D8F50CE00CAACD7 /* startAndSink8.plist in Resources */,
+				20FB5ED41D8F50BB00CAACD7 /* operators25.plist in Resources */,
+				20FB5ED31D8F50BB00CAACD7 /* operators24.plist in Resources */,
+				20FB5ED11D8F50BB00CAACD7 /* operators22.plist in Resources */,
+				20FB5EB01D8F50BB00CAACD7 /* obstacles15.plist in Resources */,
+				20FB5ED01D8F50BB00CAACD7 /* operators21.plist in Resources */,
 				20F01EB71D8ADDA800E12054 /* smashing.wav in Resources */,
+				20FB5F091D8F50CE00CAACD7 /* startAndSink26.plist in Resources */,
+				20FB5F061D8F50CE00CAACD7 /* startAndSink23.plist in Resources */,
+				20D779CD1D8ED02E00379C9E /* startAndSink2.plist in Resources */,
+				20FB5EAA1D8F50BB00CAACD7 /* obstacles9.plist in Resources */,
+				20FB5ED51D8F50BB00CAACD7 /* operators26.plist in Resources */,
+				20FB5EFB1D8F50CE00CAACD7 /* startAndSink12.plist in Resources */,
+				20FB5F041D8F50CE00CAACD7 /* startAndSink21.plist in Resources */,
+				20FB5EBA1D8F50BB00CAACD7 /* obstacles25.plist in Resources */,
+				20D779D81D8ED57400379C9E /* operators4.plist in Resources */,
+				20D779D71D8ED57400379C9E /* obstacles4.plist in Resources */,
+				20FB5F001D8F50CE00CAACD7 /* startAndSink17.plist in Resources */,
+				20FB5EB41D8F50BB00CAACD7 /* obstacles19.plist in Resources */,
+				20FB5EB71D8F50BB00CAACD7 /* obstacles22.plist in Resources */,
+				20FB5EFF1D8F50CE00CAACD7 /* startAndSink16.plist in Resources */,
+				20FB5ED91D8F50BB00CAACD7 /* operators30.plist in Resources */,
 				2097BFA31D7E3C3900E59D12 /* MenuScene.sks in Resources */,
+				20FB5EC21D8F50BB00CAACD7 /* operators7.plist in Resources */,
 				20AEB33D1D8E41B500FC40D8 /* robotBlip.wav in Resources */,
+				20FB5EAD1D8F50BB00CAACD7 /* obstacles12.plist in Resources */,
 				208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */,
+				20FB5ECA1D8F50BB00CAACD7 /* operators15.plist in Resources */,
+				20D779CB1D8ED02E00379C9E /* obstacles2.plist in Resources */,
+				20FB5EAF1D8F50BB00CAACD7 /* obstacles14.plist in Resources */,
+				20FB5EC11D8F50BB00CAACD7 /* operators6.plist in Resources */,
+				20FB5E751D8F509C00CAACD7 /* obstacles5.plist in Resources */,
+				20FB5EC41D8F50BB00CAACD7 /* operators9.plist in Resources */,
 				20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */,
+				20FB5ED61D8F50BB00CAACD7 /* operators27.plist in Resources */,
+				20D779C51D8EC32500379C9E /* obstacles1.plist in Resources */,
+				20FB5EFA1D8F50CE00CAACD7 /* startAndSink11.plist in Resources */,
+				20D779D91D8ED57400379C9E /* startAndSink4.plist in Resources */,
 				204663DC1D795A4C0019B96A /* Main.storyboard in Resources */,
+				20FB5F011D8F50CE00CAACD7 /* startAndSink18.plist in Resources */,
+				20FB5F081D8F50CE00CAACD7 /* startAndSink25.plist in Resources */,
 				20F01EB91D8ADDC000E12054 /* chinese-gong-daniel_simon.wav in Resources */,
+				20FB5ECD1D8F50BB00CAACD7 /* operators18.plist in Resources */,
+				20FB5F0A1D8F50CE00CAACD7 /* startAndSink27.plist in Resources */,
+				20FB5F031D8F50CE00CAACD7 /* startAndSink20.plist in Resources */,
+				20FB5EF81D8F50CE00CAACD7 /* startAndSink9.plist in Resources */,
+				20FB5EF91D8F50CE00CAACD7 /* startAndSink10.plist in Resources */,
+				20FB5EB81D8F50BB00CAACD7 /* obstacles23.plist in Resources */,
+				20D779C61D8EC32500379C9E /* operators1.plist in Resources */,
+				20FB5EAC1D8F50BB00CAACD7 /* obstacles11.plist in Resources */,
 				208FB01E1D8D921C00180EAE /* spark.png in Resources */,
+				20FB5EF51D8F50CE00CAACD7 /* startAndSink6.plist in Resources */,
 				2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */,
+				20FB5EC81D8F50BB00CAACD7 /* operators13.plist in Resources */,
+				20FB5EAE1D8F50BB00CAACD7 /* obstacles13.plist in Resources */,
+				20FB5EB11D8F50BB00CAACD7 /* obstacles16.plist in Resources */,
+				20FB5F0B1D8F50CE00CAACD7 /* startAndSink28.plist in Resources */,
+				20FB5F071D8F50CE00CAACD7 /* startAndSink24.plist in Resources */,
+				20FB5EBF1D8F50BB00CAACD7 /* obstacles30.plist in Resources */,
+				20D779D21D8ED27900379C9E /* operators3.plist in Resources */,
+				20FB5F021D8F50CE00CAACD7 /* startAndSink19.plist in Resources */,
+				20FB5EC71D8F50BB00CAACD7 /* operators12.plist in Resources */,
+				20FB5ECB1D8F50BB00CAACD7 /* operators16.plist in Resources */,
+				20FB5EF41D8F50CE00CAACD7 /* startAndSink5.plist in Resources */,
 				20A7CC501D8AE68E00A06482 /* sms-alert-1-daniel_simon.wav in Resources */,
+				20FB5EAB1D8F50BB00CAACD7 /* obstacles10.plist in Resources */,
+				20FB5EC31D8F50BB00CAACD7 /* operators8.plist in Resources */,
 				2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */,
+				20D779D11D8ED27900379C9E /* obstacles3.plist in Resources */,
+				20FB5F0C1D8F50CE00CAACD7 /* startAndSink29.plist in Resources */,
+				20FB5EB51D8F50BB00CAACD7 /* obstacles20.plist in Resources */,
+				20FB5EB91D8F50BB00CAACD7 /* obstacles24.plist in Resources */,
+				20FB5ECE1D8F50BB00CAACD7 /* operators19.plist in Resources */,
+				20FB5F051D8F50CE00CAACD7 /* startAndSink22.plist in Resources */,
+				20FB5EBD1D8F50BB00CAACD7 /* obstacles28.plist in Resources */,
 				201E09531D8E685B0088B86E /* SettingsScene.sks in Resources */,
+				20FB5E761D8F509C00CAACD7 /* obstacles6.plist in Resources */,
 				20C565761D82BDA50011846E /* hitMetal.wav in Resources */,
+				20FB5EFC1D8F50CE00CAACD7 /* startAndSink13.plist in Resources */,
+				20FB5EC51D8F50BB00CAACD7 /* operators10.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

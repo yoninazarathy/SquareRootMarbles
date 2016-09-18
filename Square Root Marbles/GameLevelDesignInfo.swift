@@ -50,25 +50,47 @@ class GameLevelDesignInfo{
         // Read Start and Sink //
         /////////////////////////
         
-        let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\(levelNumber).plist"
-        let readStartAndSinkDict = NSDictionary(contentsOfFile: startAndSinkFilePath)
-        if let dict = readStartAndSinkDict{
-            let separators = NSCharacterSet(charactersInString: "(,)")
-            for (key, val) in dict{
-                var words =  val.componentsSeparatedByCharactersInSet(separators)
-                let wrd1 = Int(words[1])!
-                let wrd2 = Int(words[2])!
-                if (key as! NSString) == "0"{
-                    startLocation = SquareCoordinates(sx: wrd1, sy: wrd2 )
-                }else{
-                    sinkLocation =  SquareCoordinates(sx: wrd1, sy: wrd2 )
+        if let plist = Plist(name: "startAndSink\(levelNumber)"){
+            let readStartAndSinkDict = plist.getValuesInPlistFile()
+            if let dict = readStartAndSinkDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                for (key, val) in dict{
+                    var words =  val.componentsSeparatedByCharactersInSet(separators)
+                    let wrd1 = Int(words[1])!
+                    let wrd2 = Int(words[2])!
+                    if (key as! NSString) == "0"{
+                        startLocation = SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    }else{
+                        sinkLocation =  SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    }
                 }
+                print("Read startAndSink file for level \(levelNumber) from BUNDLE")
+            }else{
+                print("No BUNDLE startAndSink file for level \(levelNumber)")
+                startLocation = defaultStartLocation
+                sinkLocation = defaultSinkLocation
             }
-            print("Read startAndSink file for level \(levelNumber)")
         }else{
-            print("No startAndSink file for level \(levelNumber)")
-            startLocation = defaultStartLocation
-            sinkLocation = defaultSinkLocation
+            let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\(levelNumber).plist"
+            let readStartAndSinkDict = NSDictionary(contentsOfFile: startAndSinkFilePath)
+            if let dict = readStartAndSinkDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                for (key, val) in dict{
+                    var words =  val.componentsSeparatedByCharactersInSet(separators)
+                    let wrd1 = Int(words[1])!
+                    let wrd2 = Int(words[2])!
+                    if (key as! NSString) == "0"{
+                        startLocation = SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    }else{
+                        sinkLocation =  SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    }
+                }
+                print("Read startAndSink file for level \(levelNumber) from PHONE")
+            }else{
+                print("No PHONE startAndSink file for level \(levelNumber)")
+                startLocation = defaultStartLocation
+                sinkLocation = defaultSinkLocation
+            }
         }
         
         
@@ -83,25 +105,48 @@ class GameLevelDesignInfo{
         //operator types are hard coded (not read from file)
         operatorTypes = operatorLevelArray[level]
 
-        let operatorFilePath = NSHomeDirectory() + "/Library/operators\(levelNumber).plist"
-        let readOperatorsDict = NSDictionary(contentsOfFile: operatorFilePath)
-        if let dict = readOperatorsDict{
-            let separators = NSCharacterSet(charactersInString: "(,)")
-            var i = 0
-            for (key, val) in dict{
-                var words =  val.componentsSeparatedByCharactersInSet(separators)
-                let wrd1 = Int(words[1])!
-                let wrd2 = Int(words[2])!
-                //QQQQ this is some scary casting and indexing without any check
-                operatorLocations[Int(String(key as! NSString))!] = SquareCoordinates(sx: wrd1, sy: wrd2 )
-                i = i + 1
+        if let plist = Plist(name: "operators\(levelNumber)"){
+            let readOperatorsDict = plist.getValuesInPlistFile()
+            if let dict = readOperatorsDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                var i = 0
+                for (key, val) in dict{
+                    var words =  val.componentsSeparatedByCharactersInSet(separators)
+                    let wrd1 = Int(words[1])!
+                    let wrd2 = Int(words[2])!
+                    //QQQQ this is some scary casting and indexing without any check
+                    operatorLocations[Int(String(key as! NSString))!] = SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    i = i + 1
+                }
+                print("Read operators file for level \(levelNumber) from BUNDLE")
+            }else{
+                print("No BUNDLE operators file for level \(levelNumber)")
+                for i in 0..<operatorLocations.count{
+                    let tup = defaultOperatorLocations[i]
+                    operatorLocations[i] = SquareCoordinates(sx: tup.0, sy: tup.1 )
+                }
             }
-            print("Read operators file for level \(levelNumber)")
         }else{
-            print("No operators file for level \(levelNumber)")
-            for i in 0..<operatorLocations.count{
-                let tup = defaultOperatorLocations[i]
-                operatorLocations[i] = SquareCoordinates(sx: tup.0, sy: tup.1 )
+            let operatorFilePath = NSHomeDirectory() + "/Library/operators\(levelNumber).plist"
+            let readOperatorsDict = NSDictionary(contentsOfFile: operatorFilePath)
+            if let dict = readOperatorsDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                var i = 0
+                for (key, val) in dict{
+                    var words =  val.componentsSeparatedByCharactersInSet(separators)
+                    let wrd1 = Int(words[1])!
+                    let wrd2 = Int(words[2])!
+                    //QQQQ this is some scary casting and indexing without any check
+                    operatorLocations[Int(String(key as! NSString))!] = SquareCoordinates(sx: wrd1, sy: wrd2 )
+                    i = i + 1
+                }
+                print("Read operators file for level \(levelNumber) from PHONE")
+            }else{
+                print("No PHONE operators file for level \(levelNumber)")
+                for i in 0..<operatorLocations.count{
+                    let tup = defaultOperatorLocations[i]
+                    operatorLocations[i] = SquareCoordinates(sx: tup.0, sy: tup.1 )
+                }
             }
         }
 
@@ -127,27 +172,54 @@ class GameLevelDesignInfo{
             obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
         }
         
-        //QQQQ temp to create grid
-        for yc in minCubeY.stride(to: maxCubeY, by: 8){
-            for xc in minCubeX...maxCubeX{
-                obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+        //////////
+        // Helpers for design only .... (horizontal and vertical grid)
+        
+        let makeHorzGrid = false
+        let makeVertGrid = false
+        
+        if makeHorzGrid{
+            for yc in minCubeY.stride(to: maxCubeY, by: 8){
+                for xc in minCubeX...maxCubeX{
+                    obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+                }
+            }
+        }
+        if makeVertGrid{
+            for xc in minCubeX.stride(to: maxCubeX, by: 8){
+                for yc in minCubeY...maxCubeY{
+                    obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+                }
             }
         }
 
-        
-
-        let obstacleFilePath = NSHomeDirectory() + "/Library/obstacles\(levelNumber).plist"
-        let readObstacleDict = NSDictionary(contentsOfFile: obstacleFilePath)
-        if let dict = readObstacleDict{
-            let separators = NSCharacterSet(charactersInString: "(,)")
-            for (key, _) in dict{
-                var words =  key.componentsSeparatedByCharactersInSet(separators)
-                obstacleMap[SquareCoordinates(sx: Int(words[1])!, sy: Int(words[2])!)] = ObstacleType.genericObstacle
+        if let plist = Plist(name: "obstacles\(levelNumber)"){
+            let readObstacleDict = plist.getValuesInPlistFile()
+            if let dict = readObstacleDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                for (key, _) in dict{
+                    var words =  key.componentsSeparatedByCharactersInSet(separators)
+                    obstacleMap[SquareCoordinates(sx: Int(words[1])!, sy: Int(words[2])!)] = ObstacleType.genericObstacle
+                }
+                print("Read obstacle file for level \(levelNumber) from BUNDLE")
+            }else{
+                obstacleMap[SquareCoordinates(sx: 0,sy: 0)] = ObstacleType.genericObstacle
+                print("No BUNDLE obstacle file for level \(levelNumber)")
             }
-            print("Read obstacle file for level \(levelNumber)")
         }else{
-            obstacleMap[SquareCoordinates(sx: 0,sy: 0)] = ObstacleType.genericObstacle
-            print("No obstacle file for level \(levelNumber)")
+            let obstacleFilePath = NSHomeDirectory() + "/Library/obstacles\(levelNumber).plist"
+            let readObstacleDict = NSDictionary(contentsOfFile: obstacleFilePath)
+            if let dict = readObstacleDict{
+                let separators = NSCharacterSet(charactersInString: "(,)")
+                for (key, _) in dict{
+                    var words =  key.componentsSeparatedByCharactersInSet(separators)
+                    obstacleMap[SquareCoordinates(sx: Int(words[1])!, sy: Int(words[2])!)] = ObstacleType.genericObstacle
+                }
+                print("Read obstacle file for level \(levelNumber) from PHONE")
+            }else{
+                obstacleMap[SquareCoordinates(sx: 0,sy: 0)] = ObstacleType.genericObstacle
+                print("No PHONE obstacle file for level \(levelNumber)")
+            }
         }
     }
 }
