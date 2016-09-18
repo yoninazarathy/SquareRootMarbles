@@ -88,11 +88,12 @@ class GameLevelDesignInfo{
         if let dict = readOperatorsDict{
             let separators = NSCharacterSet(charactersInString: "(,)")
             var i = 0
-            for (_, val) in dict{
+            for (key, val) in dict{
                 var words =  val.componentsSeparatedByCharactersInSet(separators)
                 let wrd1 = Int(words[1])!
                 let wrd2 = Int(words[2])!
-                operatorLocations[i] = SquareCoordinates(sx: wrd1, sy: wrd2 )
+                //QQQQ this is some scary casting and indexing without any check
+                operatorLocations[Int(String(key as! NSString))!] = SquareCoordinates(sx: wrd1, sy: wrd2 )
                 i = i + 1
             }
             print("Read operators file for level \(levelNumber)")
@@ -105,9 +106,9 @@ class GameLevelDesignInfo{
         }
 
         
-        ////////////////////
-        // Read Obstacles //
-        ////////////////////
+        ///////////////////////////////
+        // Read and Create Obstacles //
+        ///////////////////////////////
         
         obstacleMap = Dictionary<SquareCoordinates,ObstacleType>()
 
@@ -126,8 +127,15 @@ class GameLevelDesignInfo{
             obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
         }
         
+        //QQQQ temp to create grid
+        for yc in minCubeY.stride(to: maxCubeY, by: 8){
+            for xc in minCubeX...maxCubeX{
+                obstacleMap[SquareCoordinates(sx: xc, sy: yc)] = ObstacleType.genericObstacle
+            }
+        }
+
         
-        
+
         let obstacleFilePath = NSHomeDirectory() + "/Library/obstacles\(levelNumber).plist"
         let readObstacleDict = NSDictionary(contentsOfFile: obstacleFilePath)
         if let dict = readObstacleDict{

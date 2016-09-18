@@ -139,6 +139,10 @@ class OperatorNode: SKSpriteNode{
     
     var valid: Bool! = nil
     
+    var active: Bool = true
+    
+    var angleToFire: CGFloat = CGFloat(M_PI/2)
+    
     func setAsValid(){
         valid = true
         color = SKColor(CIColor: CIColor(red: 0.0, green: 1.0, blue: 0.0))

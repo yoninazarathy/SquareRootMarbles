@@ -219,6 +219,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             node.physicsBody?.categoryBitMask = PhysicsCategory.Operator
             node.physicsBody?.collisionBitMask = PhysicsCategory.None
             node.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+            //QQQQ maybe we won't use this...
+            let deltaX = messageLabelNode.position.x-node.position.x
+            let deltaY = messageLabelNode.position.y-node.position.y
+            node.angleToFire = atan(deltaY/deltaX)+CGFloat(M_PI)
             self.addChild(node)
         }
     }
@@ -271,11 +275,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         for (coords,_) in gameLevelModel!.designInfo.obstacleMap{
             createObstacleNode(coords)
         }
+        createDashBoard()
         createSinkNode()
         createOperatorNodes()
         createPlayerNode()
         updateOperatorsAndSinkStatus()
-        createDashBoard()
         
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tap.numberOfTapsRequired = 2
@@ -335,7 +339,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 finalizeSceneWithFailure()
             }
         default:
-            handleOperatorPass(actionNode as! OperatorNode)
+            let op = actionNode as! OperatorNode
+            if op.active{
+                handleOperatorPass(op)
+            }
         }
     }
     
@@ -345,17 +352,29 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             
             let newValue = operatorNode.operatorAction.operate(playerNode.value)
             
+            operatorNode.active = false
+            
+            let rotate = SKAction.rotateByAngle(CGFloat(2*M_PI), duration: 2)
+            operatorNode.runAction(rotate)
+
+            let fadeout = SKAction.fadeAlphaTo(0.3, duration: 1.0)
+            let fadein = SKAction.fadeAlphaTo(1.0, duration: 1.0)
+            let revive = SKAction.runBlock(){operatorNode.active = true}
+            let sequence = SKAction.sequence([fadeout, fadein,revive])
+            operatorNode.runAction(sequence)
+            
+            //maybe delete this particle story...
+//            let squareRootExplosionEmitterNode = SKEmitterNode(fileNamed:"SquareRootParticle")
+//            squareRootExplosionEmitterNode?.emissionAngle = operatorNode.angleToFire
+//            operatorNode.addChild(squareRootExplosionEmitterNode!)
+//            let particleRemove = SKAction.sequence([SKAction.waitForDuration(1.3), SKAction.runBlock(){squareRootExplosionEmitterNode?.removeFromParent()}])
+//            operatorNode.runAction(particleRemove)
+            
+            
             //operators are of two categories: sqrts  - get attention, others - minor
             if operatorNode.operatorAction.operationString() == "sqrt"{
-                //QQQQ Do the SQRT show here...
-                //... not sure what the square root show is
-                
                 self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
                 
-                
-                //QQQQ make sure to remove this and do it based on operator
-//                let squareRootExplosionEmitterNode = SKEmitterNode(fileNamed:"SquareRootParticle")
-//                playerNode.addChild(squareRootExplosionEmitterNode!)
             }else{
                 //QQQQ do a non square root shot here
                 self.runAction(SKAction.playSoundFileNamed("robotBlip",waitForCompletion:false))
