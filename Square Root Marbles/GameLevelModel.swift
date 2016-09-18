@@ -21,10 +21,36 @@ class GameLevelModel{
     var bestScoreString: String
     var newScoreString: String
     
+    static func centiSeconds(fromString: String) -> Int{
+        let numArray = fromString.componentsSeparatedByString(".")
+        let time = 100*Int(numArray[0])! + Int(numArray[1])! //QQQQ This is brave/stupid shit...
+        return time
+    }
+    
+    //QQQQ
+    var bestScoreCentiSecond: Int{
+        get{
+            return bestScoreString == "" ? Int.max : GameLevelModel.centiSeconds(bestScoreString)
+        }
+    }
+
+    var newScoreCentiSecond: Int{
+        get{
+            return newScoreString == "" ? Int.max : GameLevelModel.centiSeconds(newScoreString)
+        }
+    }
+
+    
     init(level: Int){
         levelNumber = level
         designInfo = GameLevelDesignInfo(level: level)
-        bestScoreString = "" //QQQQ read from persistant memoery (property list whatever...)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let bestScore = defaults.stringForKey("level\(level)best") {
+            bestScoreString = bestScore
+        }else{
+            bestScoreString = ""
+        }
+        
         newScoreString = ""
     }
 }

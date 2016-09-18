@@ -29,7 +29,7 @@ let upperBoundNumOperators = 15
 
 //QQQQ make naming common (scene/screen)
 let timeInIntroScreen = 1.0
-let timeInAfterLevelScene = 3.0
+let timeInAfterLevelScene = 10.0
 
 /////////////////
 // Level World //
@@ -77,6 +77,7 @@ enum AppState{
     case gameActionPaused
     case afterLevelScene
     case instructionScene
+    case settingsScene
 }
 
 

@@ -18,24 +18,6 @@ class InstructionsScene: GeneralScene {
         
         //QQQQ How do I initilize an array member?
         
-        for i in 1.stride(to: numLevels, by: 2) {
-            var x = 120
-            var y = 1300-75*(i-1)
-            var shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
-            shapeNode.zPosition = -5
-            shapeNode.fillColor = SKColor.yellowColor()
-            shapeNode.strokeColor = SKColor.blueColor()
-            self.addChild(shapeNode)
-            x = 414-120
-            y = 1300-75*(i-1)
-            
-            shapeNode = SKShapeNode(rect: CGRect(x: x-30, y:y-30, width: 65, height: 65))
-            shapeNode.zPosition = -5
-            shapeNode.fillColor = SKColor.yellowColor()
-            shapeNode.strokeColor = SKColor.blueColor()
-            self.addChild(shapeNode)
-        }
-        
         sceneCam = SKCameraNode() //initialize your camera
         sceneCam.position = CGPoint(x: size.width/2, y: size.height/2)
         self.camera = sceneCam  //set the scene's camera
@@ -45,8 +27,8 @@ class InstructionsScene: GeneralScene {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("need to get out of instruction scene")
-        //(scene as! GameLevelScene).gameAppDelegate!.changeView(AppState.gameActionPaused)
+        //QQQQ this is silly code...
+        (scene as! InstructionsScene).gameAppDelegate!.changeView((scene as! InstructionsScene).gameAppDelegate!.getReturnAppState())
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -60,13 +42,13 @@ class InstructionsScene: GeneralScene {
         //QQQQ adjust these constants and any others...
         
         //upper bound for scrolling up
-        if newYPosition > 750{
-            newYPosition = 750
+        if newYPosition > CGFloat(screenHeight){
+            newYPosition = CGFloat(screenHeight)
         }
         
         //lower bound for scrolling down
-        if newYPosition < -800{
-            newYPosition = -800
+        if newYPosition < 0{
+            newYPosition = 0
         }
         
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)

@@ -136,18 +136,17 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playing = false
         self.runAction(SKAction.playSoundFileNamed("chinese-gong-daniel_simon.wav",waitForCompletion:false))
         haultAction()
-        physicsWorld.speed = 1.0
 
-        gameLevelModel!.bestScoreString = timeString
         
         
         //QQQQ Replace this spring stuff or improve it
-//        sinkSpring = SKPhysicsJointSpring.jointWithBodyA(playerNode.physicsBody!, bodyB: sinkNode.physicsBody! ,anchorA: playerNode.anchorPoint, anchorB: sinkNode.position)
+        //physicsWorld.speed = 1.0
+        //        sinkSpring = SKPhysicsJointSpring.jointWithBodyA(playerNode.physicsBody!, bodyB: sinkNode.physicsBody! ,anchorA: playerNode.anchorPoint, anchorB: sinkNode.position)
 //        sinkSpring.frequency = 1.0
 //        sinkSpring.damping  = 0.0
 //        self.physicsWorld.addJoint(sinkSpring)
 
-        //QQQQ update score here
+        gameLevelModel!.newScoreString = timeString //record score
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
     
@@ -157,6 +156,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
         playerNode.addChild(badExplosionEmitterNode!)
         haultAction()
+        gameLevelModel!.newScoreString = "" //indicate a failure in the level
+
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
     
@@ -281,8 +282,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         self.view?.addGestureRecognizer(tap)
         
         resetGame()
-        playGame()
-        
+        if gameAppDelegate!.getAppState() == AppState.gameActionPlaying{
+            playGame()
+        }else{//assert it is paused QQQQ
+            pauseGame()
+        }
     }
     
     ///////////////////////
@@ -336,17 +340,28 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func handleOperatorPass(operatorNode: OperatorNode){
-        messageLabelNode.DisplayFadingMessage("You hit \(operatorNode.operatorAction.operationString())",duration: 1.0)
         if operatorNode.valid!{
-            self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
+            messageLabelNode.DisplayFadingMessage("You hit \(operatorNode.operatorAction.operationString())",duration: 1.0)
+            
             let newValue = operatorNode.operatorAction.operate(playerNode.value)
+            
+            //operators are of two categories: sqrts  - get attention, others - minor
+            if operatorNode.operatorAction.operationString() == "sqrt"{
+                //QQQQ Do the SQRT show here...
+                //... not sure what the square root show is
+                
+                self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
+                
+                
+                //QQQQ make sure to remove this and do it based on operator
+//                let squareRootExplosionEmitterNode = SKEmitterNode(fileNamed:"SquareRootParticle")
+//                playerNode.addChild(squareRootExplosionEmitterNode!)
+            }else{
+                //QQQQ do a non square root shot here
+                self.runAction(SKAction.playSoundFileNamed("robotBlip",waitForCompletion:false))
+                
+            }
             playerNode.changeValue(newValue)
-            
-            
-            //QQQQ make sure to remove this and do it based on operator
-            let badExplosionEmitterNode = SKEmitterNode(fileNamed:"SquareRootParticle")
-            playerNode.addChild(badExplosionEmitterNode!)
-            
             updateOperatorsAndSinkStatus()
         }
         else{
@@ -359,32 +374,57 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     // Pause PopUp //
     /////////////////
     
+    //QQQQ clean this whole thing up...
+    var popUpDesiredPosition: CGPoint! = nil
+    
     func displayPopUp(){
         
         //QQQQ Make this whole thing a class
         
+        let buttonSize = 45.0
+        let buttonSpacing = 15.0
+        let playXOffest = 0 - buttonSpacing/2 - buttonSize - buttonSpacing - buttonSize/2
+        let stopXOffest = 0 - buttonSpacing/2 - buttonSize/2
+        let auidoXOffset = -1*(stopXOffest)
+        let helpXOffset = -1*(playXOffest)
+        let editXOffset = helpXOffset + buttonSpacing + buttonSize
+        
+        var popUpWidth = 4*buttonSize+5*buttonSpacing
+        if editModeEnabled{
+            popUpWidth += buttonSize + buttonSpacing
+        }
+        let popUpHeight = buttonSize + 2*buttonSpacing
+        
         popUpNode = SKSpriteNode(imageNamed: "backTest")
         popUpNode!.colorBlendFactor = 0.8
         popUpNode!.color = SKColor.redColor()
-        popUpNode!.size = CGSize(width: 260, height: 65)
-        popUpNode!.position = CGPoint(x:80, y:630)
-        popUpNode!.anchorPoint = CGPoint(x:0,y:0)
-        //QQQQ Update Z positions of other items
+        popUpNode!.size = CGSize(width: popUpWidth, height: popUpHeight)
         popUpNode!.zPosition = GameLevelZPositions.popUpMenuZ
-        self.addChild(popUpNode!)
-        
-        //QQQQ put consistant graphic anems
-        
         if editModeEnabled{
-            let editButtonNode = EditButtonNode(imageNamed: "edit-button")
-            editButtonNode.userInteractionEnabled = true
-            editButtonNode.name = "editButton"
-            editButtonNode.size = CGSize(width:40, height: 40)
-            editButtonNode.position = CGPoint(x:30, y:35)
-            editButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
-            popUpNode!.addChild(editButtonNode)
+            popUpNode!.anchorPoint = CGPoint(x:2.0/5.0,y: 0.5)
+            popUpNode!.position = CGPoint(x:screenCenterPointX-(buttonSize+buttonSpacing)/2, y:screenCenterPointY)
+        }else{
+            popUpNode!.anchorPoint = CGPoint(x:0.5,y: 0.5)
+            popUpNode!.position = CGPoint(x:screenCenterPointX, y:screenCenterPointY)
         }
+        popUpDesiredPosition = popUpNode!.position
         
+        let playButtonNode = PlayButtonNode(imageNamed: "play")
+        playButtonNode.userInteractionEnabled = true
+        playButtonNode.name = "playButton"
+        playButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        playButtonNode.position = CGPoint(x:playXOffest, y:0)
+        playButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
+        popUpNode!.addChild(playButtonNode)
+
+        let stopButtonNode = StopButtonNode(imageNamed: "cross-button")
+        stopButtonNode.userInteractionEnabled = true
+        stopButtonNode.name = "stopButton"
+        stopButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        stopButtonNode.position = CGPoint(x:stopXOffest, y:0)
+        stopButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
+        popUpNode!.addChild(stopButtonNode)
+
         let audioButtonNode: AudioButtonNode
         if gameAppDelegate!.isMuted(){
             audioButtonNode = AudioButtonNode(imageNamed: "audio")
@@ -394,35 +434,35 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         audioButtonNode.userInteractionEnabled = true
         audioButtonNode.name = "audioButton"
-        audioButtonNode.size = CGSize(width:40, height: 40)
-        audioButtonNode.position = CGPoint(x:80, y:40)
+        audioButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        audioButtonNode.position = CGPoint(x:auidoXOffset, y:0)
+
         //QQQ Not sure need to set this z position
         audioButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(audioButtonNode)
         
-        let stopButtonNode = StopButtonNode(imageNamed: "cross-button")
-        stopButtonNode.userInteractionEnabled = true
-        stopButtonNode.name = "stopButton"
-        stopButtonNode.size = CGSize(width:40, height: 40)
-        stopButtonNode.position = CGPoint(x:130, y:35)
-        stopButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
-        popUpNode!.addChild(stopButtonNode)
         
         let helpButtonNode = HelpButtonNode(imageNamed: "help")
         helpButtonNode.userInteractionEnabled = true
         helpButtonNode.name = "helpButton"
-        helpButtonNode.size = CGSize(width:40, height: 40)
-        helpButtonNode.position = CGPoint(x:180, y:35)
+        helpButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        helpButtonNode.position = CGPoint(x:helpXOffset, y:0)
         helpButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(helpButtonNode)
         
-        let playButtonNode = PlayButtonNode(imageNamed: "play")
-        playButtonNode.userInteractionEnabled = true
-        playButtonNode.name = "playButton"
-        playButtonNode.size = CGSize(width:40, height: 40)
-        playButtonNode.position = CGPoint(x:230, y:35)
-        playButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
-        popUpNode!.addChild(playButtonNode)
+        if editModeEnabled{
+            let editButtonNode = EditButtonNode(imageNamed: "edit-button")
+            editButtonNode.userInteractionEnabled = true
+            editButtonNode.name = "editButton"
+            editButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+            editButtonNode.position = CGPoint(x:editXOffset, y:0)
+            editButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
+            popUpNode!.addChild(editButtonNode)
+        }
+        
+        self.addChild(popUpNode!)
+
+        messageLabelNode.DisplayFadingMessage("Paused", duration: 10.0)
     }
 
     //////////////
@@ -612,6 +652,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     class HelpButtonNode : SKSpriteNode{
         override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+            (scene as! GameLevelScene).gameAppDelegate!.setReturnAppState(AppState.gameActionPaused)
             (scene as! GameLevelScene).gameAppDelegate!.changeView(AppState.instructionScene)
         }
     }
@@ -630,8 +671,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             (scene as! GameLevelScene).gameAppDelegate!.toggleMute()
             if (scene as! GameLevelScene).gameAppDelegate!.isMuted(){
                 self.texture = SKTexture(imageNamed: "audio")
+                (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("Audio Off", duration: 2.0)
             }else{
                 self.texture = SKTexture(imageNamed: "audioOff")
+                (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("Audio On", duration: 2.0)
             }
         }
     }
@@ -640,11 +683,14 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             if (scene as! GameLevelScene).inEditMode == false{
                 (scene as! GameLevelScene).inEditMode = true
                 self.texture = SKTexture(imageNamed: "editOff")
+                (scene as! GameLevelScene).popUpNode!.position = CGPoint(x: (scene as! GameLevelScene).popUpDesiredPosition.x, y: CGFloat(0.955*screenHeight))
+                (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("", duration: 1.0)
             }
             else{
                 (scene as! GameLevelScene).inEditMode = false
                 self.texture = SKTexture(imageNamed: "edit-button")
-                
+                (scene as! GameLevelScene).popUpNode!.position = (scene as! GameLevelScene).popUpDesiredPosition
+                (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("Edits saved", duration: 5.0)
                 //QQQQ Change this so that the writing isn't in here and also to one file
                 
                 /////////////////////////////
