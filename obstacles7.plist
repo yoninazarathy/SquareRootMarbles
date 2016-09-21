@@ -16,8 +16,6 @@
 	<string>genericObstacle</string>
 	<key>(-1,32)</key>
 	<string>genericObstacle</string>
-	<key>(-1,8)</key>
-	<string>genericObstacle</string>
 	<key>(-10,-16)</key>
 	<string>genericObstacle</string>
 	<key>(-10,-24)</key>
@@ -147,8 +145,6 @@
 	<key>(-2,24)</key>
 	<string>genericObstacle</string>
 	<key>(-2,32)</key>
-	<string>genericObstacle</string>
-	<key>(-2,8)</key>
 	<string>genericObstacle</string>
 	<key>(-20,-1)</key>
 	<string>genericObstacle</string>
@@ -294,8 +290,6 @@
 	<string>genericObstacle</string>
 	<key>(-3,32)</key>
 	<string>genericObstacle</string>
-	<key>(-3,8)</key>
-	<string>genericObstacle</string>
 	<key>(-4,-16)</key>
 	<string>genericObstacle</string>
 	<key>(-4,-24)</key>
@@ -309,8 +303,6 @@
 	<key>(-4,24)</key>
 	<string>genericObstacle</string>
 	<key>(-4,32)</key>
-	<string>genericObstacle</string>
-	<key>(-4,8)</key>
 	<string>genericObstacle</string>
 	<key>(-5,-16)</key>
 	<string>genericObstacle</string>
@@ -344,49 +336,19 @@
 	<string>genericObstacle</string>
 	<key>(-6,8)</key>
 	<string>genericObstacle</string>
-	<key>(-7,-1)</key>
-	<string>genericObstacle</string>
 	<key>(-7,-16)</key>
-	<string>genericObstacle</string>
-	<key>(-7,-2)</key>
 	<string>genericObstacle</string>
 	<key>(-7,-24)</key>
 	<string>genericObstacle</string>
-	<key>(-7,-3)</key>
-	<string>genericObstacle</string>
 	<key>(-7,-32)</key>
-	<string>genericObstacle</string>
-	<key>(-7,-4)</key>
-	<string>genericObstacle</string>
-	<key>(-7,-5)</key>
-	<string>genericObstacle</string>
-	<key>(-7,-6)</key>
-	<string>genericObstacle</string>
-	<key>(-7,-7)</key>
 	<string>genericObstacle</string>
 	<key>(-7,-8)</key>
 	<string>genericObstacle</string>
-	<key>(-7,0)</key>
-	<string>genericObstacle</string>
-	<key>(-7,1)</key>
-	<string>genericObstacle</string>
 	<key>(-7,16)</key>
-	<string>genericObstacle</string>
-	<key>(-7,2)</key>
 	<string>genericObstacle</string>
 	<key>(-7,24)</key>
 	<string>genericObstacle</string>
-	<key>(-7,3)</key>
-	<string>genericObstacle</string>
 	<key>(-7,32)</key>
-	<string>genericObstacle</string>
-	<key>(-7,4)</key>
-	<string>genericObstacle</string>
-	<key>(-7,5)</key>
-	<string>genericObstacle</string>
-	<key>(-7,6)</key>
-	<string>genericObstacle</string>
-	<key>(-7,7)</key>
 	<string>genericObstacle</string>
 	<key>(-7,8)</key>
 	<string>genericObstacle</string>
@@ -464,8 +426,6 @@
 	<string>genericObstacle</string>
 	<key>(0,32)</key>
 	<string>genericObstacle</string>
-	<key>(0,8)</key>
-	<string>genericObstacle</string>
 	<key>(1,-16)</key>
 	<string>genericObstacle</string>
 	<key>(1,-24)</key>
@@ -480,15 +440,11 @@
 	<string>genericObstacle</string>
 	<key>(1,32)</key>
 	<string>genericObstacle</string>
-	<key>(1,8)</key>
-	<string>genericObstacle</string>
 	<key>(10,-16)</key>
 	<string>genericObstacle</string>
 	<key>(10,-24)</key>
 	<string>genericObstacle</string>
 	<key>(10,-32)</key>
-	<string>genericObstacle</string>
-	<key>(10,-8)</key>
 	<string>genericObstacle</string>
 	<key>(10,0)</key>
 	<string>genericObstacle</string>
@@ -503,8 +459,6 @@
 	<key>(11,-24)</key>
 	<string>genericObstacle</string>
 	<key>(11,-32)</key>
-	<string>genericObstacle</string>
-	<key>(11,-8)</key>
 	<string>genericObstacle</string>
 	<key>(11,0)</key>
 	<string>genericObstacle</string>
@@ -613,8 +567,6 @@
 	<key>(2,24)</key>
 	<string>genericObstacle</string>
 	<key>(2,32)</key>
-	<string>genericObstacle</string>
-	<key>(2,8)</key>
 	<string>genericObstacle</string>
 	<key>(20,-1)</key>
 	<string>genericObstacle</string>
@@ -842,8 +794,6 @@
 	<string>genericObstacle</string>
 	<key>(8,-32)</key>
 	<string>genericObstacle</string>
-	<key>(8,-8)</key>
-	<string>genericObstacle</string>
 	<key>(8,0)</key>
 	<string>genericObstacle</string>
 	<key>(8,16)</key>
@@ -859,8 +809,6 @@
 	<key>(9,-24)</key>
 	<string>genericObstacle</string>
 	<key>(9,-32)</key>
-	<string>genericObstacle</string>
-	<key>(9,-8)</key>
 	<string>genericObstacle</string>
 	<key>(9,0)</key>
 	<string>genericObstacle</string>

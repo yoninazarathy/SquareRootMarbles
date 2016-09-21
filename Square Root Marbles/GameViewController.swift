@@ -28,6 +28,29 @@ protocol GameAppDelegate{
 
 class GeneralScene: SKScene {
     var gameAppDelegate: GameAppDelegate?
+    
+    var backgroundMusic: SKAudioNode!
+    
+    func playBackgroundMusic() {
+        if backgroundMusic != nil {
+            backgroundMusic.removeFromParent()
+        }
+        
+        let temp = SKAudioNode(fileNamed: "136_full_efficiency_0159.mp3")
+        temp.autoplayLooped = true
+        backgroundMusic = temp
+        //backgroundMusic = SKAudioNode(fileNamed: "SpaceGame.caf")
+        //backgroundMusic.autoplayLooped = true
+        //addChild(backgroundMusic)
+        addChild(backgroundMusic)
+    }
+    
+    func stopBackgroundMusic(){
+        if let bm = backgroundMusic{
+            bm.removeFromParent()
+        }
+    }
+    
 }
 
 

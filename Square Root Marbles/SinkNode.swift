@@ -41,12 +41,12 @@ class SinkNode: SKSpriteNode{
     
     
     convenience init(target: Int){
-        self.init(texture: SKTexture(imageNamed: "checkSink"), color: SKColor.redColor(), size: CGSize(width:50, height:50))
+        self.init(texture: SKTexture(imageNamed: "sink"), color: SKColor.redColor(), size: CGSize(width:50, height:50))
         self.targetValue = target
         labelNode = SKLabelNode(text: "\(targetValue)")
         
         labelNode.fontName = "AmericanTypewriter-Bold"
-        labelNode.fontColor = SKColor.blueColor()
+        labelNode.fontColor = SKColor.whiteColor()
         labelNode.fontSize = 40
         labelNode.position = CGPoint(x:0, y: -15) //QQQQ
         labelNode.blendMode = SKBlendMode.Add

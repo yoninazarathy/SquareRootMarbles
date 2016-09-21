@@ -26,6 +26,7 @@ sqrt(9) = 3
 7 - start: 7, goal: 3, operators: +1, +1, sqrt, -1, -1, sqrt, +1, +1    //objective: square root of 9, square root of 1 //sequential maze
 8 - start: 8, goal: 3, operators: +1, sqrt, +1, -1, +1, -1              //objective: square root of 9                   //open plan
 9 - start: 9, goal: 3, operators: sqrt && +1, +1, +1, +1, +1, +1, +1    //objective square root of 9 (maybe 16)         //open plan and maze of +1's
+ //change -1 instead of a +1
 
 sqrt(16) = 4
 10 - start: 10, goal: 4, operators: *2, -1, -1, -1, -1, sqrt              //objective square root of 16                   //sequential
@@ -74,15 +75,15 @@ func goalOfLevel(level: Int) -> Int{
 let operatorLevelArray = [
 [], //level 0 meaningless
 [], //level 1 has no operators
-["-1", "+1", "-1"],
+["-1", "+1", "-1"],//2
 ["+1", "sqrt", "-1"],
 ["-1", "-1", "-1", "sqrt", "+1"],
-["+1", "+1", "-1", "+1", "+1","+1", "sqrt", "-1"],
+["+1", "+1", "-1", "+1", "+1","+1", "sqrt", "-1"], //5
 ["-1", "-1", "-1", "+1", "sqrt"],
 ["+1", "+1", "sqrt", "-1", "-1", "sqrt", "+1", "+1"],
 ["+1", "sqrt", "+1", "-1", "+1", "-1"],
-["sqrt","+1", "+1", "+1", "+1", "+1", "+1", "+1"],
-["*2", "-1", "-1", "-1", "-1", "sqrt"],
+["sqrt","+1", "+1", "+1", "+1", "+1", "+1", "-1"], //9
+["*2", "-1", "-1", "-1", "-1", "sqrt"], //10
 ["sqrt","+1", "+1", "+1", "+1", "sqrt"],
 ["*2", "+1", "sqrt", "-1"],
 ["*2", "sqrt"],

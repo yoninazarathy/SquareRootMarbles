@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "IntroScreen.png",
+      "filename" : "popup.png",
       "scale" : "1x"
     },
     {

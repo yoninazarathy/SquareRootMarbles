@@ -20,6 +20,7 @@ struct PhysicsCategory{
 
 
 struct GameLevelZPositions{
+    static let backZ = CGFloat(-100.0)
     static let obstacleZ = CGFloat(-20.0)
     static let sinkZ = CGFloat(-5.0)
     static let playerZ = CGFloat(0.0)
@@ -58,6 +59,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         //pause core motion
         motionManager.stopDeviceMotionUpdates()
+        
+        stopBackgroundMusic()
     }
     
     func startAction(){
@@ -89,6 +92,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 return
             }
         }
+        
+        playBackgroundMusic()
     }
     
     func pauseGame(){
@@ -116,7 +121,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if let popUp = popUpNode{
             popUp.removeFromParent()
         }
-        
     }
     
     func increaseTime(){
@@ -134,7 +138,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func finalizeSceneWithSuccess(){
         playing = false
-        self.runAction(SKAction.playSoundFileNamed("chinese-gong-daniel_simon.wav",waitForCompletion:false))
+        self.runAction(SKAction.playSoundFileNamed("0015_game_event_02_victory.wav",waitForCompletion:false))
         haultAction()
 
         
@@ -152,7 +156,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func finalizeSceneWithFailure(){
         playing = false
-        self.runAction(SKAction.playSoundFileNamed("smashing.wav",waitForCompletion:false))
+        self.runAction(SKAction.playSoundFileNamed("0015_game_event_02_victory.wav",waitForCompletion:false))
         let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
         playerNode.addChild(badExplosionEmitterNode!)
         haultAction()
@@ -182,8 +186,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         let rect = coords.rect()
         let node = SKShapeNode(rect: rect)
         node.name = "obstacleNode"
-        node.fillColor = SKColor.whiteColor()
-        node.strokeColor = SKColor.redColor()
+        node.fillColor = SKColor.darkGrayColor()
         node.lineWidth = 0
         node.physicsBody = SKPhysicsBody(edgeLoopFromRect: rect)
         node.physicsBody!.dynamic = false
@@ -204,6 +207,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         sinkNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         sinkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
         self.addChild(sinkNode)
+        
+        let shrink = SKAction.scaleTo(0.8,duration: 1.2)
+        let grow = SKAction.scaleTo(1.0, duration: 0.5)
+        let sequence = SKAction.sequence([shrink, grow])
+        sinkNode.runAction(SKAction.repeatActionForever(sequence))
     }
     
     func createOperatorNodes(){
@@ -262,6 +270,13 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
+        
+        let background = SKSpriteNode(imageNamed: "orangeBack")
+        background.size = CGSize(width: gameHorzSize, height: gameVertSize)
+        background.position = CGPoint(x: 0, y: 0)
+        background.anchorPoint = CGPoint(x:0,y:0)
+        background.zPosition = GameLevelZPositions.backZ
+        addChild(background)
         
         physicsWorld.contactDelegate = self
         physicsWorld.speed = 0.0 //will be set to 1.0 when starting
@@ -326,10 +341,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         switch(actionNode!.name!){
         case "obstacleNode":
-            if contact.collisionImpulse > 2{//QQQQ make this 2 a constant
+            if contact.collisionImpulse > 6{//QQQQ make this 2 a constant
                 //QQQQ handle muting globally
                 if gameAppDelegate?.isMuted() == false{
-                    self.runAction(SKAction.playSoundFileNamed("hitMetal.wav",waitForCompletion:false))
+                    self.runAction(SKAction.playSoundFileNamed("knock.wav",waitForCompletion:false))
                 }
             }
         case "sinkNode":
@@ -373,7 +388,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             
             //operators are of two categories: sqrts  - get attention, others - minor
             if operatorNode.operatorAction.operationString() == "sqrt"{
-                self.runAction(SKAction.playSoundFileNamed("sms-alert-1-daniel_simon.wav",waitForCompletion:false))
+                self.runAction(SKAction.playSoundFileNamed("0015_game_event_03_achieve.wav",waitForCompletion:false))
                 
             }else{
                 //QQQQ do a non square root shot here
@@ -414,9 +429,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         }
         let popUpHeight = buttonSize + 2*buttonSpacing
         
-        popUpNode = SKSpriteNode(imageNamed: "backTest")
-        popUpNode!.colorBlendFactor = 0.8
-        popUpNode!.color = SKColor.redColor()
+        popUpNode = SKSpriteNode(imageNamed: "popup")
+        //popUpNode!.colorBlendFactor = 0.8
+        //popUpNode!.color = SKColor.redColor()
         popUpNode!.size = CGSize(width: popUpWidth, height: popUpHeight)
         popUpNode!.zPosition = GameLevelZPositions.popUpMenuZ
         if editModeEnabled{
@@ -691,9 +706,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             if (scene as! GameLevelScene).gameAppDelegate!.isMuted(){
                 self.texture = SKTexture(imageNamed: "audio")
                 (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("Audio Off", duration: 2.0)
+                (scene as! GameLevelScene).stopBackgroundMusic()
             }else{
                 self.texture = SKTexture(imageNamed: "audioOff")
                 (scene as! GameLevelScene).messageLabelNode.DisplayFadingMessage("Audio On", duration: 2.0)
+                (scene as! GameLevelScene).playBackgroundMusic()
             }
         }
     }

@@ -15,16 +15,18 @@ class IntroScene: GeneralScene {
     override func didMoveToView(view: SKView) {
         //QQQQ problem if clicked before - need to kill timer
         timer = NSTimer.scheduledTimerWithTimeInterval(timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
-
+        playBackgroundMusic()
     }
     
     func timerExpired(){
-            gameAppDelegate!.changeView(AppState.menuScene)
+        stopBackgroundMusic()
+        gameAppDelegate!.changeView(AppState.menuScene)
     }
 
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         timer!.invalidate()
+        stopBackgroundMusic()
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     

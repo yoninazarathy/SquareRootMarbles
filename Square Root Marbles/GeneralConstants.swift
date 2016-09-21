@@ -29,7 +29,7 @@ let numLevels = 30
 let upperBoundNumOperators = 15
 
 //QQQQ make naming common (scene/screen)
-let timeInIntroScreen = 1.0
+let timeInIntroScreen = 15.0
 let timeInAfterLevelScene = 10.0
 
 /////////////////
@@ -69,6 +69,8 @@ let offGameVerticalSpare = (screenHeight - cubeSize * Double(numCubesHeight))/2
 let gameLevelCenterPointX = screenCenterPointX
 let gameLevelCenterPointY = screenCenterPointY - offGameVerticalSpare
 
+let gameHorzSize = cubeSize*Double(numCubesWidth)
+let gameVertSize = cubeSize*Double(numCubesHeight)
 
 
 enum AppState{

@@ -44,9 +44,9 @@ class MenuScene: GeneralScene {
         
         var currentY = Double(self.size.height) - 2*buttonSpacing - buttonSize/2
         
-        let menuNode = SKSpriteNode(imageNamed: "backTest")
-        menuNode.colorBlendFactor = 0.8
-        menuNode.color = SKColor.redColor()
+        let menuNode = SKSpriteNode(imageNamed: "popup")
+        //menuNode.colorBlendFactor = 0.8
+        //menuNode.color = SKColor.redColor()
         menuNode.size = CGSize(width: menuWidth, height: menuHeight)
         menuNode.position = CGPoint(x: Double(self.size.width/2), y: currentY)
         menuNode.zPosition = GameLevelZPositions.popUpMenuZ
