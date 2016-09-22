@@ -42,7 +42,27 @@
 		204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204663DF1D795A4C0019B96A /* LaunchScreen.storyboard */; };
 		204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663E81D79615A0019B96A /* GameLevelModel.swift */; };
 		204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */; };
+		204B256A1D92AC5E005230E7 /* obstacles29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25671D92AC5E005230E7 /* obstacles29.plist */; };
+		204B256B1D92AC5E005230E7 /* operators29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25681D92AC5E005230E7 /* operators29.plist */; };
+		204B256C1D92AC5E005230E7 /* startAndSink29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25691D92AC5E005230E7 /* startAndSink29.plist */; };
+		204B25701D92AF0E005230E7 /* obstacles12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B256D1D92AF0E005230E7 /* obstacles12.plist */; };
+		204B25711D92AF0E005230E7 /* operators12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B256E1D92AF0E005230E7 /* operators12.plist */; };
+		204B25721D92AF0E005230E7 /* startAndSink12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B256F1D92AF0E005230E7 /* startAndSink12.plist */; };
+		204B25761D92B167005230E7 /* obstacles17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25731D92B167005230E7 /* obstacles17.plist */; };
+		204B25771D92B167005230E7 /* operators17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25741D92B167005230E7 /* operators17.plist */; };
+		204B25781D92B167005230E7 /* startAndSink17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25751D92B167005230E7 /* startAndSink17.plist */; };
+		204B25831D92B7BA005230E7 /* operators18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25801D92B7BA005230E7 /* operators18.plist */; };
+		204B25841D92B7BA005230E7 /* startAndSink18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25811D92B7BA005230E7 /* startAndSink18.plist */; };
+		204B25861D92B865005230E7 /* obstacles18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204B25851D92B864005230E7 /* obstacles18.plist */; };
 		2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540991D7C16590082D92D /* GeneralConstants.swift */; };
+		2067ED2A1D929964004616BD /* obstacles10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED271D929964004616BD /* obstacles10.plist */; };
+		2067ED2B1D929964004616BD /* operators10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED281D929964004616BD /* operators10.plist */; };
+		2067ED2C1D929964004616BD /* startAndSink10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED291D929964004616BD /* startAndSink10.plist */; };
+		2067ED301D929C17004616BD /* obstacles11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED2D1D929C17004616BD /* obstacles11.plist */; };
+		2067ED311D929C17004616BD /* operators11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED2E1D929C17004616BD /* operators11.plist */; };
+		2067ED321D929C17004616BD /* startAndSink11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED2F1D929C17004616BD /* startAndSink11.plist */; };
+		2067ED371D929F8E004616BD /* operators12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED351D929F8E004616BD /* operators12.plist */; };
+		2067ED381D929F8E004616BD /* startAndSink12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2067ED361D929F8E004616BD /* startAndSink12.plist */; };
 		2079F8631D86094000F74E4E /* LevelsPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079F8621D86094000F74E4E /* LevelsPlan.swift */; };
 		208FB0161D8D540700180EAE /* MessageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FB0151D8D540700180EAE /* MessageNode.swift */; };
 		208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 208FB01B1D8D921C00180EAE /* SquareRootParticle.sks */; };
@@ -67,15 +87,10 @@
 		20D779CC1D8ED02E00379C9E /* operators2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779C91D8ED02E00379C9E /* operators2.plist */; };
 		20D779CD1D8ED02E00379C9E /* startAndSink2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20D779CA1D8ED02E00379C9E /* startAndSink2.plist */; };
 		20FB5E761D8F509C00CAACD7 /* obstacles6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E731D8F509C00CAACD7 /* obstacles6.plist */; };
-		20FB5EAB1D8F50BB00CAACD7 /* obstacles10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */; };
-		20FB5EAC1D8F50BB00CAACD7 /* obstacles11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */; };
-		20FB5EAD1D8F50BB00CAACD7 /* obstacles12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */; };
 		20FB5EAE1D8F50BB00CAACD7 /* obstacles13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */; };
 		20FB5EAF1D8F50BB00CAACD7 /* obstacles14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */; };
 		20FB5EB01D8F50BB00CAACD7 /* obstacles15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */; };
 		20FB5EB11D8F50BB00CAACD7 /* obstacles16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */; };
-		20FB5EB21D8F50BB00CAACD7 /* obstacles17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */; };
-		20FB5EB31D8F50BB00CAACD7 /* obstacles18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */; };
 		20FB5EB41D8F50BB00CAACD7 /* obstacles19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */; };
 		20FB5EB51D8F50BB00CAACD7 /* obstacles20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */; };
 		20FB5EB61D8F50BB00CAACD7 /* obstacles21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */; };
@@ -86,18 +101,11 @@
 		20FB5EBB1D8F50BB00CAACD7 /* obstacles26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */; };
 		20FB5EBC1D8F50BB00CAACD7 /* obstacles27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */; };
 		20FB5EBD1D8F50BB00CAACD7 /* obstacles28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */; };
-		20FB5EBE1D8F50BB00CAACD7 /* obstacles29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */; };
 		20FB5EBF1D8F50BB00CAACD7 /* obstacles30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */; };
 		20FB5EC11D8F50BB00CAACD7 /* operators6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E901D8F50BB00CAACD7 /* operators6.plist */; };
-		20FB5EC51D8F50BB00CAACD7 /* operators10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E941D8F50BB00CAACD7 /* operators10.plist */; };
-		20FB5EC61D8F50BB00CAACD7 /* operators11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E951D8F50BB00CAACD7 /* operators11.plist */; };
-		20FB5EC71D8F50BB00CAACD7 /* operators12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E961D8F50BB00CAACD7 /* operators12.plist */; };
-		20FB5EC81D8F50BB00CAACD7 /* operators13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E971D8F50BB00CAACD7 /* operators13.plist */; };
 		20FB5EC91D8F50BB00CAACD7 /* operators14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E981D8F50BB00CAACD7 /* operators14.plist */; };
 		20FB5ECA1D8F50BB00CAACD7 /* operators15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E991D8F50BB00CAACD7 /* operators15.plist */; };
 		20FB5ECB1D8F50BB00CAACD7 /* operators16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */; };
-		20FB5ECC1D8F50BB00CAACD7 /* operators17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */; };
-		20FB5ECD1D8F50BB00CAACD7 /* operators18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */; };
 		20FB5ECE1D8F50BB00CAACD7 /* operators19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */; };
 		20FB5ECF1D8F50BB00CAACD7 /* operators20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */; };
 		20FB5ED01D8F50BB00CAACD7 /* operators21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */; };
@@ -108,18 +116,12 @@
 		20FB5ED51D8F50BB00CAACD7 /* operators26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA41D8F50BB00CAACD7 /* operators26.plist */; };
 		20FB5ED61D8F50BB00CAACD7 /* operators27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA51D8F50BB00CAACD7 /* operators27.plist */; };
 		20FB5ED71D8F50BB00CAACD7 /* operators28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA61D8F50BB00CAACD7 /* operators28.plist */; };
-		20FB5ED81D8F50BB00CAACD7 /* operators29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA71D8F50BB00CAACD7 /* operators29.plist */; };
 		20FB5ED91D8F50BB00CAACD7 /* operators30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EA81D8F50BB00CAACD7 /* operators30.plist */; };
 		20FB5EF51D8F50CE00CAACD7 /* startAndSink6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDB1D8F50CE00CAACD7 /* startAndSink6.plist */; };
-		20FB5EF91D8F50CE00CAACD7 /* startAndSink10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */; };
-		20FB5EFA1D8F50CE00CAACD7 /* startAndSink11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */; };
-		20FB5EFB1D8F50CE00CAACD7 /* startAndSink12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */; };
 		20FB5EFC1D8F50CE00CAACD7 /* startAndSink13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */; };
 		20FB5EFD1D8F50CE00CAACD7 /* startAndSink14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */; };
 		20FB5EFE1D8F50CE00CAACD7 /* startAndSink15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */; };
 		20FB5EFF1D8F50CE00CAACD7 /* startAndSink16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */; };
-		20FB5F001D8F50CE00CAACD7 /* startAndSink17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */; };
-		20FB5F011D8F50CE00CAACD7 /* startAndSink18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */; };
 		20FB5F021D8F50CE00CAACD7 /* startAndSink19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */; };
 		20FB5F031D8F50CE00CAACD7 /* startAndSink20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */; };
 		20FB5F041D8F50CE00CAACD7 /* startAndSink21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */; };
@@ -130,7 +132,6 @@
 		20FB5F091D8F50CE00CAACD7 /* startAndSink26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */; };
 		20FB5F0A1D8F50CE00CAACD7 /* startAndSink27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */; };
 		20FB5F0B1D8F50CE00CAACD7 /* startAndSink28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */; };
-		20FB5F0C1D8F50CE00CAACD7 /* startAndSink29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */; };
 		20FB5F0D1D8F50CE00CAACD7 /* startAndSink30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */; };
 /* End PBXBuildFile section */
 
@@ -172,7 +173,27 @@
 		204663E21D795A4C0019B96A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		204663E81D79615A0019B96A /* GameLevelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelModel.swift; sourceTree = "<group>"; };
 		204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelDesignInfo.swift; sourceTree = "<group>"; };
+		204B25671D92AC5E005230E7 /* obstacles29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles29.plist; sourceTree = "<group>"; };
+		204B25681D92AC5E005230E7 /* operators29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators29.plist; sourceTree = "<group>"; };
+		204B25691D92AC5E005230E7 /* startAndSink29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink29.plist; sourceTree = "<group>"; };
+		204B256D1D92AF0E005230E7 /* obstacles12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles12.plist; sourceTree = "<group>"; };
+		204B256E1D92AF0E005230E7 /* operators12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators12.plist; sourceTree = "<group>"; };
+		204B256F1D92AF0E005230E7 /* startAndSink12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink12.plist; sourceTree = "<group>"; };
+		204B25731D92B167005230E7 /* obstacles17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles17.plist; sourceTree = "<group>"; };
+		204B25741D92B167005230E7 /* operators17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators17.plist; sourceTree = "<group>"; };
+		204B25751D92B167005230E7 /* startAndSink17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink17.plist; sourceTree = "<group>"; };
+		204B25801D92B7BA005230E7 /* operators18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators18.plist; sourceTree = "<group>"; };
+		204B25811D92B7BA005230E7 /* startAndSink18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink18.plist; sourceTree = "<group>"; };
+		204B25851D92B864005230E7 /* obstacles18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles18.plist; sourceTree = "<group>"; };
 		206540991D7C16590082D92D /* GeneralConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralConstants.swift; sourceTree = "<group>"; };
+		2067ED271D929964004616BD /* obstacles10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles10.plist; sourceTree = "<group>"; };
+		2067ED281D929964004616BD /* operators10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators10.plist; sourceTree = "<group>"; };
+		2067ED291D929964004616BD /* startAndSink10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink10.plist; sourceTree = "<group>"; };
+		2067ED2D1D929C17004616BD /* obstacles11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles11.plist; sourceTree = "<group>"; };
+		2067ED2E1D929C17004616BD /* operators11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators11.plist; sourceTree = "<group>"; };
+		2067ED2F1D929C17004616BD /* startAndSink11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink11.plist; sourceTree = "<group>"; };
+		2067ED351D929F8E004616BD /* operators12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators12.plist; sourceTree = "<group>"; };
+		2067ED361D929F8E004616BD /* startAndSink12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink12.plist; sourceTree = "<group>"; };
 		2079F8621D86094000F74E4E /* LevelsPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsPlan.swift; sourceTree = "<group>"; };
 		208FB0151D8D540700180EAE /* MessageNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNode.swift; sourceTree = "<group>"; };
 		208FB01B1D8D921C00180EAE /* SquareRootParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SquareRootParticle.sks; sourceTree = "<group>"; };
@@ -197,15 +218,10 @@
 		20D779C91D8ED02E00379C9E /* operators2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators2.plist; sourceTree = "<group>"; };
 		20D779CA1D8ED02E00379C9E /* startAndSink2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink2.plist; sourceTree = "<group>"; };
 		20FB5E731D8F509C00CAACD7 /* obstacles6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles6.plist; sourceTree = "<group>"; };
-		20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles10.plist; sourceTree = "<group>"; };
-		20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles11.plist; sourceTree = "<group>"; };
-		20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles12.plist; sourceTree = "<group>"; };
 		20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles13.plist; sourceTree = "<group>"; };
 		20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles14.plist; sourceTree = "<group>"; };
 		20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles15.plist; sourceTree = "<group>"; };
 		20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles16.plist; sourceTree = "<group>"; };
-		20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles17.plist; sourceTree = "<group>"; };
-		20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles18.plist; sourceTree = "<group>"; };
 		20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles19.plist; sourceTree = "<group>"; };
 		20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles20.plist; sourceTree = "<group>"; };
 		20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles21.plist; sourceTree = "<group>"; };
@@ -216,18 +232,11 @@
 		20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles26.plist; sourceTree = "<group>"; };
 		20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles27.plist; sourceTree = "<group>"; };
 		20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles28.plist; sourceTree = "<group>"; };
-		20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles29.plist; sourceTree = "<group>"; };
 		20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles30.plist; sourceTree = "<group>"; };
 		20FB5E901D8F50BB00CAACD7 /* operators6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators6.plist; sourceTree = "<group>"; };
-		20FB5E941D8F50BB00CAACD7 /* operators10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators10.plist; sourceTree = "<group>"; };
-		20FB5E951D8F50BB00CAACD7 /* operators11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators11.plist; sourceTree = "<group>"; };
-		20FB5E961D8F50BB00CAACD7 /* operators12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators12.plist; sourceTree = "<group>"; };
-		20FB5E971D8F50BB00CAACD7 /* operators13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators13.plist; sourceTree = "<group>"; };
 		20FB5E981D8F50BB00CAACD7 /* operators14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators14.plist; sourceTree = "<group>"; };
 		20FB5E991D8F50BB00CAACD7 /* operators15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators15.plist; sourceTree = "<group>"; };
 		20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators16.plist; sourceTree = "<group>"; };
-		20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators17.plist; sourceTree = "<group>"; };
-		20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators18.plist; sourceTree = "<group>"; };
 		20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators19.plist; sourceTree = "<group>"; };
 		20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators20.plist; sourceTree = "<group>"; };
 		20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators21.plist; sourceTree = "<group>"; };
@@ -238,18 +247,12 @@
 		20FB5EA41D8F50BB00CAACD7 /* operators26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators26.plist; sourceTree = "<group>"; };
 		20FB5EA51D8F50BB00CAACD7 /* operators27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators27.plist; sourceTree = "<group>"; };
 		20FB5EA61D8F50BB00CAACD7 /* operators28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators28.plist; sourceTree = "<group>"; };
-		20FB5EA71D8F50BB00CAACD7 /* operators29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators29.plist; sourceTree = "<group>"; };
 		20FB5EA81D8F50BB00CAACD7 /* operators30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators30.plist; sourceTree = "<group>"; };
 		20FB5EDB1D8F50CE00CAACD7 /* startAndSink6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink6.plist; sourceTree = "<group>"; };
-		20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink10.plist; sourceTree = "<group>"; };
-		20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink11.plist; sourceTree = "<group>"; };
-		20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink12.plist; sourceTree = "<group>"; };
 		20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink13.plist; sourceTree = "<group>"; };
 		20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink14.plist; sourceTree = "<group>"; };
 		20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink15.plist; sourceTree = "<group>"; };
 		20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink16.plist; sourceTree = "<group>"; };
-		20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink17.plist; sourceTree = "<group>"; };
-		20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink18.plist; sourceTree = "<group>"; };
 		20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink19.plist; sourceTree = "<group>"; };
 		20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink20.plist; sourceTree = "<group>"; };
 		20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink21.plist; sourceTree = "<group>"; };
@@ -260,7 +263,6 @@
 		20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink26.plist; sourceTree = "<group>"; };
 		20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink27.plist; sourceTree = "<group>"; };
 		20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink28.plist; sourceTree = "<group>"; };
-		20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink29.plist; sourceTree = "<group>"; };
 		20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startAndSink30.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -403,15 +405,15 @@
 				201E3D0A1D91225B006C18C6 /* obstacles7.plist */,
 				201E3D171D912BDD006C18C6 /* obstacles8.plist */,
 				201E3D1F1D912D3A006C18C6 /* obstacles9.plist */,
-				20FB5E7A1D8F50BB00CAACD7 /* obstacles10.plist */,
-				20FB5E7B1D8F50BB00CAACD7 /* obstacles11.plist */,
-				20FB5E7C1D8F50BB00CAACD7 /* obstacles12.plist */,
+				2067ED271D929964004616BD /* obstacles10.plist */,
+				2067ED2D1D929C17004616BD /* obstacles11.plist */,
+				204B256D1D92AF0E005230E7 /* obstacles12.plist */,
+				204B25851D92B864005230E7 /* obstacles18.plist */,
 				20FB5E7D1D8F50BB00CAACD7 /* obstacles13.plist */,
 				20FB5E7E1D8F50BB00CAACD7 /* obstacles14.plist */,
 				20FB5E7F1D8F50BB00CAACD7 /* obstacles15.plist */,
 				20FB5E801D8F50BB00CAACD7 /* obstacles16.plist */,
-				20FB5E811D8F50BB00CAACD7 /* obstacles17.plist */,
-				20FB5E821D8F50BB00CAACD7 /* obstacles18.plist */,
+				204B25731D92B167005230E7 /* obstacles17.plist */,
 				20FB5E831D8F50BB00CAACD7 /* obstacles19.plist */,
 				20FB5E841D8F50BB00CAACD7 /* obstacles20.plist */,
 				20FB5E851D8F50BB00CAACD7 /* obstacles21.plist */,
@@ -422,7 +424,7 @@
 				20FB5E8A1D8F50BB00CAACD7 /* obstacles26.plist */,
 				20FB5E8B1D8F50BB00CAACD7 /* obstacles27.plist */,
 				20FB5E8C1D8F50BB00CAACD7 /* obstacles28.plist */,
-				20FB5E8D1D8F50BB00CAACD7 /* obstacles29.plist */,
+				204B25671D92AC5E005230E7 /* obstacles29.plist */,
 				20FB5E8E1D8F50BB00CAACD7 /* obstacles30.plist */,
 				201E3CE51D911797006C18C6 /* operators1.plist */,
 				20D779C91D8ED02E00379C9E /* operators2.plist */,
@@ -433,15 +435,14 @@
 				201E3D0E1D912272006C18C6 /* operators7.plist */,
 				201E3D021D9121F8006C18C6 /* operators8.plist */,
 				201E3D201D912D3A006C18C6 /* operators9.plist */,
-				20FB5E941D8F50BB00CAACD7 /* operators10.plist */,
-				20FB5E951D8F50BB00CAACD7 /* operators11.plist */,
-				20FB5E961D8F50BB00CAACD7 /* operators12.plist */,
-				20FB5E971D8F50BB00CAACD7 /* operators13.plist */,
+				2067ED281D929964004616BD /* operators10.plist */,
+				2067ED2E1D929C17004616BD /* operators11.plist */,
+				204B256E1D92AF0E005230E7 /* operators12.plist */,
 				20FB5E981D8F50BB00CAACD7 /* operators14.plist */,
 				20FB5E991D8F50BB00CAACD7 /* operators15.plist */,
 				20FB5E9A1D8F50BB00CAACD7 /* operators16.plist */,
-				20FB5E9B1D8F50BB00CAACD7 /* operators17.plist */,
-				20FB5E9C1D8F50BB00CAACD7 /* operators18.plist */,
+				204B25741D92B167005230E7 /* operators17.plist */,
+				204B25801D92B7BA005230E7 /* operators18.plist */,
 				20FB5E9D1D8F50BB00CAACD7 /* operators19.plist */,
 				20FB5E9E1D8F50BB00CAACD7 /* operators20.plist */,
 				20FB5E9F1D8F50BB00CAACD7 /* operators21.plist */,
@@ -452,7 +453,7 @@
 				20FB5EA41D8F50BB00CAACD7 /* operators26.plist */,
 				20FB5EA51D8F50BB00CAACD7 /* operators27.plist */,
 				20FB5EA61D8F50BB00CAACD7 /* operators28.plist */,
-				20FB5EA71D8F50BB00CAACD7 /* operators29.plist */,
+				204B25681D92AC5E005230E7 /* operators29.plist */,
 				20FB5EA81D8F50BB00CAACD7 /* operators30.plist */,
 				201E3CE71D911797006C18C6 /* startAndSink1.plist */,
 				20D779CA1D8ED02E00379C9E /* startAndSink2.plist */,
@@ -463,15 +464,15 @@
 				201E3D131D912297006C18C6 /* startAndSink7.plist */,
 				201E3D031D9121F8006C18C6 /* startAndSink8.plist */,
 				201E3D211D912D3A006C18C6 /* startAndSink9.plist */,
-				20FB5EDF1D8F50CE00CAACD7 /* startAndSink10.plist */,
-				20FB5EE01D8F50CE00CAACD7 /* startAndSink11.plist */,
-				20FB5EE11D8F50CE00CAACD7 /* startAndSink12.plist */,
+				2067ED291D929964004616BD /* startAndSink10.plist */,
+				2067ED2F1D929C17004616BD /* startAndSink11.plist */,
+				204B256F1D92AF0E005230E7 /* startAndSink12.plist */,
 				20FB5EE21D8F50CE00CAACD7 /* startAndSink13.plist */,
 				20FB5EE31D8F50CE00CAACD7 /* startAndSink14.plist */,
 				20FB5EE41D8F50CE00CAACD7 /* startAndSink15.plist */,
 				20FB5EE51D8F50CE00CAACD7 /* startAndSink16.plist */,
-				20FB5EE61D8F50CE00CAACD7 /* startAndSink17.plist */,
-				20FB5EE71D8F50CE00CAACD7 /* startAndSink18.plist */,
+				204B25751D92B167005230E7 /* startAndSink17.plist */,
+				204B25811D92B7BA005230E7 /* startAndSink18.plist */,
 				20FB5EE81D8F50CE00CAACD7 /* startAndSink19.plist */,
 				20FB5EE91D8F50CE00CAACD7 /* startAndSink20.plist */,
 				20FB5EEA1D8F50CE00CAACD7 /* startAndSink21.plist */,
@@ -482,8 +483,10 @@
 				20FB5EEF1D8F50CE00CAACD7 /* startAndSink26.plist */,
 				20FB5EF01D8F50CE00CAACD7 /* startAndSink27.plist */,
 				20FB5EF11D8F50CE00CAACD7 /* startAndSink28.plist */,
-				20FB5EF21D8F50CE00CAACD7 /* startAndSink29.plist */,
+				204B25691D92AC5E005230E7 /* startAndSink29.plist */,
 				20FB5EF31D8F50CE00CAACD7 /* startAndSink30.plist */,
+				2067ED351D929F8E004616BD /* operators12.plist */,
+				2067ED361D929F8E004616BD /* startAndSink12.plist */,
 			);
 			name = levels1to30;
 			sourceTree = "<group>";
@@ -548,29 +551,31 @@
 			files = (
 				20FB5ED21D8F50BB00CAACD7 /* operators23.plist in Resources */,
 				201E3CDB1D909E77006C18C6 /* 0015_game_event_02_victory.wav in Resources */,
-				20FB5EB21D8F50BB00CAACD7 /* obstacles17.plist in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
-				20FB5ED81D8F50BB00CAACD7 /* operators29.plist in Resources */,
+				2067ED311D929C17004616BD /* operators11.plist in Resources */,
+				204B25711D92AF0E005230E7 /* operators12.plist in Resources */,
 				20D779CC1D8ED02E00379C9E /* operators2.plist in Resources */,
 				20FB5EFD1D8F50CE00CAACD7 /* startAndSink14.plist in Resources */,
+				204B25781D92B167005230E7 /* startAndSink17.plist in Resources */,
+				204B25721D92AF0E005230E7 /* startAndSink12.plist in Resources */,
 				20FB5ED71D8F50BB00CAACD7 /* operators28.plist in Resources */,
 				20FB5EBB1D8F50BB00CAACD7 /* obstacles26.plist in Resources */,
 				20FB5EFE1D8F50CE00CAACD7 /* startAndSink15.plist in Resources */,
+				2067ED2A1D929964004616BD /* obstacles10.plist in Resources */,
 				20FB5ECF1D8F50BB00CAACD7 /* operators20.plist in Resources */,
-				20FB5EC61D8F50BB00CAACD7 /* operators11.plist in Resources */,
 				20FB5EC91D8F50BB00CAACD7 /* operators14.plist in Resources */,
+				2067ED321D929C17004616BD /* startAndSink11.plist in Resources */,
 				20FB5EB61D8F50BB00CAACD7 /* obstacles21.plist in Resources */,
 				20FB5EBC1D8F50BB00CAACD7 /* obstacles27.plist in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,
 				208FB0201D8D958E00180EAE /* BadExplosionParticle.sks in Resources */,
-				20FB5ECC1D8F50BB00CAACD7 /* operators17.plist in Resources */,
+				204B25841D92B7BA005230E7 /* startAndSink18.plist in Resources */,
 				204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */,
-				20FB5EB31D8F50BB00CAACD7 /* obstacles18.plist in Resources */,
+				204B256C1D92AC5E005230E7 /* startAndSink29.plist in Resources */,
 				201E3D151D912297006C18C6 /* startAndSink5.plist in Resources */,
 				20FB5F0D1D8F50CE00CAACD7 /* startAndSink30.plist in Resources */,
 				201E3D231D912D3A006C18C6 /* operators9.plist in Resources */,
 				201E3D0F1D912272006C18C6 /* operators5.plist in Resources */,
-				20FB5EBE1D8F50BB00CAACD7 /* obstacles29.plist in Resources */,
 				201E3CE91D911797006C18C6 /* obstacles1.plist in Resources */,
 				20FB5ED41D8F50BB00CAACD7 /* operators25.plist in Resources */,
 				20FB5ED31D8F50BB00CAACD7 /* operators24.plist in Resources */,
@@ -583,23 +588,28 @@
 				20FB5F061D8F50CE00CAACD7 /* startAndSink23.plist in Resources */,
 				20D779CD1D8ED02E00379C9E /* startAndSink2.plist in Resources */,
 				20FB5ED51D8F50BB00CAACD7 /* operators26.plist in Resources */,
-				20FB5EFB1D8F50CE00CAACD7 /* startAndSink12.plist in Resources */,
 				201E3CEE1D911797006C18C6 /* startAndSink3.plist in Resources */,
 				20FB5F041D8F50CE00CAACD7 /* startAndSink21.plist in Resources */,
+				2067ED2C1D929964004616BD /* startAndSink10.plist in Resources */,
+				2067ED301D929C17004616BD /* obstacles11.plist in Resources */,
+				204B256A1D92AC5E005230E7 /* obstacles29.plist in Resources */,
+				2067ED381D929F8E004616BD /* startAndSink12.plist in Resources */,
 				201E3CEC1D911797006C18C6 /* operators3.plist in Resources */,
 				20FB5EBA1D8F50BB00CAACD7 /* obstacles25.plist in Resources */,
-				20FB5F001D8F50CE00CAACD7 /* startAndSink17.plist in Resources */,
 				20FB5EB41D8F50BB00CAACD7 /* obstacles19.plist in Resources */,
 				20FB5EB71D8F50BB00CAACD7 /* obstacles22.plist in Resources */,
 				20FB5EFF1D8F50CE00CAACD7 /* startAndSink16.plist in Resources */,
 				201E3CDE1D909FAD006C18C6 /* 136_full_efficiency_0159.mp3 in Resources */,
 				20FB5ED91D8F50BB00CAACD7 /* operators30.plist in Resources */,
+				204B256B1D92AC5E005230E7 /* operators29.plist in Resources */,
+				2067ED2B1D929964004616BD /* operators10.plist in Resources */,
 				201E3D051D9121F8006C18C6 /* operators8.plist in Resources */,
 				2097BFA31D7E3C3900E59D12 /* MenuScene.sks in Resources */,
 				20AEB33D1D8E41B500FC40D8 /* robotBlip.wav in Resources */,
-				20FB5EAD1D8F50BB00CAACD7 /* obstacles12.plist in Resources */,
+				204B25861D92B865005230E7 /* obstacles18.plist in Resources */,
 				208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */,
 				20FB5ECA1D8F50BB00CAACD7 /* operators15.plist in Resources */,
+				204B25831D92B7BA005230E7 /* operators18.plist in Resources */,
 				201E3D221D912D3A006C18C6 /* obstacles9.plist in Resources */,
 				20D779CB1D8ED02E00379C9E /* obstacles2.plist in Resources */,
 				20FB5EAF1D8F50BB00CAACD7 /* obstacles14.plist in Resources */,
@@ -607,22 +617,17 @@
 				201E3D0C1D91225B006C18C6 /* obstacles7.plist in Resources */,
 				20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */,
 				20FB5ED61D8F50BB00CAACD7 /* operators27.plist in Resources */,
-				20FB5EFA1D8F50CE00CAACD7 /* startAndSink11.plist in Resources */,
 				204663DC1D795A4C0019B96A /* Main.storyboard in Resources */,
 				201E3D0B1D91225B006C18C6 /* obstacles5.plist in Resources */,
-				20FB5F011D8F50CE00CAACD7 /* startAndSink18.plist in Resources */,
 				20FB5F081D8F50CE00CAACD7 /* startAndSink25.plist in Resources */,
-				20FB5ECD1D8F50BB00CAACD7 /* operators18.plist in Resources */,
+				2067ED371D929F8E004616BD /* operators12.plist in Resources */,
 				20FB5F0A1D8F50CE00CAACD7 /* startAndSink27.plist in Resources */,
 				20FB5F031D8F50CE00CAACD7 /* startAndSink20.plist in Resources */,
-				20FB5EF91D8F50CE00CAACD7 /* startAndSink10.plist in Resources */,
 				20FB5EB81D8F50BB00CAACD7 /* obstacles23.plist in Resources */,
-				20FB5EAC1D8F50BB00CAACD7 /* obstacles11.plist in Resources */,
 				208FB01E1D8D921C00180EAE /* spark.png in Resources */,
 				20FB5EF51D8F50CE00CAACD7 /* startAndSink6.plist in Resources */,
 				20CB3AEA1D902C870005C590 /* knock.wav in Resources */,
 				2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */,
-				20FB5EC81D8F50BB00CAACD7 /* operators13.plist in Resources */,
 				201E3D101D912272006C18C6 /* operators7.plist in Resources */,
 				20FB5EAE1D8F50BB00CAACD7 /* obstacles13.plist in Resources */,
 				20FB5EB11D8F50BB00CAACD7 /* obstacles16.plist in Resources */,
@@ -630,15 +635,13 @@
 				20FB5F071D8F50CE00CAACD7 /* startAndSink24.plist in Resources */,
 				20FB5EBF1D8F50BB00CAACD7 /* obstacles30.plist in Resources */,
 				20FB5F021D8F50CE00CAACD7 /* startAndSink19.plist in Resources */,
-				20FB5EC71D8F50BB00CAACD7 /* operators12.plist in Resources */,
 				20FB5ECB1D8F50BB00CAACD7 /* operators16.plist in Resources */,
+				204B25771D92B167005230E7 /* operators17.plist in Resources */,
 				201E3CFB1D911F63006C18C6 /* operators4.plist in Resources */,
 				20A7CC501D8AE68E00A06482 /* sms-alert-1-daniel_simon.wav in Resources */,
 				201E3CEA1D911797006C18C6 /* obstacles3.plist in Resources */,
 				201E3D191D912BDD006C18C6 /* obstacles8.plist in Resources */,
-				20FB5EAB1D8F50BB00CAACD7 /* obstacles10.plist in Resources */,
 				2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */,
-				20FB5F0C1D8F50CE00CAACD7 /* startAndSink29.plist in Resources */,
 				20FB5EB51D8F50BB00CAACD7 /* obstacles20.plist in Resources */,
 				201E3D081D912246006C18C6 /* obstacles4.plist in Resources */,
 				20FB5EB91D8F50BB00CAACD7 /* obstacles24.plist in Resources */,
@@ -647,13 +650,14 @@
 				20FB5EBD1D8F50BB00CAACD7 /* obstacles28.plist in Resources */,
 				201E3CEB1D911797006C18C6 /* operators1.plist in Resources */,
 				201E09531D8E685B0088B86E /* SettingsScene.sks in Resources */,
+				204B25761D92B167005230E7 /* obstacles17.plist in Resources */,
 				20FB5E761D8F509C00CAACD7 /* obstacles6.plist in Resources */,
 				201E3CED1D911797006C18C6 /* startAndSink1.plist in Resources */,
 				201E3D161D912297006C18C6 /* startAndSink7.plist in Resources */,
 				201E3D241D912D3A006C18C6 /* startAndSink9.plist in Resources */,
 				201E3CDC1D909E77006C18C6 /* 0015_game_event_03_achieve.wav in Resources */,
+				204B25701D92AF0E005230E7 /* obstacles12.plist in Resources */,
 				20FB5EFC1D8F50CE00CAACD7 /* startAndSink13.plist in Resources */,
-				20FB5EC51D8F50BB00CAACD7 /* operators10.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

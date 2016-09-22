@@ -13,6 +13,9 @@ import SpriteKit
 //Make true only for development purpuses
 let editModeEnabled = true
 let allowAllLevels = true //also for development
+let showFPSFlag = false
+let showNodCountFlag = false
+
 
 ///////////////
 // Game Play //

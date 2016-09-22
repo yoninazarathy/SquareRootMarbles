@@ -69,31 +69,36 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(0.1), SKAction.runBlock(){self.increaseTime()}])),
                                                    withKey: "timerAction")
         
-        //put physics world in normal playing mode
-        physicsWorld.speed = 1.0
-        
-        //QQQQ not sure if this should be here or elsewhere
-        //QQQQ not sure these four lines of code do anything. Maybe remove (or modify)
-        let sceneBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        sceneBody.friction = 1000
-        sceneBody.categoryBitMask = PhysicsCategory.Background
-        sceneBody.contactTestBitMask = PhysicsCategory.Player
-        self.physicsBody = sceneBody
-        
-        motionManager.startDeviceMotionUpdates()
-        motionManager.deviceMotionUpdateInterval = 0.03
-        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue() ) {
-            (data, error) in
-            //QQQQ adjust and organize these constants
-            self.physicsWorld.gravity = CGVectorMake(10 * CGFloat(sin(data!.attitude.roll)),-10 * CGFloat(sin(data!.attitude.pitch)))
-            self.playerNode.physicsBody!.applyForce(CGVectorMake(CGFloat(data!.userAcceleration.x*600), CGFloat(data!.userAcceleration.y*600)))
-            if let error = error { // Might as well handle the optional error as well
-                print(error.localizedDescription)
-                return
-            }
-        }
-        
-        playBackgroundMusic()
+        //QQQQ This is crazy - idea is to delay 100ms till start
+        runAction(
+                SKAction.sequence([SKAction.waitForDuration(0.1),SKAction.runBlock(){
+                    //put physics world in normal playing mode
+                    self.physicsWorld.speed = 1.0
+                    
+                    //QQQQ not sure if this should be here or elsewhere
+                    //QQQQ not sure these four lines of code do anything. Maybe remove (or modify)
+                    let sceneBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+                    sceneBody.friction = 1000
+                    sceneBody.categoryBitMask = PhysicsCategory.Background
+                    sceneBody.contactTestBitMask = PhysicsCategory.Player
+                    self.physicsBody = sceneBody
+                    
+                    motionManager.startDeviceMotionUpdates()
+                    motionManager.deviceMotionUpdateInterval = 0.03
+                    motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue() ) {
+                        (data, error) in
+                        //QQQQ adjust and organize these constants
+                        self.physicsWorld.gravity = CGVectorMake(15 * CGFloat(sin(data!.attitude.roll)),-15 * CGFloat(sin(data!.attitude.pitch)))
+                        self.playerNode.physicsBody!.applyForce(CGVectorMake(CGFloat(data!.userAcceleration.x*500), CGFloat(data!.userAcceleration.y*500)))
+                        if let error = error { // Might as well handle the optional error as well
+                            print(error.localizedDescription)
+                            return
+                        }
+                    }
+                    
+                    self.playBackgroundMusic()
+                }])
+        )//end of runAction
     }
     
     func pauseGame(){
@@ -676,7 +681,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-
     }
     
     

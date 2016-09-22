@@ -34,7 +34,7 @@ sqrt(16) = 4
 12 - start: 12, goal: 4, operators: *2, +1, sqrt, -1                      //objective square root of 25 (maybe 16         //open plan
  
 sqrt(25) = 5
-13 - start: 13, goal: 5, operators: *2, sqrt                              //objective square root of 25                   //open plan
+13 - start: 13, goal: 5, operators: *2, -1, sqrt                              //objective square root of 25                   //open plan
 14 - start: 14, goal: 5, operators: +1, +1, sqrt +1, -1, +1               //objective square root of 16                   //sequential
 15 - start: 15, goal: 5, operators: +1, sqrt && -1, -1, -1, -1, -1, -1     //objective square root of 9 (maybe 9)         //open plan and maze of -1's
 
@@ -43,7 +43,7 @@ sqrt(25) = 5
 sqrt(36) = 6
 16 - start: 16, goal: 6, operators: *2, +1, +1, +1, +1, sqrt               //objective square root of 36                  //sequential
 17 - start: 17, goal: 6, operators: *2, +1, -1, +1, +1, sqrt               //objective square root of 36                    //sequential
-18 - start: 18, goal: 6, operators: *2, sqrt, *2, sqrt, *2, sqrt            //objective square root of 36                   //open plan
+18 - start: 18, goal: 6, operators: *2, sqrt, *2, sqrt, *2, sqrt, *3            //objective square root of 36                   //open plan
  
 sqrt(49) = 7
 19 - start: 19, goal 7, operators: -1, -1, -1, -1, *3, +1, +1 ,+1 ,+1, sqrt //objective square root of 49                   //sequential
@@ -86,12 +86,12 @@ let operatorLevelArray = [
 ["*2", "-1", "-1", "-1", "-1", "sqrt"], //10
 ["sqrt","+1", "+1", "+1", "+1", "sqrt"],
 ["*2", "+1", "sqrt", "-1"],
-["*2", "sqrt"],
+["*2", "sqrt", "-1"],
 ["+1", "+1", "sqrt", "+1", "-1", "+1"],
-["+1", "sqrt","-1", "-1", "-1", "-1", "-1", "-1"],
+["+1", "sqrt","-1", "-1", "-1", "-1", "-1", "-1"],//15
 ["*2", "+1", "+1", "+1", "+1", "sqrt"],
 ["*2", "+1", "-1", "+1", "+1", "sqrt"],
-["*2", "sqrt", "*2", "sqrt", "*2", "sqrt"],
+["*2", "sqrt", "*2", "sqrt", "*2", "sqrt","*3"], //18
 ["-1", "-1", "-1", "-1", "*3", "+1", "+1" ,"+1" ,"+1", "sqrt"],
 ["+1", "+1", "+1", "+1", "*2", "+1", "sqrt"],
 ["+1", "+1", "+1", "+1", "sqrt", "*2", "*2", "*2", "+1", "+1", "+1", "+1", "+1"],

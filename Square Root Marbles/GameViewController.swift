@@ -50,7 +50,6 @@ class GeneralScene: SKScene {
             bm.removeFromParent()
         }
     }
-    
 }
 
 
@@ -92,7 +91,7 @@ class GameViewController: UIViewController, GameAppDelegate {
         return gameLevelModels[level]
     }
 
-    var currentGameScene: SKScene? = nil
+ //   var currentGameScene: SKScene? = nil
     
     func setLevel(newLevel: Int){
         currentlevel = newLevel
@@ -107,11 +106,15 @@ class GameViewController: UIViewController, GameAppDelegate {
 
         // Configure the view.
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        skView.showsFPS = showFPSFlag
+        skView.showsNodeCount = showNodCountFlag
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
+        
+        let transitionSlow = SKTransition.crossFadeWithDuration(0.8)
+        let transitionFast = SKTransition.crossFadeWithDuration(0.4)
+       // transition.pausesOutgoingScene = true
         
         //QQQQ factor out common code here...
         switch appState{
@@ -121,7 +124,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
             case AppState.menuScene:
                 //QQQQ? Don't know what to do if this fails
@@ -129,7 +132,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.presentScene(currentGameScene, transition: transitionFast)
                 }
             case AppState.gameActionPlaying:                
                 //QQQQ? Don't know what to do if this fails
@@ -137,7 +140,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
+                                                        //it was after using SKTransition...
+                                                        //I have sussupected SKAudioNode and NSTimer 
+                                                        //QQQQ irrespective of this, need to remove NSTimer
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
             case AppState.gameActionPaused:
                 //QQQQ? Don't know what to do if this fails
@@ -147,7 +154,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
             case AppState.instructionScene:
                 //QQQQ? Don't know what to do if this fails
@@ -155,7 +162,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
             case AppState.afterLevelScene:
                 //QQQQ? Don't know what to do if this fails
@@ -163,7 +170,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .AspectFill
                     currentGameScene.gameAppDelegate = self
-                    skView.presentScene(currentGameScene)
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
             }
             case AppState.settingsScene:
                 //QQQQ? Don't know what to do if this fails
@@ -171,7 +178,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 /* Set the scale mode to scale to fit the window */
                 currentGameScene.scaleMode = .AspectFill
                 currentGameScene.gameAppDelegate = self
-                skView.presentScene(currentGameScene)
+                skView.presentScene(currentGameScene, transition: transitionFast)
             }
         }
     }
