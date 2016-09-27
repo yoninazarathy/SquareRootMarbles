@@ -10,8 +10,8 @@ import SpriteKit
 
 class SettingsScene: GeneralScene {
     
-    override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.blackColor()
+    override func didMove(to view: SKView) {
+        self.backgroundColor = SKColor.black
 
         //QQQQ synch this code with the code in GameLevelScene and MenuScene
         let buttonSize = 45.0
@@ -31,7 +31,7 @@ class SettingsScene: GeneralScene {
         self.addChild(menuNode)
         
         let resetButtonNode = ResetScoresButtonNode(imageNamed: "reset")
-        resetButtonNode.userInteractionEnabled = true
+        resetButtonNode.isUserInteractionEnabled = true
         resetButtonNode.name = "helpButton"
         resetButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
         resetButtonNode.position = CGPoint(x:resetXOffset, y:0)
@@ -39,7 +39,7 @@ class SettingsScene: GeneralScene {
         menuNode.addChild(resetButtonNode)
         
         let backButtonNode = BackButtonNode(imageNamed: "back")
-        backButtonNode.userInteractionEnabled = true
+        backButtonNode.isUserInteractionEnabled = true
         backButtonNode.name = "helpButton"
         backButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
         backButtonNode.position = CGPoint(x:backXOffset, y:0)
@@ -47,21 +47,21 @@ class SettingsScene: GeneralScene {
         menuNode.addChild(backButtonNode)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     
     func resetAllScores(){
         print("Resetting All Scores")
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         for lev in 1...numLevels{
             //QQQQ probably nicer way to do this
-            if let _ = defaults.stringForKey("level\(lev)best") {
-                    defaults.removeObjectForKey("level\(lev)best")
+            if let _ = defaults.string(forKey: "level\(lev)best") {
+                    defaults.removeObject(forKey: "level\(lev)best")
             }
             gameAppDelegate!.getGameLevelModel(lev).bestScoreString = ""
         }
@@ -75,14 +75,14 @@ class SettingsScene: GeneralScene {
     
     class ResetScoresButtonNode : SKSpriteNode{
         
-        override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! SettingsScene).resetAllScores()
             //QQQQ need here an "alert" saying, are you sure....
         }
     }
 
     class BackButtonNode : SKSpriteNode{
-        override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! SettingsScene).gameAppDelegate!.changeView(AppState.menuScene)
         }
     }

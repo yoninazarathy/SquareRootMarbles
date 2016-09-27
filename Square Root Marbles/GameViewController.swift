@@ -13,43 +13,80 @@ import CoreMotion
 let motionManager = CMMotionManager()
 
 protocol GameAppDelegate{
-    func changeView(newState: AppState)
+    func changeView(_ newState: AppState)
     func getAppState() -> AppState
-    func setLevel(newLevel: Int)
+    func setLevel(_ newLevel: Int)
     func getLevel() -> Int
     func toggleMute()
     func isMuted() -> Bool
-    func getGameLevelModel(level: Int) -> GameLevelModel!
+    func getGameLevelModel(_ level: Int) -> GameLevelModel
     
     //used when going (for e.g.) to instructions - need to know if to return to game or to menu...
     func getReturnAppState() -> AppState!
-    func setReturnAppState(returnState: AppState)
+    func setReturnAppState(_ returnState: AppState)
+    
+    //QQQQ The "X" is because of some objective c stuff
+    func getNumberOfMarblesX() -> Int
+    func setNumberOfMarblesX(_ number: Int)
+    func incrementNumberOfMarbles(_ byNumber: Int)
+    func incrementNumberOfMarbles()
+    func decrementNumberOfMarbles(_ byNumber: Int)
+    func decrementNumberOfMarbles()
 }
 
 class GeneralScene: SKScene {
     var gameAppDelegate: GameAppDelegate?
     
-    var backgroundMusic: SKAudioNode!
+    static var playingMusic: Bool = false
+    
+//    var backgroundMusic: SKAudioNode! = nil
     
     func playBackgroundMusic() {
-        if backgroundMusic != nil {
-            backgroundMusic.removeFromParent()
+//        if backgroundMusic != nil {
+//            backgroundMusic.removeFromParent()
+//        }
+//        
+//        let temp = SKAudioNode(fileNamed: "136_full_efficiency_0159.mp3")
+//        temp.autoplayLooped = true
+//        backgroundMusic = temp
+//        //backgroundMusic = SKAudioNode(fileNamed: "SpaceGame.caf")
+//        //backgroundMusic.autoplayLooped = true
+//        //addChild(backgroundMusic)
+//        addChild(backgroundMusic)
+        if !GeneralScene.playingMusic{
+            SKTAudio.sharedInstance().playBackgroundMusic("136_full_efficiency_0159.mp3",volume: musicVolume ) // Start the music
+            GeneralScene.playingMusic = true
         }
-        
-        let temp = SKAudioNode(fileNamed: "136_full_efficiency_0159.mp3")
-        temp.autoplayLooped = true
-        backgroundMusic = temp
-        //backgroundMusic = SKAudioNode(fileNamed: "SpaceGame.caf")
-        //backgroundMusic.autoplayLooped = true
-        //addChild(backgroundMusic)
-        addChild(backgroundMusic)
     }
     
     func stopBackgroundMusic(){
-        if let bm = backgroundMusic{
-            bm.removeFromParent()
-        }
+//        if let bm = backgroundMusic{
+//            bm.removeFromParent()
+//        }
+        SKTAudio.sharedInstance().pauseBackgroundMusic() // Pause the music
+        GeneralScene.playingMusic = false
     }
+    
+    //    let numSRMVoices: UInt32 = 22
+    //    let musicVolume: Float = 0.6
+    //    let endGameVolume: Float = 0.5
+    //    let thumpTopVolume: Float = 0.6
+    //    let srmVoiceVolume: Float = 1.0
+    //    let operatorVolume: Float = 0.5
+    
+    //QQQQ
+    
+    func playRandomSRM(){
+        let diceRoll = arc4random_uniform(numSRMVoices) + 1
+        SKTAudio.sharedInstance().playSoundEffect("srm_\(diceRoll).mp3", volume: srmVoiceVolume)
+    }
+    
+    func playWallHit(_ impulse: Float){
+        let temp = 0.005*(impulse - 6) //make these global constants
+        let vol = temp < thumpTopVolume ? temp : thumpTopVolume
+        SKTAudio.sharedInstance().playSoundEffect("knock.wav", volume: vol)
+    }
+
 }
 
 
@@ -59,7 +96,33 @@ class GameViewController: UIViewController, GameAppDelegate {
     var currentlevel: Int?      = nil
     var muted: Bool             = false
     
-    var gameLevelModels: [GameLevelModel!] = Array(count: numLevels+1, repeatedValue: nil)
+    var numberOfMarbles: Int    = 0
+    
+    func getNumberOfMarblesX() -> Int{
+        return numberOfMarbles
+    }
+    
+    func setNumberOfMarblesX(_ number: Int){
+        numberOfMarbles = number
+    }
+    
+    func incrementNumberOfMarbles(_ byNumber: Int){
+        numberOfMarbles += byNumber
+    }
+    
+    func incrementNumberOfMarbles(){
+        numberOfMarbles += 1
+    }
+    
+    func decrementNumberOfMarbles(_ byNumber: Int){
+        numberOfMarbles -= byNumber
+    }
+    
+    func decrementNumberOfMarbles(){
+        numberOfMarbles -= 1
+    }
+
+    var gameLevelModels: [GameLevelModel?] = Array(repeating: nil, count: numLevels+1)
     
     var returnAppState: AppState! = nil
     
@@ -67,7 +130,7 @@ class GameViewController: UIViewController, GameAppDelegate {
             return returnAppState
     }
     
-    func setReturnAppState(returnState: AppState){
+    func setReturnAppState(_ returnState: AppState){
         returnAppState = returnState
     }
     
@@ -87,13 +150,13 @@ class GameViewController: UIViewController, GameAppDelegate {
         return currentlevel!
     }
     
-    func getGameLevelModel(level: Int) -> GameLevelModel!{
-        return gameLevelModels[level]
+    func getGameLevelModel(_ level: Int) -> GameLevelModel{
+        return gameLevelModels[level]!
     }
 
  //   var currentGameScene: SKScene? = nil
     
-    func setLevel(newLevel: Int){
+    func setLevel(_ newLevel: Int){
         currentlevel = newLevel
     }
     
@@ -101,7 +164,7 @@ class GameViewController: UIViewController, GameAppDelegate {
         return appState
     }
 
-    func changeView(newState: AppState){
+    func changeView(_ newState: AppState){
         appState = newState
 
         // Configure the view.
@@ -112,8 +175,8 @@ class GameViewController: UIViewController, GameAppDelegate {
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         
-        let transitionSlow = SKTransition.crossFadeWithDuration(0.8)
-        let transitionFast = SKTransition.crossFadeWithDuration(0.4)
+        let transitionSlow = SKTransition.crossFade(withDuration: 0.8)
+        let transitionFast = SKTransition.crossFade(withDuration: 0.3)
        // transition.pausesOutgoingScene = true
         
         //QQQQ factor out common code here...
@@ -122,7 +185,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = IntroScene(fileNamed:"IntroScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -130,7 +193,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = MenuScene(fileNamed:"MenuScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionFast)
                 }
@@ -138,13 +201,13 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = GameLevelScene(fileNamed:"GameLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
                                                         //it was after using SKTransition...
                                                         //I have sussupected SKAudioNode and NSTimer 
                                                         //QQQQ irrespective of this, need to remove NSTimer
-                    skView.presentScene(currentGameScene, transition: transitionSlow)
+                    skView.presentScene(currentGameScene, transition: transitionFast)
                 }
             case AppState.gameActionPaused:
                 //QQQQ? Don't know what to do if this fails
@@ -152,7 +215,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ Need to "resume game" (currently restarting game in paused mode)
                 if let currentGameScene = GameLevelScene(fileNamed:"GameLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -160,7 +223,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = InstructionsScene(fileNamed:"InstructionsScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -168,7 +231,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = AfterLevelScene(fileNamed:"AfterLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .AspectFill
+                    currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
             }
@@ -176,7 +239,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = SettingsScene(fileNamed:"SettingsScene") {
                 /* Set the scale mode to scale to fit the window */
-                currentGameScene.scaleMode = .AspectFill
+                currentGameScene.scaleMode = .aspectFill
                 currentGameScene.gameAppDelegate = self
                 skView.presentScene(currentGameScene, transition: transitionFast)
             }
@@ -185,21 +248,25 @@ class GameViewController: UIViewController, GameAppDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+
+        
         for i in 1...numLevels{
             gameLevelModels[i] = GameLevelModel(level: i)
         }
         changeView(AppState.introScene)
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown //QQQQ????
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown //QQQQ????
         } else {
-            return .All  //QQQQ ????
+            return .all  //QQQQ ????
         }
     }
 
@@ -208,7 +275,7 @@ class GameViewController: UIViewController, GameAppDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     

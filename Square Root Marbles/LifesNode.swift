@@ -1,0 +1,110 @@
+//
+//  LifesNode.swift
+//  Square Root Marbles
+//
+//  Created by Yoni Nazarathy on 24/09/2016.
+//  Copyright © 2016 oneonepsilon. All rights reserved.
+//
+
+import Foundation
+import SpriteKit
+
+class LifesNode: SKSpriteNode{
+    
+    var numLifes: Int = 0
+    var lifeSprites: [SKSpriteNode?]
+    
+    var currentLife: Double = 1.0
+    
+    var coverMask: SKShapeNode! = nil
+    
+    let diameter = 25.0
+    
+    var moveLifeInProgress = false
+    
+    var nextFreePoint: CGPoint{
+        get{ //QQQQ This code is used twice in below
+            return CGPoint(x: self.size.width - CGFloat(diameter*(Double((numLifes-1)%5+1)-0.5)), y: self.size.height - CGFloat(diameter*(0.5+Double((numLifes-1)/5))))
+        }
+    }
+    
+    func refreshDisplay(){
+        if moveLifeInProgress{
+            return
+        }
+        
+        removeAllChildren()
+        for i in 0..<numLifes{
+            let sprite = lifeSprites[i]
+            sprite?.position = CGPoint(x: self.size.width - CGFloat(diameter*(Double(i%5+1)-0.5)), y: self.size.height - CGFloat(diameter*(0.5+Double(i/5))))
+            addChild(sprite!)
+        }
+        if currentLife < 1.0{
+            let bezierPath = UIBezierPath(arcCenter: CGPoint(x:0,y:0), radius: CGFloat(0.5*diameter), startAngle: 0.5 * .pi , endAngle: CGFloat(0.5 * .pi - ((1-currentLife) * 2.0) * .pi), clockwise: false)
+            bezierPath.addLine(to: CGPoint(x: 0, y:0))
+            bezierPath.close()
+            coverMask = SKShapeNode(path: bezierPath.cgPath)
+            coverMask.fillColor = SKColor.black
+            coverMask.position = CGPoint(x: self.size.width - CGFloat(diameter*(Double((numLifes-1)%5+1)-0.5)), y: self.size.height - CGFloat(diameter*(0.5+Double((numLifes-1)/5))))
+            coverMask.zPosition = 200
+            coverMask.lineWidth = 0
+            self.addChild(coverMask)
+        }
+    }
+        
+    func setLifes(_ numLifes: Int){
+        self.numLifes = numLifes
+        refreshDisplay()
+    }
+    
+    func decrementLifes(){
+        numLifes = numLifes - 1        
+        refreshDisplay()
+    }
+
+    
+    func incrementLifes(_ startPosition: CGPoint){
+        let srmNode = SKSpriteNode(imageNamed: "BlueSRmarble")
+        srmNode.size = CGSize(width: diameter, height: diameter)
+        srmNode.position = startPosition
+        srmNode.zPosition = 100 //QQQQ use constants
+        scene!.addChild(srmNode)
+        //QQQQ move to position offset by nextFreePoint
+        currentLife = 1.0
+        refreshDisplay()
+        numLifes = numLifes + 1
+        moveLifeInProgress = true
+        let dest = convert(nextFreePoint, to: scene!)
+        let move = SKAction.move(to: dest, duration: 0.8)
+        let endMove = SKAction.run(){
+            srmNode.removeFromParent()//QQQQ
+            self.refreshDisplay()
+            self.moveLifeInProgress = false
+        }
+        srmNode.run(SKAction.sequence([move, endMove]))
+    }
+    
+
+    init(position: CGPoint){
+        //QQQQ max number of lifes
+        self.lifeSprites = Array<SKSpriteNode!>(repeating: nil, count: 10)
+        for i in 0..<lifeSprites.count{
+            lifeSprites[i] =  SKSpriteNode(imageNamed: "BlueSRmarble")
+            lifeSprites[i]?.size = CGSize(width: diameter, height: diameter)
+            lifeSprites[i]?.zPosition = 100 //QQQQ use constants
+        }
+        //QQQQ this whole thing is a bit wrong...
+        super.init(texture: SKTexture(imageNamed: "popup"),color: SKColor.black, size: CGSize(width: 5*diameter, height: 2.0*diameter))
+        self.colorBlendFactor = 1.0
+        self.position = position
+        self.anchorPoint = CGPoint(x:0, y:0)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.lifeSprites = Array<SKSpriteNode>(repeating: SKSpriteNode(), count: 5)
+        
+        // Decoding length here would be nice...
+        super.init(coder: aDecoder)
+    }
+    
+}

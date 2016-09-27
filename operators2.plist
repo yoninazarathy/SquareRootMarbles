@@ -3,10 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>0</key>
-	<string>(-7,-4)</string>
+	<string>(-2,12)</string>
 	<key>1</key>
-	<string>(0,-6)</string>
+	<string>(4,-12)</string>
 	<key>2</key>
-	<string>(16,11)</string>
+	<string>(-6,-27)</string>
+	<key>3</key>
+	<string>(0,0)</string>
 </dict>
 </plist>

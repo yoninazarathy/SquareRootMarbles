@@ -10,18 +10,18 @@ import SpriteKit
 
 class AfterLevelScene: GeneralScene {
     
-    var timer: NSTimer? = nil
+    var timer: Timer? = nil
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //QQQQ problem if clicked before - need to kill timer
-        timer = NSTimer.scheduledTimerWithTimeInterval(timeInAfterLevelScene, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: timeInAfterLevelScene, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
         
-        self.backgroundColor = SKColor.blackColor()
+        self.backgroundColor = SKColor.black
         
         //QQQQ slightly improve the appDelgate so that compositions such as this aren't needed (they are used elsewhere also
         let model = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
-        
-        var messageText: [String?] = Array(count: 0, repeatedValue: nil)
+                
+        var messageText: [String?] = Array(repeating: nil, count: 0)
         if model.newScoreString == ""{
             messageText.append("No success for level \(model.levelNumber)")
             messageText.append("Level record: \(model.bestScoreString)")
@@ -37,8 +37,8 @@ class AfterLevelScene: GeneralScene {
                 
                 //update and store in UserDefaults
                 model.bestScoreString = model.newScoreString
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(model.bestScoreString, forKey: "level\(model.levelNumber)best")
+                let defaults = UserDefaults.standard
+                defaults.set(model.bestScoreString, forKey: "level\(model.levelNumber)best")
                 
             }else{
                 messageText.append("Record for level \(model.bestScoreString)")
@@ -54,7 +54,7 @@ class AfterLevelScene: GeneralScene {
             let label = SKLabelNode(text: txt)
             label.position = CGPoint(x: x, y: y)
             label.fontSize = 20
-            label.fontColor = SKColor.whiteColor()
+            label.fontColor = SKColor.white
             label.fontName = "AmericanTypewriter-Bold"
             y = y - 50
             self.addChild(label)
@@ -66,12 +66,12 @@ class AfterLevelScene: GeneralScene {
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         timer!.invalidate()
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     

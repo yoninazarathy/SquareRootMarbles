@@ -13,7 +13,7 @@ import SpriteKit
 protocol OperatorAction {
     //returns the operation or -1 if invalid
     //assumes it operates on value in [0,maxVal]
-    func operate(value: Int) -> Int
+    func operate(_ value: Int) -> Int
     
     //returns a string describing the operation
     func operationString() -> String
@@ -21,11 +21,11 @@ protocol OperatorAction {
     static func operationString() -> String
     
     //return true if operate(value) will not return -1
-    func isValid(value: Int) -> Bool
+    func isValid(_ value: Int) -> Bool
 }
 
 class SqrtNode: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = sqrt(Double(value))
         if Double(Int(val)) == val{
             return Int(val)
@@ -40,13 +40,13 @@ class SqrtNode: OperatorAction{
     
     func operationString() -> String{return SqrtNode.operationString()}
     
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return perectSquares.contains(value)
     }
 }
 
 class MinusOneNode: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         return value - 1
         //note if value is 0 it will go to -1
     }
@@ -55,14 +55,14 @@ class MinusOneNode: OperatorAction{
         return "-1"
     }
     func operationString() -> String{return MinusOneNode.operationString()}
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value > 0
     }
 
 }
 
 class AddOneNode: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = value + 1
         return val <= maxVal ? val : -1
     }
@@ -70,13 +70,13 @@ class AddOneNode: OperatorAction{
         return "+1"
     }
     func operationString() -> String{return AddOneNode.operationString()}
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value < 100
     }
 }
 
 class Times2Node: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = 2*value
         return val <= maxVal ? val : -1
     }
@@ -85,13 +85,13 @@ class Times2Node: OperatorAction{
     }
     func operationString() -> String{return Times2Node.operationString()}
 
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value < 51
     }
 }
 
 class Times3Node: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = 3*value
         return val <= maxVal ? val : -1
     }
@@ -99,13 +99,13 @@ class Times3Node: OperatorAction{
         return "*3"
     }
     func operationString() -> String{return Times3Node.operationString()}
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value < 34
     }
 }
 
 class Times4Node: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = 4*value
         return val <= maxVal ? val : -1
     }
@@ -113,13 +113,13 @@ class Times4Node: OperatorAction{
         return "*4"
     }
     func operationString() -> String{return Times4Node.operationString()}
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value < 26
     }
 }
 
 class Times5Node: OperatorAction{
-    func operate(value: Int) -> Int{
+    func operate(_ value: Int) -> Int{
         let val = 5*value
         return val <= maxVal ? val : -1
     }
@@ -127,7 +127,7 @@ class Times5Node: OperatorAction{
         return "*5"
     }
     func operationString() -> String{return Times5Node.operationString()}
-    func isValid(value: Int) -> Bool{
+    func isValid(_ value: Int) -> Bool{
         return value < 21
     }
 }
@@ -138,21 +138,26 @@ class OperatorNode: SKSpriteNode{
     var operatorAction: OperatorAction!
     
     var valid: Bool! = nil
-    
     var active: Bool = true
-    
-    var angleToFire: CGFloat = CGFloat(M_PI/2)
+
     
     func setAsValid(){
         valid = true
-        color = SKColor(CIColor: CIColor(red: 0.0, green: 1.0, blue: 0.0))
+        physicsBody!.categoryBitMask = PhysicsCategory.PassingOperator
+        if operatorAction.operationString() == "sqrt"{
+            color = SKColor(ciColor: CIColor(red: 0, green: 0.94, blue: 0.82))
+        }else{
+            color = SKColor(ciColor: CIColor(red: 0.0, green: 1.0, blue: 0.0))
+        }
         colorBlendFactor = 1
         alpha = 1.0
     }
     
     func setAsInvalid(){
         valid = false
-        color = SKColor.redColor()
+        //QQQQ not sure this is the best 
+        run(SKAction.sequence([SKAction.wait(forDuration: 0.5),SKAction.run(){self.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator}]))
+        color = SKColor.red
         colorBlendFactor = 1
         alpha = 1.0
 
@@ -171,7 +176,7 @@ class OperatorNode: SKSpriteNode{
     }
     
     convenience init(operatorActionString: String){
-        self.init(texture: nil, color: SKColor.redColor(), size: CGSize(width:50, height:50))
+        self.init(texture: nil, color: SKColor.red, size: CGSize(width:43, height:43))
         switch operatorActionString{
         case SqrtNode.operationString():
             operatorAction = SqrtNode()

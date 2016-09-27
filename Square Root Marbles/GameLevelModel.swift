@@ -18,11 +18,13 @@ class GameLevelModel{
     let levelNumber:    Int
     let designInfo: GameLevelDesignInfo
     
+    var numMarbles: Int = 0
+    
     var bestScoreString: String
     var newScoreString: String
     
-    static func centiSeconds(fromString: String) -> Int{
-        let numArray = fromString.componentsSeparatedByString(".")
+    static func centiSeconds(_ fromString: String) -> Int{
+        let numArray = fromString.components(separatedBy: ".")
         let time = 100*Int(numArray[0])! + Int(numArray[1])! //QQQQ This is brave/stupid shit...
         return time
     }
@@ -44,13 +46,14 @@ class GameLevelModel{
     init(level: Int){
         levelNumber = level
         designInfo = GameLevelDesignInfo(level: level)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let bestScore = defaults.stringForKey("level\(level)best") {
+        let defaults = UserDefaults.standard
+        if let bestScore = defaults.string(forKey: "level\(level)best") {
             bestScoreString = bestScore
         }else{
             bestScoreString = ""
         }
         
         newScoreString = ""
+        
     }
 }

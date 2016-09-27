@@ -10,11 +10,11 @@ import SpriteKit
 
 class IntroScene: GeneralScene {
     
-    var timer: NSTimer? = nil
+    var timer: Timer? = nil
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //QQQQ problem if clicked before - need to kill timer
-        timer = NSTimer.scheduledTimerWithTimeInterval(timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
         playBackgroundMusic()
     }
     
@@ -24,13 +24,13 @@ class IntroScene: GeneralScene {
     }
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         timer!.invalidate()
         stopBackgroundMusic()
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
 }

@@ -8,35 +8,35 @@
 import Foundation
 
 struct Plist{
-    enum PlistError: ErrorType{
-        case FileNotWritten
-        case FileDoesNotExist
+    enum PlistError: Error{
+        case fileNotWritten
+        case fileDoesNotExist
     }
     
     let name: String
     
     var sourcePath: String?{
-        guard let path = NSBundle.mainBundle().pathForResource(name, ofType: "plist") else {return .None}
+        guard let path = Bundle.main.path(forResource: name, ofType: "plist") else {return .none}
         return path
     }
     
     var destPath: String?{
-        guard sourcePath != .None else {return .None}
-        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        return (dir as NSString).stringByAppendingPathComponent("\(name).plist")
+        guard sourcePath != .none else {return .none}
+        let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return (dir as NSString).appendingPathComponent("\(name).plist")
     }
     
     init?(name: String){
         self.name = name
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
         guard let source = sourcePath else {return nil}
         guard let destination = destPath else {return nil}
-        guard fileManager.fileExistsAtPath(source) else {return nil}
+        guard fileManager.fileExists(atPath: source) else {return nil}
         
-        if !fileManager.fileExistsAtPath(destination){
+        if !fileManager.fileExists(atPath: destination){
             do{
-                try fileManager.copyItemAtPath(source, toPath: destination)
+                try fileManager.copyItem(atPath: source, toPath: destination)
             }catch let error as NSError{
                 print("Unable to copy file. ERROR: \(error.localizedDescription)")
             }
@@ -44,12 +44,12 @@ struct Plist{
     }
     
     func getValuesInPlistFile() -> NSDictionary?{
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!){
-            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .None}
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!){
+            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .none}
             return dict
         }else{
-            return .None
+            return .none
         }
     }
     

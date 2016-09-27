@@ -12,7 +12,7 @@ import SpriteKit
 
 //Make true only for development purpuses
 let editModeEnabled = true
-let allowAllLevels = true //also for development
+let allowAllLevels = false //also for development
 let showFPSFlag = false
 let showNodCountFlag = false
 
@@ -34,6 +34,16 @@ let upperBoundNumOperators = 15
 //QQQQ make naming common (scene/screen)
 let timeInIntroScreen = 15.0
 let timeInAfterLevelScene = 10.0
+
+let secondsBetweenLosses = 10
+
+
+let numSRMVoices: UInt32 = 22
+let musicVolume: Float = 0.2
+let endGameVolume: Float = 0.5
+let thumpTopVolume: Float = 0.6
+let srmVoiceVolume: Float = 1.0
+let operatorVolume: Float = 0.5
 
 /////////////////
 // Level World //
@@ -134,13 +144,13 @@ func ==(lhs: SquareCoordinates, rhs: SquareCoordinates) -> Bool {
     return lhs.values == rhs.values
 }
 
-func squareOfPoint(x: Double, y: Double) -> SquareCoordinates{
+func squareOfPoint(_ x: Double, y: Double) -> SquareCoordinates{
     let sx = Int(round((x-gameLevelCenterPointX + cubeSize)/cubeSize))-1
     let sy = Int(round((y-gameLevelCenterPointY + cubeSize)/cubeSize))-1
     return SquareCoordinates(sx: sx, sy: sy)
 }
 
-func squareOfPoint(point: CGPoint) -> SquareCoordinates{
+func squareOfPoint(_ point: CGPoint) -> SquareCoordinates{
     return squareOfPoint(Double(point.x), y: Double(point.y))
 }
 

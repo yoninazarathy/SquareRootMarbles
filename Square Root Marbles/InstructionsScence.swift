@@ -13,8 +13,8 @@ class InstructionsScene: GeneralScene {
     var sceneCam: SKCameraNode!
     
     
-    override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.orangeColor()
+    override func didMove(to view: SKView) {
+        self.backgroundColor = SKColor.orange
         
         //QQQQ How do I initilize an array member?
         
@@ -23,19 +23,18 @@ class InstructionsScene: GeneralScene {
         self.camera = sceneCam  //set the scene's camera
         addChild(sceneCam) //add camera to scene
         
-        
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //QQQQ this is silly code...
         (scene as! InstructionsScene).gameAppDelegate!.changeView((scene as! InstructionsScene).gameAppDelegate!.getReturnAppState())
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         
-        let positionInScene = touch!.locationInNode(self)
-        let previousPosition = touch!.previousLocationInNode(self)
+        let positionInScene = touch!.location(in: self)
+        let previousPosition = touch!.previousLocation(in: self)
         let translation = CGPoint(x: 0, y: positionInScene.y - previousPosition.y)
         
         var newYPosition = sceneCam.position.y - translation.y
@@ -54,7 +53,7 @@ class InstructionsScene: GeneralScene {
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
 }

@@ -24,8 +24,8 @@ class MenuScene: GeneralScene {
     var messageLabelNode: MessageNode! = nil
     
     
-    override func didMoveToView(view: SKView) {
-        self.backgroundColor = SKColor.blackColor()
+    override func didMove(to view: SKView) {
+        self.backgroundColor = SKColor.black
         
         sceneCam = SKCameraNode() //initialize your camera
         sceneCam.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -59,7 +59,7 @@ class MenuScene: GeneralScene {
             audioButtonNode = AudioButtonNode(imageNamed: "audioOff")
         }
 
-        audioButtonNode.userInteractionEnabled = true
+        audioButtonNode.isUserInteractionEnabled = true
         audioButtonNode.name = "audioButton"
         audioButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
         audioButtonNode.position = CGPoint(x:auidoXOffset, y:0)
@@ -69,7 +69,7 @@ class MenuScene: GeneralScene {
         menuNode.addChild(audioButtonNode)
 
         let helpButtonNode = HelpButtonNode(imageNamed: "help")
-        helpButtonNode.userInteractionEnabled = true
+        helpButtonNode.isUserInteractionEnabled = true
         helpButtonNode.name = "helpButton"
         helpButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
         helpButtonNode.position = CGPoint(x:helpXOffset, y:0)
@@ -77,7 +77,7 @@ class MenuScene: GeneralScene {
         menuNode.addChild(helpButtonNode)
         
         let settingsButtonNode = SettingsButtonNode(imageNamed: "settings")
-        settingsButtonNode.userInteractionEnabled = true
+        settingsButtonNode.isUserInteractionEnabled = true
         settingsButtonNode.name = "resetScoresButton"
         settingsButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
         settingsButtonNode.position = CGPoint(x:settingsXOffset, y:0)
@@ -86,42 +86,40 @@ class MenuScene: GeneralScene {
 
         currentY = currentY - buttonSize/2 - 2 * buttonSpacing - 20
         
-        messageLabelNode = MessageNode(text: "Square Root Marbles")
-        messageLabelNode.position = CGPoint(x: Double(self.size.width/2), y: currentY)
-        messageLabelNode.fontSize = 20
-        messageLabelNode.fontColor = SKColor.whiteColor()
-        messageLabelNode.fontName = "AmericanTypewriter-Bold"
+        messageLabelNode = MessageNode(position: CGPoint(x: Double(self.size.width/2), y: currentY))
+        messageLabelNode.displayMessage("Square Root Marbles")
         self.addChild(messageLabelNode)
 
         let xLabelFix = 8.0 //QQQQ note sure why we need this
         
         selectionNodes.append(nil)
-        for i in 1.stride(to: numLevels, by: 3) {
+        for i in stride(from: 1, to: numLevels, by: 3) {
             let y = currentY-60-40*(Double(i)-1)
             
             var x = Double(screenWidth)/5
             var lev = i
-            var levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
+            var levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
+            //var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
+            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
             var levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
-            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontColor = SKColor.black
             levelNumberNode.fontSize = 55
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
             levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
             self.addChild(levelNumberNode)
             var levelScoreNode = SKLabelNode(text: levelScore)
             levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontColor = SKColor.black
             levelScoreNode.fontSize = 18
             levelScoreNode.fontName = "AmericanTypewriter-Bold"
             levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
             self.addChild(levelScoreNode)
             var shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).CGPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
-            shapeNode.strokeColor = SKColor.whiteColor()
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
                 selectionNodes.append(shapeNode)
@@ -131,27 +129,27 @@ class MenuScene: GeneralScene {
             
             x = Double(screenWidth)/2
             lev = lev + 1
-            levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
+            levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
-            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontColor = SKColor.black
             levelNumberNode.fontSize = 55
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
             levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
             self.addChild(levelNumberNode)
             levelScoreNode = SKLabelNode(text: levelScore)
             levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontColor = SKColor.black
             levelScoreNode.fontSize = 18
             levelScoreNode.fontName = "AmericanTypewriter-Bold"
             levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
             self.addChild(levelScoreNode)
             shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).CGPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
-            shapeNode.strokeColor = SKColor.whiteColor()
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
                 selectionNodes.append(shapeNode)
@@ -159,27 +157,27 @@ class MenuScene: GeneralScene {
             
             x = (4*Double(screenWidth))/5
             lev = lev + 1
-            levelScore = gameAppDelegate!.getGameLevelModel(lev).bestScoreString
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
+            levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
+            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
-            levelNumberNode.fontColor = SKColor.blackColor()
+            levelNumberNode.fontColor = SKColor.black
             levelNumberNode.fontSize = 55
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
             levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
             levelScoreNode = SKLabelNode(text: levelScore)
             levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.blackColor()
+            levelScoreNode.fontColor = SKColor.black
             levelScoreNode.fontSize = 18
             levelScoreNode.fontName = "AmericanTypewriter-Bold"
             levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
             self.addChild(levelScoreNode)
             self.addChild(levelNumberNode)
             shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).CGPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGrayColor() : SKColor.darkGrayColor())
-            shapeNode.strokeColor = SKColor.whiteColor()
+            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
                 selectionNodes.append(shapeNode)
@@ -188,7 +186,7 @@ class MenuScene: GeneralScene {
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if dragging{
             dragging = false
             return
@@ -196,7 +194,8 @@ class MenuScene: GeneralScene {
         let touch = touches.first!
         for i in 1..<selectionNodes.count{
             if let node = selectionNodes[i] {
-                if node.containsPoint(touch.locationInNode(self)){
+                if node.contains(touch.location(in: self)){
+                    gameAppDelegate!.setNumberOfMarblesX(3) //QQQQ read from level start
                     gameAppDelegate!.setLevel(i)
                     gameAppDelegate!.changeView(AppState.gameActionPlaying)
                     return
@@ -207,12 +206,12 @@ class MenuScene: GeneralScene {
     
     var dragging = false
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         dragging = true
         let touch = touches.first
         
-        let positionInScene = touch!.locationInNode(self)
-        let previousPosition = touch!.previousLocationInNode(self)
+        let positionInScene = touch!.location(in: self)
+        let previousPosition = touch!.previousLocation(in: self)
         let translation = CGPoint(x: 0, y: positionInScene.y - previousPosition.y)
         
         var newYPosition = sceneCam.position.y - translation.y
@@ -231,7 +230,7 @@ class MenuScene: GeneralScene {
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
     
@@ -243,25 +242,25 @@ class MenuScene: GeneralScene {
     //QQQQ copied these from GameLevelScene - consoloidate!
     
     class HelpButtonNode : SKSpriteNode{
-        override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! MenuScene).gameAppDelegate!.setReturnAppState(AppState.menuScene)
             (scene as! MenuScene).gameAppDelegate!.changeView(AppState.instructionScene)
         }
     }
     class SettingsButtonNode : SKSpriteNode{
-        override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! MenuScene).gameAppDelegate!.changeView(AppState.settingsScene)
         }
     }
     class AudioButtonNode : SKSpriteNode{
-        override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! MenuScene).gameAppDelegate!.toggleMute()
             if (scene as! MenuScene).gameAppDelegate!.isMuted(){
                 self.texture = SKTexture(imageNamed: "audio")
-                (scene as! MenuScene).messageLabelNode.DisplayFadingMessage("Audio Off", duration: 2.0)
+                (scene as! MenuScene).messageLabelNode.displayFadingMessage("Audio Off", duration: 2.0)
             }else{
                 self.texture = SKTexture(imageNamed: "audioOff")
-                (scene as! MenuScene).messageLabelNode.DisplayFadingMessage("Audio On", duration: 2.0)
+                (scene as! MenuScene).messageLabelNode.displayFadingMessage("Audio On", duration: 2.0)
             }
         }
     }    

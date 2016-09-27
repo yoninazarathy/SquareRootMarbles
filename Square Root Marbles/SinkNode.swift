@@ -18,13 +18,13 @@ class SinkNode: SKSpriteNode{
     
     func setAsValid(){
         valid = true
-        color = SKColor.greenColor()
+        color = SKColor.green
         colorBlendFactor = 0.75
     }
     
     func setAsInvalid(){
         valid = false
-        color = SKColor.redColor()
+        color = SKColor.red
         colorBlendFactor = 0.75
     }
     
@@ -41,15 +41,15 @@ class SinkNode: SKSpriteNode{
     
     
     convenience init(target: Int){
-        self.init(texture: SKTexture(imageNamed: "sink"), color: SKColor.redColor(), size: CGSize(width:50, height:50))
+        self.init(texture: SKTexture(imageNamed: "sink"), color: SKColor.red, size: CGSize(width:50, height:50))
         self.targetValue = target
         labelNode = SKLabelNode(text: "\(targetValue)")
         
         labelNode.fontName = "AmericanTypewriter-Bold"
-        labelNode.fontColor = SKColor.whiteColor()
+        labelNode.fontColor = SKColor.white
         labelNode.fontSize = 40
         labelNode.position = CGPoint(x:0, y: -15) //QQQQ
-        labelNode.blendMode = SKBlendMode.Add
+        labelNode.blendMode = SKBlendMode.add
         labelNode.colorBlendFactor = 0
         //labelNode.position = ???
         labelNode.zPosition = 1
