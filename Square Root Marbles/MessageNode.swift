@@ -59,7 +59,7 @@ class MessageNode: SKSpriteNode{
         }
 
         //QQQQ this whole thing is a bit wrong...
-        super.init(texture: SKTexture(imageNamed: "popup"),color: SKColor.black, size: CGSize(width: 200, height: 30))
+        super.init(texture: SKTexture(imageNamed: "popup"),color: SKColor.clear, size: CGSize(width: 200, height: 30))
         self.colorBlendFactor = 1.0
         self.position = position
         self.anchorPoint = CGPoint(x:0, y:0.5)

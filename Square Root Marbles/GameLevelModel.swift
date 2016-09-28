@@ -18,42 +18,21 @@ class GameLevelModel{
     let levelNumber:    Int
     let designInfo: GameLevelDesignInfo
     
-    var numMarbles: Int = 0
-    
-    var bestScoreString: String
-    var newScoreString: String
-    
-    static func centiSeconds(_ fromString: String) -> Int{
-        let numArray = fromString.components(separatedBy: ".")
-        let time = 100*Int(numArray[0])! + Int(numArray[1])! //QQQQ This is brave/stupid shit...
-        return time
-    }
-    
-    //QQQQ
-    var bestScoreCentiSecond: Int{
-        get{
-            return bestScoreString == "" ? Int.max : GameLevelModel.centiSeconds(bestScoreString)
-        }
-    }
-
-    var newScoreCentiSecond: Int{
-        get{
-            return newScoreString == "" ? Int.max : GameLevelModel.centiSeconds(newScoreString)
-        }
-    }
-
+    var numMarbles: Int = 0 //say that -1 means the level is open
+    var levelOpen: Bool = false
     
     init(level: Int){
         levelNumber = level
         designInfo = GameLevelDesignInfo(level: level)
         let defaults = UserDefaults.standard
-        if let bestScore = defaults.string(forKey: "level\(level)best") {
-            bestScoreString = bestScore
+        if let marblesString = defaults.string(forKey: "level\(level)marbles") {
+            numMarbles = Int(marblesString)!
         }else{
-            bestScoreString = ""
+            numMarbles = level > 1 ? 0 : 3
+            if allowAllLevels{
+                numMarbles = 10
+            }
         }
-        
-        newScoreString = ""
         
     }
 }

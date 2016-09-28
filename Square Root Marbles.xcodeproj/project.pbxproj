@@ -7,21 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2009D0381D951773004984ED /* obstacles2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0361D951773004984ED /* obstacles2.plist */; };
-		2009D0391D951773004984ED /* operators2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0371D951773004984ED /* operators2.plist */; };
-		2009D03C1D952843004984ED /* obstacles3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03A1D952843004984ED /* obstacles3.plist */; };
-		2009D03D1D952843004984ED /* operators3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03B1D952843004984ED /* operators3.plist */; };
-		2009D0401D952B36004984ED /* obstacles4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03E1D952B36004984ED /* obstacles4.plist */; };
-		2009D0411D952B36004984ED /* operators4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03F1D952B36004984ED /* operators4.plist */; };
-		2009D0461D952EDA004984ED /* obstacles5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0421D952EDA004984ED /* obstacles5.plist */; };
-		2009D0471D952EDA004984ED /* obstacles6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0431D952EDA004984ED /* obstacles6.plist */; };
-		2009D0481D952EDA004984ED /* operators5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0441D952EDA004984ED /* operators5.plist */; };
-		2009D0491D952EDA004984ED /* operators6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0451D952EDA004984ED /* operators6.plist */; };
-		2009D04C1D9530C9004984ED /* obstacles7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D04A1D9530C9004984ED /* obstacles7.plist */; };
-		2009D04D1D9530C9004984ED /* operators7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D04B1D9530C9004984ED /* operators7.plist */; };
+		2009D0381D951773004984ED /* obstacles3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0361D951773004984ED /* obstacles3.plist */; };
+		2009D03C1D952843004984ED /* obstacles4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03A1D952843004984ED /* obstacles4.plist */; };
+		2009D0401D952B36004984ED /* obstacles5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D03E1D952B36004984ED /* obstacles5.plist */; };
+		2009D0461D952EDA004984ED /* obstacles6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0421D952EDA004984ED /* obstacles6.plist */; };
+		2009D0471D952EDA004984ED /* obstacles7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0431D952EDA004984ED /* obstacles7.plist */; };
+		2009D04C1D9530C9004984ED /* obstacles8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D04A1D9530C9004984ED /* obstacles8.plist */; };
 		2009D04F1D95E652004984ED /* LifesNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2009D04E1D95E652004984ED /* LifesNode.swift */; };
 		2009D0511D95EB80004984ED /* electricshock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0501D95EB80004984ED /* electricshock.wav */; };
-		2009D0531D96769B004984ED /* operators1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2009D0521D96769B004984ED /* operators1.plist */; };
 		200D57211D873E3E0002BFD2 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200D57201D873E3E0002BFD2 /* PlayerNode.swift */; };
 		201E09531D8E685B0088B86E /* SettingsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 201E09521D8E685B0088B86E /* SettingsScene.sks */; };
 		201E09551D8E68870088B86E /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201E09541D8E68870088B86E /* SettingsScene.swift */; };
@@ -50,7 +43,59 @@
 		204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 204663DF1D795A4C0019B96A /* LaunchScreen.storyboard */; };
 		204663E91D79615A0019B96A /* GameLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663E81D79615A0019B96A /* GameLevelModel.swift */; };
 		204663EB1D7963A00019B96A /* GameLevelDesignInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */; };
-		204FBFF81D9410D000172C45 /* obstacles1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204FBFF61D9410D000172C45 /* obstacles1.plist */; };
+		204FBFF81D9410D000172C45 /* obstacles2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204FBFF61D9410D000172C45 /* obstacles2.plist */; };
+		205D3A841D9BDB1600DE3F5D /* obstacles1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A831D9BDB1600DE3F5D /* obstacles1.plist */; };
+		205D3A881D9BF6EF00DE3F5D /* obstacles13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A871D9BF6EF00DE3F5D /* obstacles13.plist */; };
+		205D3A8A1D9BF6FC00DE3F5D /* obstacles14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A891D9BF6FC00DE3F5D /* obstacles14.plist */; };
+		205D3A8C1D9BF70500DE3F5D /* obstacles15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A8B1D9BF70500DE3F5D /* obstacles15.plist */; };
+		205D3A8E1D9BF70F00DE3F5D /* obstacles16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A8D1D9BF70F00DE3F5D /* obstacles16.plist */; };
+		205D3A901D9BF71C00DE3F5D /* obstacles17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A8F1D9BF71C00DE3F5D /* obstacles17.plist */; };
+		205D3A921D9BF72500DE3F5D /* obstacles18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A911D9BF72500DE3F5D /* obstacles18.plist */; };
+		205D3A941D9BF74B00DE3F5D /* obstacles9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A931D9BF74B00DE3F5D /* obstacles9.plist */; };
+		205D3A961D9BF75600DE3F5D /* obstacles10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A951D9BF75600DE3F5D /* obstacles10.plist */; };
+		205D3A981D9BF76500DE3F5D /* obstacles11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A971D9BF76500DE3F5D /* obstacles11.plist */; };
+		205D3A9A1D9BF77B00DE3F5D /* obstacles12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A991D9BF77B00DE3F5D /* obstacles12.plist */; };
+		205D3A9C1D9BF79700DE3F5D /* obstacles19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A9B1D9BF79700DE3F5D /* obstacles19.plist */; };
+		205D3A9E1D9BF7A200DE3F5D /* obstacles20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A9D1D9BF7A200DE3F5D /* obstacles20.plist */; };
+		205D3AA01D9BF7AF00DE3F5D /* obstacles21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3A9F1D9BF7AF00DE3F5D /* obstacles21.plist */; };
+		205D3AA21D9BF7B900DE3F5D /* obstacles22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AA11D9BF7B900DE3F5D /* obstacles22.plist */; };
+		205D3AA41D9BF7D500DE3F5D /* obstacles23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AA31D9BF7D500DE3F5D /* obstacles23.plist */; };
+		205D3AA61D9BF7DC00DE3F5D /* obstacles24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AA51D9BF7DC00DE3F5D /* obstacles24.plist */; };
+		205D3AA81D9BF7E300DE3F5D /* obstacles25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AA71D9BF7E300DE3F5D /* obstacles25.plist */; };
+		205D3AAA1D9BF7EB00DE3F5D /* obstacles26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AA91D9BF7EB00DE3F5D /* obstacles26.plist */; };
+		205D3AAC1D9BF7F300DE3F5D /* obstacles27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AAB1D9BF7F300DE3F5D /* obstacles27.plist */; };
+		205D3AAE1D9BF7FC00DE3F5D /* obstacles28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AAD1D9BF7FC00DE3F5D /* obstacles28.plist */; };
+		205D3AB01D9BF80400DE3F5D /* obstacles29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AAF1D9BF80400DE3F5D /* obstacles29.plist */; };
+		205D3AB21D9BF80D00DE3F5D /* obstacles30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AB11D9BF80D00DE3F5D /* obstacles30.plist */; };
+		205D3ABE1D9C006300DE3F5D /* operators1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ABD1D9C006300DE3F5D /* operators1.plist */; };
+		205D3ADB1D9C048700DE3F5D /* operators2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ABF1D9C048700DE3F5D /* operators2.plist */; };
+		205D3ADC1D9C048700DE3F5D /* operators3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC01D9C048700DE3F5D /* operators3.plist */; };
+		205D3ADD1D9C048700DE3F5D /* operators4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC11D9C048700DE3F5D /* operators4.plist */; };
+		205D3ADE1D9C048700DE3F5D /* operators5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC21D9C048700DE3F5D /* operators5.plist */; };
+		205D3ADF1D9C048700DE3F5D /* operators6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC31D9C048700DE3F5D /* operators6.plist */; };
+		205D3AE01D9C048700DE3F5D /* operators7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC41D9C048700DE3F5D /* operators7.plist */; };
+		205D3AE11D9C048700DE3F5D /* operators8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC51D9C048700DE3F5D /* operators8.plist */; };
+		205D3AE21D9C048700DE3F5D /* operators9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC61D9C048700DE3F5D /* operators9.plist */; };
+		205D3AE31D9C048700DE3F5D /* operators10.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC71D9C048700DE3F5D /* operators10.plist */; };
+		205D3AE41D9C048700DE3F5D /* operators11.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC81D9C048700DE3F5D /* operators11.plist */; };
+		205D3AE51D9C048700DE3F5D /* operators12.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AC91D9C048700DE3F5D /* operators12.plist */; };
+		205D3AE61D9C048700DE3F5D /* operators13.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACA1D9C048700DE3F5D /* operators13.plist */; };
+		205D3AE71D9C048700DE3F5D /* operators14.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACB1D9C048700DE3F5D /* operators14.plist */; };
+		205D3AE81D9C048700DE3F5D /* operators15.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACC1D9C048700DE3F5D /* operators15.plist */; };
+		205D3AE91D9C048700DE3F5D /* operators16.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACD1D9C048700DE3F5D /* operators16.plist */; };
+		205D3AEA1D9C048700DE3F5D /* operators17.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACE1D9C048700DE3F5D /* operators17.plist */; };
+		205D3AEB1D9C048700DE3F5D /* operators18.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ACF1D9C048700DE3F5D /* operators18.plist */; };
+		205D3AEC1D9C048700DE3F5D /* operators19.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD01D9C048700DE3F5D /* operators19.plist */; };
+		205D3AED1D9C048700DE3F5D /* operators20.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD11D9C048700DE3F5D /* operators20.plist */; };
+		205D3AEE1D9C048700DE3F5D /* operators21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD21D9C048700DE3F5D /* operators21.plist */; };
+		205D3AEF1D9C048700DE3F5D /* operators22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD31D9C048700DE3F5D /* operators22.plist */; };
+		205D3AF01D9C048700DE3F5D /* operators23.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD41D9C048700DE3F5D /* operators23.plist */; };
+		205D3AF11D9C048700DE3F5D /* operators24.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD51D9C048700DE3F5D /* operators24.plist */; };
+		205D3AF21D9C048700DE3F5D /* operators25.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD61D9C048700DE3F5D /* operators25.plist */; };
+		205D3AF31D9C048700DE3F5D /* operators27.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD71D9C048700DE3F5D /* operators27.plist */; };
+		205D3AF41D9C048700DE3F5D /* operators28.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD81D9C048700DE3F5D /* operators28.plist */; };
+		205D3AF51D9C048700DE3F5D /* operators29.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3AD91D9C048700DE3F5D /* operators29.plist */; };
+		205D3AF61D9C048700DE3F5D /* operators30.plist in Resources */ = {isa = PBXBuildFile; fileRef = 205D3ADA1D9C048700DE3F5D /* operators30.plist */; };
 		2065409A1D7C16590082D92D /* GeneralConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206540991D7C16590082D92D /* GeneralConstants.swift */; };
 		2079F8631D86094000F74E4E /* LevelsPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079F8621D86094000F74E4E /* LevelsPlan.swift */; };
 		208FB0161D8D540700180EAE /* MessageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FB0151D8D540700180EAE /* MessageNode.swift */; };
@@ -84,21 +129,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2009D0361D951773004984ED /* obstacles2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles2.plist; sourceTree = "<group>"; };
-		2009D0371D951773004984ED /* operators2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators2.plist; sourceTree = "<group>"; };
-		2009D03A1D952843004984ED /* obstacles3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles3.plist; sourceTree = "<group>"; };
-		2009D03B1D952843004984ED /* operators3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators3.plist; sourceTree = "<group>"; };
-		2009D03E1D952B36004984ED /* obstacles4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles4.plist; sourceTree = "<group>"; };
-		2009D03F1D952B36004984ED /* operators4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators4.plist; sourceTree = "<group>"; };
-		2009D0421D952EDA004984ED /* obstacles5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles5.plist; sourceTree = "<group>"; };
-		2009D0431D952EDA004984ED /* obstacles6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles6.plist; sourceTree = "<group>"; };
-		2009D0441D952EDA004984ED /* operators5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators5.plist; sourceTree = "<group>"; };
-		2009D0451D952EDA004984ED /* operators6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators6.plist; sourceTree = "<group>"; };
-		2009D04A1D9530C9004984ED /* obstacles7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles7.plist; sourceTree = "<group>"; };
-		2009D04B1D9530C9004984ED /* operators7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators7.plist; sourceTree = "<group>"; };
+		2009D0361D951773004984ED /* obstacles3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles3.plist; sourceTree = "<group>"; };
+		2009D03A1D952843004984ED /* obstacles4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles4.plist; sourceTree = "<group>"; };
+		2009D03E1D952B36004984ED /* obstacles5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles5.plist; sourceTree = "<group>"; };
+		2009D0421D952EDA004984ED /* obstacles6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles6.plist; sourceTree = "<group>"; };
+		2009D0431D952EDA004984ED /* obstacles7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles7.plist; sourceTree = "<group>"; };
+		2009D04A1D9530C9004984ED /* obstacles8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles8.plist; sourceTree = "<group>"; };
 		2009D04E1D95E652004984ED /* LifesNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifesNode.swift; sourceTree = "<group>"; };
 		2009D0501D95EB80004984ED /* electricshock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = electricshock.wav; sourceTree = "<group>"; };
-		2009D0521D96769B004984ED /* operators1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators1.plist; sourceTree = "<group>"; };
 		200D57201D873E3E0002BFD2 /* PlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerNode.swift; path = ../PlayerNode.swift; sourceTree = "<group>"; };
 		201E09521D8E685B0088B86E /* SettingsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingsScene.sks; sourceTree = "<group>"; };
 		201E09541D8E68870088B86E /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
@@ -129,7 +167,59 @@
 		204663E21D795A4C0019B96A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		204663E81D79615A0019B96A /* GameLevelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelModel.swift; sourceTree = "<group>"; };
 		204663EA1D7963A00019B96A /* GameLevelDesignInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelDesignInfo.swift; sourceTree = "<group>"; };
-		204FBFF61D9410D000172C45 /* obstacles1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles1.plist; sourceTree = "<group>"; };
+		204FBFF61D9410D000172C45 /* obstacles2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles2.plist; sourceTree = "<group>"; };
+		205D3A831D9BDB1600DE3F5D /* obstacles1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles1.plist; sourceTree = "<group>"; };
+		205D3A871D9BF6EF00DE3F5D /* obstacles13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles13.plist; sourceTree = "<group>"; };
+		205D3A891D9BF6FC00DE3F5D /* obstacles14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles14.plist; sourceTree = "<group>"; };
+		205D3A8B1D9BF70500DE3F5D /* obstacles15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles15.plist; sourceTree = "<group>"; };
+		205D3A8D1D9BF70F00DE3F5D /* obstacles16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles16.plist; sourceTree = "<group>"; };
+		205D3A8F1D9BF71C00DE3F5D /* obstacles17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles17.plist; sourceTree = "<group>"; };
+		205D3A911D9BF72500DE3F5D /* obstacles18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles18.plist; sourceTree = "<group>"; };
+		205D3A931D9BF74B00DE3F5D /* obstacles9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles9.plist; sourceTree = "<group>"; };
+		205D3A951D9BF75600DE3F5D /* obstacles10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles10.plist; sourceTree = "<group>"; };
+		205D3A971D9BF76500DE3F5D /* obstacles11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles11.plist; sourceTree = "<group>"; };
+		205D3A991D9BF77B00DE3F5D /* obstacles12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles12.plist; sourceTree = "<group>"; };
+		205D3A9B1D9BF79700DE3F5D /* obstacles19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles19.plist; sourceTree = "<group>"; };
+		205D3A9D1D9BF7A200DE3F5D /* obstacles20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles20.plist; sourceTree = "<group>"; };
+		205D3A9F1D9BF7AF00DE3F5D /* obstacles21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles21.plist; sourceTree = "<group>"; };
+		205D3AA11D9BF7B900DE3F5D /* obstacles22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles22.plist; sourceTree = "<group>"; };
+		205D3AA31D9BF7D500DE3F5D /* obstacles23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles23.plist; sourceTree = "<group>"; };
+		205D3AA51D9BF7DC00DE3F5D /* obstacles24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles24.plist; sourceTree = "<group>"; };
+		205D3AA71D9BF7E300DE3F5D /* obstacles25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles25.plist; sourceTree = "<group>"; };
+		205D3AA91D9BF7EB00DE3F5D /* obstacles26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles26.plist; sourceTree = "<group>"; };
+		205D3AAB1D9BF7F300DE3F5D /* obstacles27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles27.plist; sourceTree = "<group>"; };
+		205D3AAD1D9BF7FC00DE3F5D /* obstacles28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles28.plist; sourceTree = "<group>"; };
+		205D3AAF1D9BF80400DE3F5D /* obstacles29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles29.plist; sourceTree = "<group>"; };
+		205D3AB11D9BF80D00DE3F5D /* obstacles30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles30.plist; sourceTree = "<group>"; };
+		205D3ABD1D9C006300DE3F5D /* operators1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators1.plist; sourceTree = "<group>"; };
+		205D3ABF1D9C048700DE3F5D /* operators2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators2.plist; sourceTree = "<group>"; };
+		205D3AC01D9C048700DE3F5D /* operators3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators3.plist; sourceTree = "<group>"; };
+		205D3AC11D9C048700DE3F5D /* operators4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators4.plist; sourceTree = "<group>"; };
+		205D3AC21D9C048700DE3F5D /* operators5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators5.plist; sourceTree = "<group>"; };
+		205D3AC31D9C048700DE3F5D /* operators6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators6.plist; sourceTree = "<group>"; };
+		205D3AC41D9C048700DE3F5D /* operators7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators7.plist; sourceTree = "<group>"; };
+		205D3AC51D9C048700DE3F5D /* operators8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators8.plist; sourceTree = "<group>"; };
+		205D3AC61D9C048700DE3F5D /* operators9.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators9.plist; sourceTree = "<group>"; };
+		205D3AC71D9C048700DE3F5D /* operators10.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators10.plist; sourceTree = "<group>"; };
+		205D3AC81D9C048700DE3F5D /* operators11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators11.plist; sourceTree = "<group>"; };
+		205D3AC91D9C048700DE3F5D /* operators12.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators12.plist; sourceTree = "<group>"; };
+		205D3ACA1D9C048700DE3F5D /* operators13.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators13.plist; sourceTree = "<group>"; };
+		205D3ACB1D9C048700DE3F5D /* operators14.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators14.plist; sourceTree = "<group>"; };
+		205D3ACC1D9C048700DE3F5D /* operators15.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators15.plist; sourceTree = "<group>"; };
+		205D3ACD1D9C048700DE3F5D /* operators16.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators16.plist; sourceTree = "<group>"; };
+		205D3ACE1D9C048700DE3F5D /* operators17.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators17.plist; sourceTree = "<group>"; };
+		205D3ACF1D9C048700DE3F5D /* operators18.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators18.plist; sourceTree = "<group>"; };
+		205D3AD01D9C048700DE3F5D /* operators19.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators19.plist; sourceTree = "<group>"; };
+		205D3AD11D9C048700DE3F5D /* operators20.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators20.plist; sourceTree = "<group>"; };
+		205D3AD21D9C048700DE3F5D /* operators21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators21.plist; sourceTree = "<group>"; };
+		205D3AD31D9C048700DE3F5D /* operators22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators22.plist; sourceTree = "<group>"; };
+		205D3AD41D9C048700DE3F5D /* operators23.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators23.plist; sourceTree = "<group>"; };
+		205D3AD51D9C048700DE3F5D /* operators24.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators24.plist; sourceTree = "<group>"; };
+		205D3AD61D9C048700DE3F5D /* operators25.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators25.plist; sourceTree = "<group>"; };
+		205D3AD71D9C048700DE3F5D /* operators27.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators27.plist; sourceTree = "<group>"; };
+		205D3AD81D9C048700DE3F5D /* operators28.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators28.plist; sourceTree = "<group>"; };
+		205D3AD91D9C048700DE3F5D /* operators29.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators29.plist; sourceTree = "<group>"; };
+		205D3ADA1D9C048700DE3F5D /* operators30.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators30.plist; sourceTree = "<group>"; };
 		206540991D7C16590082D92D /* GeneralConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralConstants.swift; sourceTree = "<group>"; };
 		2079F8621D86094000F74E4E /* LevelsPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsPlan.swift; sourceTree = "<group>"; };
 		208FB0151D8D540700180EAE /* MessageNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageNode.swift; sourceTree = "<group>"; };
@@ -317,20 +407,65 @@
 		20D779C11D8EC2F400379C9E /* levels1to30 */ = {
 			isa = PBXGroup;
 			children = (
-				204FBFF61D9410D000172C45 /* obstacles1.plist */,
-				2009D0361D951773004984ED /* obstacles2.plist */,
-				2009D0371D951773004984ED /* operators2.plist */,
-				2009D03A1D952843004984ED /* obstacles3.plist */,
-				2009D0521D96769B004984ED /* operators1.plist */,
-				2009D03B1D952843004984ED /* operators3.plist */,
-				2009D03E1D952B36004984ED /* obstacles4.plist */,
-				2009D03F1D952B36004984ED /* operators4.plist */,
-				2009D0421D952EDA004984ED /* obstacles5.plist */,
-				2009D0431D952EDA004984ED /* obstacles6.plist */,
-				2009D0441D952EDA004984ED /* operators5.plist */,
-				2009D0451D952EDA004984ED /* operators6.plist */,
-				2009D04A1D9530C9004984ED /* obstacles7.plist */,
-				2009D04B1D9530C9004984ED /* operators7.plist */,
+				205D3A831D9BDB1600DE3F5D /* obstacles1.plist */,
+				204FBFF61D9410D000172C45 /* obstacles2.plist */,
+				2009D0361D951773004984ED /* obstacles3.plist */,
+				2009D03A1D952843004984ED /* obstacles4.plist */,
+				2009D03E1D952B36004984ED /* obstacles5.plist */,
+				2009D0421D952EDA004984ED /* obstacles6.plist */,
+				2009D0431D952EDA004984ED /* obstacles7.plist */,
+				2009D04A1D9530C9004984ED /* obstacles8.plist */,
+				205D3A931D9BF74B00DE3F5D /* obstacles9.plist */,
+				205D3A951D9BF75600DE3F5D /* obstacles10.plist */,
+				205D3A971D9BF76500DE3F5D /* obstacles11.plist */,
+				205D3A991D9BF77B00DE3F5D /* obstacles12.plist */,
+				205D3A871D9BF6EF00DE3F5D /* obstacles13.plist */,
+				205D3A891D9BF6FC00DE3F5D /* obstacles14.plist */,
+				205D3A8B1D9BF70500DE3F5D /* obstacles15.plist */,
+				205D3A8D1D9BF70F00DE3F5D /* obstacles16.plist */,
+				205D3A8F1D9BF71C00DE3F5D /* obstacles17.plist */,
+				205D3A911D9BF72500DE3F5D /* obstacles18.plist */,
+				205D3A9B1D9BF79700DE3F5D /* obstacles19.plist */,
+				205D3A9D1D9BF7A200DE3F5D /* obstacles20.plist */,
+				205D3A9F1D9BF7AF00DE3F5D /* obstacles21.plist */,
+				205D3AA11D9BF7B900DE3F5D /* obstacles22.plist */,
+				205D3AA31D9BF7D500DE3F5D /* obstacles23.plist */,
+				205D3AA51D9BF7DC00DE3F5D /* obstacles24.plist */,
+				205D3AA71D9BF7E300DE3F5D /* obstacles25.plist */,
+				205D3AA91D9BF7EB00DE3F5D /* obstacles26.plist */,
+				205D3AAB1D9BF7F300DE3F5D /* obstacles27.plist */,
+				205D3AAD1D9BF7FC00DE3F5D /* obstacles28.plist */,
+				205D3AAF1D9BF80400DE3F5D /* obstacles29.plist */,
+				205D3AB11D9BF80D00DE3F5D /* obstacles30.plist */,
+				205D3ABF1D9C048700DE3F5D /* operators2.plist */,
+				205D3AC01D9C048700DE3F5D /* operators3.plist */,
+				205D3AC11D9C048700DE3F5D /* operators4.plist */,
+				205D3AC21D9C048700DE3F5D /* operators5.plist */,
+				205D3AC31D9C048700DE3F5D /* operators6.plist */,
+				205D3AC41D9C048700DE3F5D /* operators7.plist */,
+				205D3AC51D9C048700DE3F5D /* operators8.plist */,
+				205D3AC61D9C048700DE3F5D /* operators9.plist */,
+				205D3AC71D9C048700DE3F5D /* operators10.plist */,
+				205D3AC81D9C048700DE3F5D /* operators11.plist */,
+				205D3AC91D9C048700DE3F5D /* operators12.plist */,
+				205D3ACA1D9C048700DE3F5D /* operators13.plist */,
+				205D3ACB1D9C048700DE3F5D /* operators14.plist */,
+				205D3ACC1D9C048700DE3F5D /* operators15.plist */,
+				205D3ACD1D9C048700DE3F5D /* operators16.plist */,
+				205D3ACE1D9C048700DE3F5D /* operators17.plist */,
+				205D3ACF1D9C048700DE3F5D /* operators18.plist */,
+				205D3AD01D9C048700DE3F5D /* operators19.plist */,
+				205D3AD11D9C048700DE3F5D /* operators20.plist */,
+				205D3AD21D9C048700DE3F5D /* operators21.plist */,
+				205D3AD31D9C048700DE3F5D /* operators22.plist */,
+				205D3AD41D9C048700DE3F5D /* operators23.plist */,
+				205D3AD51D9C048700DE3F5D /* operators24.plist */,
+				205D3AD61D9C048700DE3F5D /* operators25.plist */,
+				205D3AD71D9C048700DE3F5D /* operators27.plist */,
+				205D3AD81D9C048700DE3F5D /* operators28.plist */,
+				205D3AD91D9C048700DE3F5D /* operators29.plist */,
+				205D3ADA1D9C048700DE3F5D /* operators30.plist */,
+				205D3ABD1D9C006300DE3F5D /* operators1.plist */,
 			);
 			name = levels1to30;
 			sourceTree = "<group>";
@@ -396,58 +531,103 @@
 			buildActionMask = 2147483647;
 			files = (
 				209612E41D9884920005DA29 /* srm_20.mp3 in Resources */,
-				2009D04D1D9530C9004984ED /* operators7.plist in Resources */,
 				201E3CDB1D909E77006C18C6 /* 0015_game_event_02_victory.wav in Resources */,
-				2009D0391D951773004984ED /* operators2.plist in Resources */,
+				205D3AE91D9C048700DE3F5D /* operators16.plist in Resources */,
+				205D3AE81D9C048700DE3F5D /* operators15.plist in Resources */,
 				204663E11D795A4C0019B96A /* LaunchScreen.storyboard in Resources */,
-				204FBFF81D9410D000172C45 /* obstacles1.plist in Resources */,
-				2009D0471D952EDA004984ED /* obstacles6.plist in Resources */,
-				2009D03D1D952843004984ED /* operators3.plist in Resources */,
+				205D3AED1D9C048700DE3F5D /* operators20.plist in Resources */,
+				204FBFF81D9410D000172C45 /* obstacles2.plist in Resources */,
+				2009D0471D952EDA004984ED /* obstacles7.plist in Resources */,
+				205D3A9C1D9BF79700DE3F5D /* obstacles19.plist in Resources */,
 				202EE1811D96AC2D007E0AEF /* srm_14.mp3 in Resources */,
 				202EE1741D96AC2D007E0AEF /* srm_1.mp3 in Resources */,
-				2009D0531D96769B004984ED /* operators1.plist in Resources */,
+				205D3A981D9BF76500DE3F5D /* obstacles11.plist in Resources */,
+				205D3AF41D9C048700DE3F5D /* operators28.plist in Resources */,
+				205D3AAC1D9BF7F300DE3F5D /* obstacles27.plist in Resources */,
+				205D3ADF1D9C048700DE3F5D /* operators6.plist in Resources */,
+				205D3A941D9BF74B00DE3F5D /* obstacles9.plist in Resources */,
+				205D3AEC1D9C048700DE3F5D /* operators19.plist in Resources */,
+				205D3A9E1D9BF7A200DE3F5D /* obstacles20.plist in Resources */,
+				205D3AF21D9C048700DE3F5D /* operators25.plist in Resources */,
+				205D3A881D9BF6EF00DE3F5D /* obstacles13.plist in Resources */,
+				205D3A961D9BF75600DE3F5D /* obstacles10.plist in Resources */,
 				202EE1801D96AC2D007E0AEF /* srm_13.mp3 in Resources */,
+				205D3AEA1D9C048700DE3F5D /* operators17.plist in Resources */,
 				209612E31D9884920005DA29 /* srm_19.mp3 in Resources */,
-				2009D0401D952B36004984ED /* obstacles4.plist in Resources */,
+				2009D0401D952B36004984ED /* obstacles5.plist in Resources */,
 				2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */,
-				2009D0411D952B36004984ED /* operators4.plist in Resources */,
+				205D3A8C1D9BF70500DE3F5D /* obstacles15.plist in Resources */,
 				208FB0201D8D958E00180EAE /* BadExplosionParticle.sks in Resources */,
-				2009D0461D952EDA004984ED /* obstacles5.plist in Resources */,
-				2009D04C1D9530C9004984ED /* obstacles7.plist in Resources */,
-				2009D0481D952EDA004984ED /* operators5.plist in Resources */,
+				2009D0461D952EDA004984ED /* obstacles6.plist in Resources */,
+				205D3AE01D9C048700DE3F5D /* operators7.plist in Resources */,
+				205D3AE51D9C048700DE3F5D /* operators12.plist in Resources */,
+				205D3A9A1D9BF77B00DE3F5D /* obstacles12.plist in Resources */,
+				2009D04C1D9530C9004984ED /* obstacles8.plist in Resources */,
+				205D3A841D9BDB1600DE3F5D /* obstacles1.plist in Resources */,
 				202EE17F1D96AC2D007E0AEF /* srm_12.mp3 in Resources */,
+				205D3AA01D9BF7AF00DE3F5D /* obstacles21.plist in Resources */,
 				202EE1771D96AC2D007E0AEF /* srm_4.mp3 in Resources */,
 				204663DE1D795A4C0019B96A /* Assets.xcassets in Resources */,
 				2009D0511D95EB80004984ED /* electricshock.wav in Resources */,
 				20DAAE111D9741B9005EC7EE /* srm_16.mp3 in Resources */,
 				201E3CDE1D909FAD006C18C6 /* 136_full_efficiency_0159.mp3 in Resources */,
+				205D3AF51D9C048700DE3F5D /* operators29.plist in Resources */,
+				205D3A901D9BF71C00DE3F5D /* obstacles17.plist in Resources */,
+				205D3AE21D9C048700DE3F5D /* operators9.plist in Resources */,
 				202EE1761D96AC2D007E0AEF /* srm_3.mp3 in Resources */,
 				202EE17D1D96AC2D007E0AEF /* srm_10.mp3 in Resources */,
+				205D3AE61D9C048700DE3F5D /* operators13.plist in Resources */,
+				205D3ADD1D9C048700DE3F5D /* operators4.plist in Resources */,
+				205D3AEF1D9C048700DE3F5D /* operators22.plist in Resources */,
+				205D3AA41D9BF7D500DE3F5D /* obstacles23.plist in Resources */,
+				205D3AF01D9C048700DE3F5D /* operators23.plist in Resources */,
 				2097BFA31D7E3C3900E59D12 /* MenuScene.sks in Resources */,
 				202EE17E1D96AC2D007E0AEF /* srm_11.mp3 in Resources */,
+				205D3AA61D9BF7DC00DE3F5D /* obstacles24.plist in Resources */,
+				205D3AA21D9BF7B900DE3F5D /* obstacles22.plist in Resources */,
+				205D3AAE1D9BF7FC00DE3F5D /* obstacles28.plist in Resources */,
 				20AEB33D1D8E41B500FC40D8 /* robotBlip.wav in Resources */,
+				205D3A8E1D9BF70F00DE3F5D /* obstacles16.plist in Resources */,
+				205D3AB01D9BF80400DE3F5D /* obstacles29.plist in Resources */,
 				209612E61D9884920005DA29 /* srm_22.mp3 in Resources */,
-				2009D0381D951773004984ED /* obstacles2.plist in Resources */,
+				205D3AEB1D9C048700DE3F5D /* operators18.plist in Resources */,
+				2009D0381D951773004984ED /* obstacles3.plist in Resources */,
 				208FB01D1D8D921C00180EAE /* SquareRootParticle.sks in Resources */,
+				205D3A8A1D9BF6FC00DE3F5D /* obstacles14.plist in Resources */,
 				209612E11D9884920005DA29 /* srm_17.mp3 in Resources */,
 				202EE1781D96AC2D007E0AEF /* srm_5.mp3 in Resources */,
+				205D3ADE1D9C048700DE3F5D /* operators5.plist in Resources */,
+				205D3AE41D9C048700DE3F5D /* operators11.plist in Resources */,
 				20DAAE101D9741B9005EC7EE /* srm_15.mp3 in Resources */,
+				205D3ADB1D9C048700DE3F5D /* operators2.plist in Resources */,
 				209612E51D9884920005DA29 /* srm_21.mp3 in Resources */,
 				20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */,
 				202EE1751D96AC2D007E0AEF /* srm_2.mp3 in Resources */,
-				2009D0491D952EDA004984ED /* operators6.plist in Resources */,
+				205D3AF61D9C048700DE3F5D /* operators30.plist in Resources */,
+				205D3AE31D9C048700DE3F5D /* operators10.plist in Resources */,
 				204663DC1D795A4C0019B96A /* Main.storyboard in Resources */,
+				205D3AE11D9C048700DE3F5D /* operators8.plist in Resources */,
+				205D3A921D9BF72500DE3F5D /* obstacles18.plist in Resources */,
+				205D3AA81D9BF7E300DE3F5D /* obstacles25.plist in Resources */,
 				208FB01E1D8D921C00180EAE /* spark.png in Resources */,
+				205D3AF11D9C048700DE3F5D /* operators24.plist in Resources */,
+				205D3AF31D9C048700DE3F5D /* operators27.plist in Resources */,
 				202EE17C1D96AC2D007E0AEF /* srm_9.mp3 in Resources */,
+				205D3AE71D9C048700DE3F5D /* operators14.plist in Resources */,
+				205D3ABE1D9C006300DE3F5D /* operators1.plist in Resources */,
 				209612E21D9884920005DA29 /* srm_18.mp3 in Resources */,
 				202EE1791D96AC2D007E0AEF /* srm_6.mp3 in Resources */,
+				205D3ADC1D9C048700DE3F5D /* operators3.plist in Resources */,
 				20CB3AEA1D902C870005C590 /* knock.wav in Resources */,
 				2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */,
 				20A7CC501D8AE68E00A06482 /* sms-alert-1-daniel_simon.wav in Resources */,
+				205D3AAA1D9BF7EB00DE3F5D /* obstacles26.plist in Resources */,
 				2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */,
+				205D3AEE1D9C048700DE3F5D /* operators21.plist in Resources */,
+				205D3AB21D9BF80D00DE3F5D /* obstacles30.plist in Resources */,
 				201E09531D8E685B0088B86E /* SettingsScene.sks in Resources */,
 				202EE17B1D96AC2D007E0AEF /* srm_8.mp3 in Resources */,
-				2009D03C1D952843004984ED /* obstacles3.plist in Resources */,
+				2009D03C1D952843004984ED /* obstacles4.plist in Resources */,
 				201E3CDC1D909E77006C18C6 /* 0015_game_event_03_achieve.wav in Resources */,
 				202EE17A1D96AC2D007E0AEF /* srm_7.mp3 in Resources */,
 			);

@@ -69,6 +69,15 @@ open class SKTAudio {
         }
     }
     
+    open func setLowBackgroundMusicVolume(){
+        backgroundMusicPlayer!.volume = 0.05
+    }
+    
+    open func setHighBackgroundMusicVolume(){
+        backgroundMusicPlayer!.volume = 0.8
+    }
+    
+    
     open func resumeBackgroundMusic() {
         if let player = backgroundMusicPlayer {
             if !player.isPlaying {

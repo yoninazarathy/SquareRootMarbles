@@ -16,6 +16,7 @@ class IntroScene: GeneralScene {
         //QQQQ problem if clicked before - need to kill timer
         timer = Timer.scheduledTimer(timeInterval: timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
         playBackgroundMusic()
+        setHighBackgroundMusicVolume()
     }
     
     func timerExpired(){
@@ -26,7 +27,7 @@ class IntroScene: GeneralScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         timer!.invalidate()
-        stopBackgroundMusic()
+        setLowBackgroundMusicVolume()
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     

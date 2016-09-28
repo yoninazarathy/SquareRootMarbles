@@ -18,7 +18,7 @@ class LifesNode: SKSpriteNode{
     
     var coverMask: SKShapeNode! = nil
     
-    let diameter = 25.0
+    var diameter = 25.0
     
     var moveLifeInProgress = false
     
@@ -85,7 +85,8 @@ class LifesNode: SKSpriteNode{
     }
     
 
-    init(position: CGPoint){
+    init(position: CGPoint, diameter: Double = 25.0 ){
+        self.diameter = diameter
         //QQQQ max number of lifes
         self.lifeSprites = Array<SKSpriteNode!>(repeating: nil, count: 10)
         for i in 0..<lifeSprites.count{
@@ -94,7 +95,7 @@ class LifesNode: SKSpriteNode{
             lifeSprites[i]?.zPosition = 100 //QQQQ use constants
         }
         //QQQQ this whole thing is a bit wrong...
-        super.init(texture: SKTexture(imageNamed: "popup"),color: SKColor.black, size: CGSize(width: 5*diameter, height: 2.0*diameter))
+        super.init(texture: SKTexture(imageNamed: "popup"),color: SKColor.clear, size: CGSize(width: 5*diameter, height: 2.0*diameter))
         self.colorBlendFactor = 1.0
         self.position = position
         self.anchorPoint = CGPoint(x:0, y:0)

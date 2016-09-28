@@ -8,12 +8,6 @@
 
 import SpriteKit
 
-class LevelIconNode: SKShapeNode{
-    
-}
-
-let iconSize = 77.0
-let levelLabelSize = 50
 
 class MenuScene: GeneralScene {
         
@@ -25,6 +19,8 @@ class MenuScene: GeneralScene {
     
     
     override func didMove(to view: SKView) {
+        setLowBackgroundMusicVolume()
+        
         self.backgroundColor = SKColor.black
         
         sceneCam = SKCameraNode() //initialize your camera
@@ -33,16 +29,21 @@ class MenuScene: GeneralScene {
         addChild(sceneCam) //add camera to scene
         
         //QQQQ synch this code with the code in GameLevelScene
-        let buttonSize = 45.0
-        let buttonSpacing = 15.0
-        let auidoXOffset = 0 - buttonSpacing - buttonSize
+        let buttonSize = 80.0
+        let buttonSpacing = 20.0
+        
+        let menuButtonSize = 45.0
+        let menuButtonSpacing = 15.0
+        
+        let margin = (screenWidth - 3*buttonSize - 2*buttonSpacing)/2
+        let auidoXOffset = 0 - menuButtonSpacing - menuButtonSize
         let helpXOffset = 0
         let settingsXOffset = -1*(auidoXOffset)
      
-        let menuWidth = 3*buttonSize+4*buttonSpacing
-        let menuHeight = buttonSize + 2*buttonSpacing
+        let menuWidth = 3*menuButtonSize+4*menuButtonSpacing
+        let menuHeight = menuButtonSize + 2*menuButtonSpacing
         
-        var currentY = Double(self.size.height) - 2*buttonSpacing - buttonSize/2
+        var currentY = Double(self.size.height) - 2*menuButtonSpacing - menuButtonSize/2
         
         let menuNode = SKSpriteNode(imageNamed: "popup")
         //menuNode.colorBlendFactor = 0.8
@@ -61,7 +62,7 @@ class MenuScene: GeneralScene {
 
         audioButtonNode.isUserInteractionEnabled = true
         audioButtonNode.name = "audioButton"
-        audioButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        audioButtonNode.size = CGSize(width:menuButtonSize, height: menuButtonSize)
         audioButtonNode.position = CGPoint(x:auidoXOffset, y:0)
 
         //QQQ Not sure need to set this z position
@@ -71,7 +72,7 @@ class MenuScene: GeneralScene {
         let helpButtonNode = HelpButtonNode(imageNamed: "help")
         helpButtonNode.isUserInteractionEnabled = true
         helpButtonNode.name = "helpButton"
-        helpButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        helpButtonNode.size = CGSize(width:menuButtonSize, height: menuButtonSize)
         helpButtonNode.position = CGPoint(x:helpXOffset, y:0)
         helpButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         menuNode.addChild(helpButtonNode)
@@ -79,46 +80,43 @@ class MenuScene: GeneralScene {
         let settingsButtonNode = SettingsButtonNode(imageNamed: "settings")
         settingsButtonNode.isUserInteractionEnabled = true
         settingsButtonNode.name = "resetScoresButton"
-        settingsButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
+        settingsButtonNode.size = CGSize(width:menuButtonSize, height: menuButtonSize)
         settingsButtonNode.position = CGPoint(x:settingsXOffset, y:0)
         settingsButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         menuNode.addChild(settingsButtonNode)
 
-        currentY = currentY - buttonSize/2 - 2 * buttonSpacing - 20
+        currentY = currentY - menuButtonSize/2 - 2 * menuButtonSpacing - 20
         
-        messageLabelNode = MessageNode(position: CGPoint(x: Double(self.size.width/2), y: currentY))
+        messageLabelNode = MessageNode(position: CGPoint(x: screenCenterPointX , y: currentY))
+      //  messageLabelNode.position = CGPoint(x: screenCenterPointX - Double(messageLabelNode.size.width/2), y: currentY) //QQQQ /funky
+        messageLabelNode.label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         messageLabelNode.displayMessage("Square Root Marbles")
         self.addChild(messageLabelNode)
-
-        let xLabelFix = 8.0 //QQQQ note sure why we need this
         
         selectionNodes.append(nil)
         for i in stride(from: 1, to: numLevels, by: 3) {
             let y = currentY-60-40*(Double(i)-1)
             
-            var x = Double(screenWidth)/5
+            var x = margin
             var lev = i
-            var levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
-            //var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev-1).bestScoreString != "" || allowAllLevels)
-            var levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
+            var numMarbles = gameAppDelegate!.getGameLevelModel(lev).numMarbles
+            var levelOpen = (numMarbles > 0 || allowAllLevels)
             var levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.black
-            levelNumberNode.fontSize = 55
+            levelNumberNode.fontSize = 50
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
-            levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
+            levelNumberNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            levelNumberNode.position = CGPoint(x: x + buttonSize/2, y: y)
             self.addChild(levelNumberNode)
-            var levelScoreNode = SKLabelNode(text: levelScore)
-            levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.black
-            levelScoreNode.fontSize = 18
-            levelScoreNode.fontName = "AmericanTypewriter-Bold"
-            levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
-            self.addChild(levelScoreNode)
+            var lifesNode = LifesNode(position: CGPoint(x: x, y: y-32), diameter: 12.5)
+            lifesNode.numLifes = numMarbles
+            lifesNode.refreshDisplay()
+            self.addChild(lifesNode)
             var shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
             shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
@@ -127,56 +125,52 @@ class MenuScene: GeneralScene {
             //QQQQ maybe be "buggy" if somehow levels open are not consecutive??? check/think
             
             
-            x = Double(screenWidth)/2
+            x = x + buttonSize + buttonSpacing
             lev = lev + 1
-            levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
+            numMarbles = gameAppDelegate!.getGameLevelModel(lev).numMarbles
+            levelOpen = (numMarbles > 0 || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.black
-            levelNumberNode.fontSize = 55
+            levelNumberNode.fontSize = 50
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
-            levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
+            levelNumberNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            levelNumberNode.position = CGPoint(x: x + buttonSize/2, y: y)
             self.addChild(levelNumberNode)
-            levelScoreNode = SKLabelNode(text: levelScore)
-            levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.black
-            levelScoreNode.fontSize = 18
-            levelScoreNode.fontName = "AmericanTypewriter-Bold"
-            levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
-            self.addChild(levelScoreNode)
+            lifesNode = LifesNode(position: CGPoint(x: x, y: y-32), diameter: 12.5)
+            lifesNode.numLifes = numMarbles
+            lifesNode.refreshDisplay()
+            self.addChild(lifesNode)
             shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
             shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
                 selectionNodes.append(shapeNode)
             }
             
-            x = (4*Double(screenWidth))/5
+            x = x + buttonSize + buttonSpacing
             lev = lev + 1
-            levelScore = "\(gameAppDelegate!.getGameLevelModel(lev).numMarbles)"
-            levelOpen = (lev == 1  || gameAppDelegate!.getGameLevelModel(lev).numMarbles > 0 || allowAllLevels)
+            numMarbles = gameAppDelegate!.getGameLevelModel(lev).numMarbles
+            levelOpen = (numMarbles > 0 || allowAllLevels)
             levelNumberNode = SKLabelNode(text: "\(lev)")
             levelNumberNode.zPosition = 5
             levelNumberNode.fontColor = SKColor.black
-            levelNumberNode.fontSize = 55
+            levelNumberNode.fontSize = 50
             levelNumberNode.fontName = "AmericanTypewriter-Bold"
-            levelNumberNode.position = CGPoint(x: x+xLabelFix, y: y)
-            levelScoreNode = SKLabelNode(text: levelScore)
-            levelScoreNode.zPosition = 5
-            levelScoreNode.fontColor = SKColor.black
-            levelScoreNode.fontSize = 18
-            levelScoreNode.fontName = "AmericanTypewriter-Bold"
-            levelScoreNode.position = CGPoint(x: x+xLabelFix, y: y-25)
-            self.addChild(levelScoreNode)
+            levelNumberNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            levelNumberNode.position = CGPoint(x: x + buttonSize/2, y: y)
             self.addChild(levelNumberNode)
+            lifesNode = LifesNode(position: CGPoint(x: x, y: y-32), diameter: 12.5)
+            lifesNode.numLifes = numMarbles
+            lifesNode.refreshDisplay()
+            self.addChild(lifesNode)
             shapeNode = SKShapeNode()
-            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x-30, y:y-30, width: iconSize, height: iconSize),cornerRadius: 8).cgPath
+            shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
-            shapeNode.fillColor = (levelOpen ? SKColor.lightGray : SKColor.darkGray)
+            shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
             shapeNode.strokeColor = SKColor.white
             self.addChild(shapeNode)
             if levelOpen{
@@ -195,7 +189,6 @@ class MenuScene: GeneralScene {
         for i in 1..<selectionNodes.count{
             if let node = selectionNodes[i] {
                 if node.contains(touch.location(in: self)){
-                    gameAppDelegate!.setNumberOfMarblesX(3) //QQQQ read from level start
                     gameAppDelegate!.setLevel(i)
                     gameAppDelegate!.changeView(AppState.gameActionPlaying)
                     return
@@ -258,9 +251,11 @@ class MenuScene: GeneralScene {
             if (scene as! MenuScene).gameAppDelegate!.isMuted(){
                 self.texture = SKTexture(imageNamed: "audio")
                 (scene as! MenuScene).messageLabelNode.displayFadingMessage("Audio Off", duration: 2.0)
+                (scene as! MenuScene).stopBackgroundMusic()
             }else{
                 self.texture = SKTexture(imageNamed: "audioOff")
                 (scene as! MenuScene).messageLabelNode.displayFadingMessage("Audio On", duration: 2.0)
+                (scene as! MenuScene).playBackgroundMusic()
             }
         }
     }    

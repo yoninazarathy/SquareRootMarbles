@@ -63,7 +63,7 @@ class SettingsScene: GeneralScene {
             if let _ = defaults.string(forKey: "level\(lev)best") {
                     defaults.removeObject(forKey: "level\(lev)best")
             }
-            gameAppDelegate!.getGameLevelModel(lev).bestScoreString = ""
+            gameAppDelegate!.getGameLevelModel(lev).numMarbles = lev == 1 ? 3 : 0
         }
     }
     

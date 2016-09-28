@@ -22,30 +22,30 @@ class AfterLevelScene: GeneralScene {
         let model = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
                 
         var messageText: [String?] = Array(repeating: nil, count: 0)
-        if model.newScoreString == ""{
-            messageText.append("No success for level \(model.levelNumber)")
-            messageText.append("Level record: \(model.bestScoreString)")
-        }else{
-            messageText.append("Level \(model.levelNumber) in \(model.newScoreString)")
-
-            if model.newScoreCentiSecond < model.bestScoreCentiSecond{
-                if model.bestScoreString == ""{
-                    messageText.append("First completion time. Record Set.")
-                }else{
-                    messageText.append("New record!!! Previous was \(model.bestScoreString)")
-                }
-                
-                //update and store in UserDefaults
-                model.bestScoreString = model.newScoreString
-                let defaults = UserDefaults.standard
-                defaults.set(model.bestScoreString, forKey: "level\(model.levelNumber)best")
-                
-            }else{
-                messageText.append("Record for level \(model.bestScoreString)")
-                messageText.append("You didn't beat that time")
-            }
-            
-        }
+//        if model.newScoreString == ""{
+//            messageText.append("No success for level \(model.levelNumber)")
+//            messageText.append("Level record: \(model.bestScoreString)")
+//        }else{
+//            messageText.append("Level \(model.levelNumber) in \(model.newScoreString)")
+//
+//            if model.newScoreCentiSecond < model.bestScoreCentiSecond{
+//                if model.bestScoreString == ""{
+//                    messageText.append("First completion time. Record Set.")
+//                }else{
+//                    messageText.append("New record!!! Previous was \(model.bestScoreString)")
+//                }
+//                
+//                //update and store in UserDefaults
+//                model.bestScoreString = model.newScoreString
+//                let defaults = UserDefaults.standard
+//                defaults.set(model.bestScoreString, forKey: "level\(model.levelNumber)best")
+//                
+//            }else{
+//                messageText.append("Record for level \(model.bestScoreString)")
+//                messageText.append("You didn't beat that time")
+//            }
+//            
+//        }
 
         let x = screenWidth/2
         var y = 0.8*screenHeight

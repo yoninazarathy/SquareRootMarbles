@@ -24,14 +24,6 @@ protocol GameAppDelegate{
     //used when going (for e.g.) to instructions - need to know if to return to game or to menu...
     func getReturnAppState() -> AppState!
     func setReturnAppState(_ returnState: AppState)
-    
-    //QQQQ The "X" is because of some objective c stuff
-    func getNumberOfMarblesX() -> Int
-    func setNumberOfMarblesX(_ number: Int)
-    func incrementNumberOfMarbles(_ byNumber: Int)
-    func incrementNumberOfMarbles()
-    func decrementNumberOfMarbles(_ byNumber: Int)
-    func decrementNumberOfMarbles()
 }
 
 class GeneralScene: SKScene {
@@ -57,6 +49,14 @@ class GeneralScene: SKScene {
             SKTAudio.sharedInstance().playBackgroundMusic("136_full_efficiency_0159.mp3",volume: musicVolume ) // Start the music
             GeneralScene.playingMusic = true
         }
+    }
+    
+    func setLowBackgroundMusicVolume(){
+        SKTAudio.sharedInstance().setLowBackgroundMusicVolume()
+    }
+    
+    func setHighBackgroundMusicVolume(){
+        SKTAudio.sharedInstance().setHighBackgroundMusicVolume()
     }
     
     func stopBackgroundMusic(){
@@ -96,32 +96,6 @@ class GameViewController: UIViewController, GameAppDelegate {
     var currentlevel: Int?      = nil
     var muted: Bool             = false
     
-    var numberOfMarbles: Int    = 0
-    
-    func getNumberOfMarblesX() -> Int{
-        return numberOfMarbles
-    }
-    
-    func setNumberOfMarblesX(_ number: Int){
-        numberOfMarbles = number
-    }
-    
-    func incrementNumberOfMarbles(_ byNumber: Int){
-        numberOfMarbles += byNumber
-    }
-    
-    func incrementNumberOfMarbles(){
-        numberOfMarbles += 1
-    }
-    
-    func decrementNumberOfMarbles(_ byNumber: Int){
-        numberOfMarbles -= byNumber
-    }
-    
-    func decrementNumberOfMarbles(){
-        numberOfMarbles -= 1
-    }
-
     var gameLevelModels: [GameLevelModel?] = Array(repeating: nil, count: numLevels+1)
     
     var returnAppState: AppState! = nil

@@ -26,8 +26,10 @@ struct GameLevelZPositions{
     static let sinkZ = CGFloat(-5.0)
     static let playerZ = CGFloat(0.0)
     static let operatorZ = CGFloat(5.0)
-    static let popUpMenuZ = CGFloat(10.0)
-    static let popUpMenuButtonsZ = CGFloat(20.0)
+    static let dimPanelZ = CGFloat(250.0)
+    static let messageNodeZ = CGFloat(275.0)
+    static let popUpMenuZ = CGFloat(300.0)
+    static let popUpMenuButtonsZ = CGFloat(400.0)
 }
 
 class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
@@ -53,6 +55,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     var lifeRemaining: Double = Double(secondsBetweenLosses)
     
+    var dimPanel: SKSpriteNode!
     
     //////////////////
     // Game Control //
@@ -118,7 +121,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func resetLevel(){
         centiSecondsPlayed = 0
         finishingSteps = 0
-        lifesNode.setLifes(gameAppDelegate!.getNumberOfMarblesX())
+        let numLifes = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel()).numMarbles
+        print("Resetting level with \(numLifes) lifes")
+        lifesNode.setLifes(numLifes)
     }
     
     func playGame(){
@@ -147,10 +152,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             lastTimeLost = centiSecondsPlayed
             lifeRemaining = Double(secondsBetweenLosses)
             
-            gameAppDelegate!.decrementNumberOfMarbles()
             lifesNode.currentLife = 1.0
             lifesNode.decrementLifes()
-            if gameAppDelegate!.getNumberOfMarblesX() == 0{
+            if  lifesNode.numLifes == 0{
                 finalizeSceneWithFailure()
             }
         }
@@ -183,20 +187,24 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 1.0 //QQQQ have done this on other one too - fix...
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 
+        let newNumMarbles = lifesNode.numLifes
+        print("newNumMarbles: \(newNumMarbles)")
+  
+        let currentLevel = gameLevelModel!.levelNumber
+        if currentLevel < numLevels{
+            let nextLevel = gameAppDelegate!.getGameLevelModel(currentLevel + 1)
+            //open next level if it isn't open
+            if nextLevel.numMarbles < newNumMarbles {
+                nextLevel.numMarbles = newNumMarbles 
+                let defaults = UserDefaults.standard
+                defaults.set(String(nextLevel.numMarbles), forKey: "level\(currentLevel+1)marbles")
+            }
+        }
         
-        
-        //QQQQ Replace this spring stuff or improve it
-        //physicsWorld.speed = 1.0
-        //        sinkSpring = SKPhysicsJointSpring.jointWithBodyA(playerNode.physicsBody!, bodyB: sinkNode.physicsBody! ,anchorA: playerNode.anchorPoint, anchorB: sinkNode.position)
-//        sinkSpring.frequency = 1.0
-//        sinkSpring.damping  = 0.0
-//        self.physicsWorld.addJoint(sinkSpring)
-
-        gameLevelModel!.newScoreString = ""//QQQQ timeString //record score
-        
-        let newNumMarbles = lifesNode.numLifes - 1
         if newNumMarbles > gameLevelModel!.numMarbles{
             gameLevelModel!.numMarbles = newNumMarbles
+            let defaults = UserDefaults.standard
+            defaults.set(String(newNumMarbles), forKey: "level\(currentLevel)marbles")
         }
         
         Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(moveToNextLevelScene), userInfo: nil, repeats: false)
@@ -209,8 +217,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playerNode.addChild(badExplosionEmitterNode!)
         haultAction()
         physicsWorld.speed = 1.0 //undo what is done in haultAction (to allow some extra spinning)
-        gameLevelModel!.newScoreString = "" //indicate a failure in the level
-        gameLevelModel!.numMarbles = 0
+
         //QQQQ Get rid of NSTimer
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
@@ -218,12 +225,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func finalizeSceneWithAbort(){
         gameAppDelegate!.changeView(AppState.menuScene)
         haultAction()
-        stopBackgroundMusic()
+        //stopBackgroundMusic()
     }
 
     func moveToMenuScene(){
         gameAppDelegate!.changeView(AppState.menuScene)
-        stopBackgroundMusic()
+        //stopBackgroundMusic()
     }
  
     func moveToNextLevelScene(){
@@ -295,7 +302,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func createPlayerNode(){
-        playerNode = PlayerNode(initValue: gameAppDelegate!.getLevel())
+        playerNode = PlayerNode(initValue: initValueOfLevel(gameAppDelegate!.getLevel()))
         //playerNode.anchorPoint = CGPoint(x: 0.5, y:0.5) //QQQQ
         playerNode.position = gameLevelModel!.designInfo.startLocation.point()
         playerNode.zPosition = GameLevelZPositions.playerZ
@@ -308,7 +315,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playerNode.physicsBody?.angularDamping = 0.6
         playerNode.physicsBody?.linearDamping = 0.3
         //QQQQ not sure we need the background collision
-        playerNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Background | PhysicsCategory.BlockingOperator
+        playerNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Background
+            //| PhysicsCategory.BlockingOperator
         playerNode.physicsBody?.contactTestBitMask = PhysicsCategory.All
         self.addChild(playerNode)
     }
@@ -319,10 +327,18 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         self.addChild(lifesNode)
         
         messageLabelNode = MessageNode(position: CGPoint(x:20, y:625))//QQQQ position...
+        messageLabelNode.zPosition = GameLevelZPositions.messageNodeZ
         self.addChild(messageLabelNode)
     }
     
     override func didMove(to view: SKView) {
+        setHighBackgroundMusicVolume()
+        
+        dimPanel = SKSpriteNode(color: UIColor.black, size: self.size)
+        dimPanel.alpha = 0.75
+        dimPanel.zPosition = GameLevelZPositions.dimPanelZ
+        dimPanel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+
         
         let background = SKSpriteNode(imageNamed: "orangeBack")
         background.size = CGSize(width: gameHorzSize, height: gameVertSize)
@@ -454,9 +470,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 //                        self.runAction(SKAction.playSoundFileNamed("srm_\(diceRoll).mp3",waitForCompletion:false))
                         playRandomSRM()
                         
-                        //QQQQ Need MVC... this is happening twice
-                        gameAppDelegate!.incrementNumberOfMarbles()
-
                         self.lifeRemaining = Double(secondsBetweenLosses)
                         lifesNode.currentLife = 1.0
                         lifesNode.incrementLifes(playerNode.position)
@@ -501,9 +514,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playerNode.physicsBody!.applyImpulse(CGVector(dx: playerPos.x - operatorPos.x, dy: playerPos.y - operatorPos.y), at: CGPoint(x:0,y:0))
         
         lastTimeLost = centiSecondsPlayed //since decrementing life, reset counter
-        gameAppDelegate!.decrementNumberOfMarbles()
         lifesNode.decrementLifes()
-        if gameAppDelegate!.getNumberOfMarblesX() == 0{
+        if lifesNode.numLifes == 1{
             finalizeSceneWithFailure()
         }
     }
@@ -613,6 +625,13 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if sender.state == .ended {
             var touchLocation: CGPoint = sender.location(in: sender.view)
             touchLocation = self.convertPoint(fromView: touchLocation)
+            
+            if playing{
+                pauseGame()
+                setLowBackgroundMusicVolume()
+                self.addChild(dimPanel)
+            }
+            
             if editModeEnabled{
                 let squarePoint = squareOfPoint(Double(touchLocation.x), y: Double(touchLocation.y))
                 let setToKill = squarePoint.NeighbourSquares()
@@ -735,6 +754,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //only relevant for editMode
+        if !inEditMode{ return }
+        
         currentEditAction = CurrentEditAction.none
         currentDraggedOperator = nil
         drawObstacleStartPos = nil
@@ -742,15 +764,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         //QQQQ probably not handling multi-touch - but OK
     }
+ 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if playing{
-            pauseGame()
-        }
-        
+        //only relevant for editMode
         if !inEditMode{ return }
 
-        
         let touch = touches.first!
         let positionInScene = touch.location(in: self)
         let squareCoords = squareOfPoint(Double(positionInScene.x), y: Double(positionInScene.y))
@@ -808,6 +827,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     class PlayButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            (scene as! GameLevelScene).dimPanel.removeFromParent()
+            (scene as! GameLevelScene).setHighBackgroundMusicVolume()
             (scene as! GameLevelScene).playGame()
         }
     }
@@ -865,7 +886,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 var tempOperatorStringDict = Dictionary<String,String>()
                 for i in 0..<(scene as! GameLevelScene).gameLevelModel!.designInfo.numOperators{
                     let location = (scene as! GameLevelScene).gameLevelModel!.designInfo.operatorLocations[i]
-                    tempOperatorStringDict["\(i)"] = "(\(location?.values.sx),\(location?.values.sy))"
+                    tempOperatorStringDict["\(i)"] = "(\(location!.values.sx),\(location!.values.sy))"
                 }
                 
                 let outputOperatorDict = tempOperatorStringDict as NSDictionary
@@ -880,8 +901,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 var tempStartAndSinkStringDict = Dictionary<String,String>()
                 let sinkLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.sinkLocation
                 let startLocation = (scene as! GameLevelScene).gameLevelModel!.designInfo.startLocation
-                tempStartAndSinkStringDict["0"] = "(\(startLocation?.values.sx),\(startLocation?.values.sy))"     //currently "0" is start "1" is sink
-                tempStartAndSinkStringDict["1"] = "(\(sinkLocation?.values.sx),\(sinkLocation?.values.sy))"
+                tempStartAndSinkStringDict["0"] = "(\(startLocation!.values.sx),\(startLocation!.values.sy))"     //currently "0" is start "1" is sink
+                tempStartAndSinkStringDict["1"] = "(\(sinkLocation!.values.sx),\(sinkLocation!.values.sy))"
                 
                 let outputStartAndSinkDict = tempStartAndSinkStringDict as NSDictionary
                 let startAndSinkFilePath = NSHomeDirectory() + "/Library/startAndSink\((scene as! GameLevelScene).gameLevelModel!.levelNumber).plist"

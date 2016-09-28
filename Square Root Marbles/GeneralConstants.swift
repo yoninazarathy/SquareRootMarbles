@@ -11,7 +11,7 @@ import SpriteKit
 
 
 //Make true only for development purpuses
-let editModeEnabled = true
+let editModeEnabled = false
 let allowAllLevels = false //also for development
 let showFPSFlag = false
 let showNodCountFlag = false
