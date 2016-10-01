@@ -22,6 +22,10 @@ protocol OperatorAction {
     
     //return true if operate(value) will not return -1
     func isValid(_ value: Int) -> Bool
+    
+    //says if operator will be valid after doing the operation once
+    //assuming value can be operated on
+    func willBeValidAfterOp(_ value: Int) -> Bool
 }
 
 class SqrtNode: OperatorAction{
@@ -43,6 +47,11 @@ class SqrtNode: OperatorAction{
     func isValid(_ value: Int) -> Bool{
         return perectSquares.contains(value)
     }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return true //QQQ it doesn't matter for SqrtNode
+    }
+
 }
 
 class MinusOneNode: OperatorAction{
@@ -59,6 +68,10 @@ class MinusOneNode: OperatorAction{
         return value > 0
     }
 
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value > 1
+    }
+
 }
 
 class AddOneNode: OperatorAction{
@@ -73,6 +86,11 @@ class AddOneNode: OperatorAction{
     func isValid(_ value: Int) -> Bool{
         return value < 100
     }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value < 99
+    }
+
 }
 
 class Times2Node: OperatorAction{
@@ -88,6 +106,11 @@ class Times2Node: OperatorAction{
     func isValid(_ value: Int) -> Bool{
         return value < 51
     }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value < 26
+    }
+    
 }
 
 class Times3Node: OperatorAction{
@@ -101,6 +124,10 @@ class Times3Node: OperatorAction{
     func operationString() -> String{return Times3Node.operationString()}
     func isValid(_ value: Int) -> Bool{
         return value < 34
+    }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value < 12
     }
 }
 
@@ -116,6 +143,10 @@ class Times4Node: OperatorAction{
     func isValid(_ value: Int) -> Bool{
         return value < 26
     }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value < 7
+    }
 }
 
 class Times5Node: OperatorAction{
@@ -129,6 +160,10 @@ class Times5Node: OperatorAction{
     func operationString() -> String{return Times5Node.operationString()}
     func isValid(_ value: Int) -> Bool{
         return value < 21
+    }
+    
+    func willBeValidAfterOp(_ value: Int) -> Bool{
+        return value < 5
     }
 }
 
@@ -160,7 +195,10 @@ class OperatorNode: SKSpriteNode{
         color = SKColor.red
         colorBlendFactor = 1
         alpha = 1.0
-
+    }
+    
+    func setAsLastTimeValid(){
+        self.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator
     }
     
     override init(texture: SKTexture!,

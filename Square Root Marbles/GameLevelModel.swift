@@ -19,7 +19,6 @@ class GameLevelModel{
     let designInfo: GameLevelDesignInfo
     
     var numMarbles: Int = 0 //say that -1 means the level is open
-    var levelOpen: Bool = false
     
     init(level: Int){
         levelNumber = level
@@ -33,6 +32,5 @@ class GameLevelModel{
                 numMarbles = 10
             }
         }
-        
     }
 }

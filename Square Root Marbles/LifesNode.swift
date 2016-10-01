@@ -58,7 +58,10 @@ class LifesNode: SKSpriteNode{
     }
     
     func decrementLifes(){
-        numLifes = numLifes - 1        
+        if numLifes > 0{
+            numLifes = numLifes - 1
+        }
+        
         refreshDisplay()
     }
 

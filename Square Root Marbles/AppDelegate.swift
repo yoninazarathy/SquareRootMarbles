@@ -18,7 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //QQQQ bPlistManager.sharedInstance.startPlistManager()
-
+        
+        
+        GameAnalytics.configureBuild(buildStringForGA)
+        GameAnalytics.initialize(withGameKey: "1e75a275b87ca5a01120b4b550842b78", gameSecret: "6859815157d477b16031b3b91bb0d28e96b9bdc4")
+        
+        SKTAudio.sharedInstance().preLoadSounds()
         
         return true
     }
@@ -31,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        let defaults = UserDefaults.standard
+        defaults.synchronize()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -43,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        let defaults = UserDefaults.standard
+        defaults.synchronize()
     }
 
 

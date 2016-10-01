@@ -17,8 +17,6 @@ protocol GameAppDelegate{
     func getAppState() -> AppState
     func setLevel(_ newLevel: Int)
     func getLevel() -> Int
-    func toggleMute()
-    func isMuted() -> Bool
     func getGameLevelModel(_ level: Int) -> GameLevelModel
     
     //used when going (for e.g.) to instructions - need to know if to return to game or to menu...
@@ -30,22 +28,36 @@ class GeneralScene: SKScene {
     var gameAppDelegate: GameAppDelegate?
     
     static var playingMusic: Bool = false
+    static var audioOff: Bool = false
     
-//    var backgroundMusic: SKAudioNode! = nil
+    func initAudio(){
+        let defaults = UserDefaults.standard
+        GeneralScene.audioOff = defaults.bool(forKey: "audioOff")
+        defaults.set(GeneralScene.audioOff, forKey: "audioOff")
+    }
+    
+    func toggleAudio(){
+        if GeneralScene.audioOff{
+            GeneralScene.audioOff = false
+            playBackgroundMusic()
+        }else{
+            GeneralScene.audioOff = true
+            stopBackgroundMusic()
+        }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(GeneralScene.audioOff, forKey: "audioOff")
+        
+        //Log to Game Analytics
+        if GeneralScene.audioOff{
+            GameAnalytics.addDesignEvent(withEventId: "audioOff")
+        }else{
+            GameAnalytics.addDesignEvent(withEventId: "audioOn")
+        }
+    }
     
     func playBackgroundMusic() {
-//        if backgroundMusic != nil {
-//            backgroundMusic.removeFromParent()
-//        }
-//        
-//        let temp = SKAudioNode(fileNamed: "136_full_efficiency_0159.mp3")
-//        temp.autoplayLooped = true
-//        backgroundMusic = temp
-//        //backgroundMusic = SKAudioNode(fileNamed: "SpaceGame.caf")
-//        //backgroundMusic.autoplayLooped = true
-//        //addChild(backgroundMusic)
-//        addChild(backgroundMusic)
-        if !GeneralScene.playingMusic{
+        if !GeneralScene.playingMusic && !GeneralScene.audioOff{
             SKTAudio.sharedInstance().playBackgroundMusic("136_full_efficiency_0159.mp3",volume: musicVolume ) // Start the music
             GeneralScene.playingMusic = true
         }
@@ -60,33 +72,23 @@ class GeneralScene: SKScene {
     }
     
     func stopBackgroundMusic(){
-//        if let bm = backgroundMusic{
-//            bm.removeFromParent()
-//        }
         SKTAudio.sharedInstance().pauseBackgroundMusic() // Pause the music
         GeneralScene.playingMusic = false
     }
     
-    //    let numSRMVoices: UInt32 = 22
-    //    let musicVolume: Float = 0.6
-    //    let endGameVolume: Float = 0.5
-    //    let thumpTopVolume: Float = 0.6
-    //    let srmVoiceVolume: Float = 1.0
-    //    let operatorVolume: Float = 0.5
     
-    //QQQQ
+    func playButtonClick(){
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "buttonClick", volume: 0.7)
+    }
+    
+    func playTrashSound(){
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "trash", volume: 0.7)
+    }
     
     func playRandomSRM(){
         let diceRoll = arc4random_uniform(numSRMVoices) + 1
-        SKTAudio.sharedInstance().playSoundEffect("srm_\(diceRoll).mp3", volume: srmVoiceVolume)
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "srm_\(diceRoll).mp3", volume: srmVoiceVolume)
     }
-    
-    func playWallHit(_ impulse: Float){
-        let temp = 0.005*(impulse - 6) //make these global constants
-        let vol = temp < thumpTopVolume ? temp : thumpTopVolume
-        SKTAudio.sharedInstance().playSoundEffect("knock.wav", volume: vol)
-    }
-
 }
 
 
@@ -94,7 +96,6 @@ class GameViewController: UIViewController, GameAppDelegate {
 
     var appState:   AppState    = AppState.introScene
     var currentlevel: Int?      = nil
-    var muted: Bool             = false
     
     var gameLevelModels: [GameLevelModel?] = Array(repeating: nil, count: numLevels+1)
     
@@ -108,18 +109,6 @@ class GameViewController: UIViewController, GameAppDelegate {
         returnAppState = returnState
     }
     
-    func toggleMute(){
-        muted = !muted
-    }
-    
-    func unMute(){
-        muted = false
-    }
-    
-    func isMuted() -> Bool{
-        return muted
-    }
-    
     func getLevel() -> Int{
         return currentlevel!
     }
@@ -127,8 +116,6 @@ class GameViewController: UIViewController, GameAppDelegate {
     func getGameLevelModel(_ level: Int) -> GameLevelModel{
         return gameLevelModels[level]!
     }
-
- //   var currentGameScene: SKScene? = nil
     
     func setLevel(_ newLevel: Int){
         currentlevel = newLevel
@@ -153,11 +140,13 @@ class GameViewController: UIViewController, GameAppDelegate {
         let transitionFast = SKTransition.crossFade(withDuration: 0.3)
        // transition.pausesOutgoingScene = true
         
+        
         //QQQQ factor out common code here...
         switch appState{
             case AppState.introScene:
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = IntroScene(fileNamed:"IntroScene") {
+                    currentGameScene.initAudio()
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
@@ -199,6 +188,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
+                    skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
+                    //it was after using SKTransition...
+                    //I have sussupected SKAudioNode and NSTimer
+                    //QQQQ irrespective of this, need to remove NSTimer
+
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
             case AppState.afterLevelScene:
@@ -215,6 +209,10 @@ class GameViewController: UIViewController, GameAppDelegate {
                 /* Set the scale mode to scale to fit the window */
                 currentGameScene.scaleMode = .aspectFill
                 currentGameScene.gameAppDelegate = self
+                    skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
+                    //it was after using SKTransition...
+                    //I have sussupected SKAudioNode and NSTimer
+                    //QQQQ irrespective of this, need to remove NSTimer
                 skView.presentScene(currentGameScene, transition: transitionFast)
             }
         }

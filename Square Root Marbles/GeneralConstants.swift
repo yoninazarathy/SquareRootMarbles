@@ -13,9 +13,10 @@ import SpriteKit
 //Make true only for development purpuses
 let editModeEnabled = false
 let allowAllLevels = false //also for development
-let showFPSFlag = false
-let showNodCountFlag = false
+let showFPSFlag = true
+let showNodCountFlag = true
 
+let buildStringForGA = "Beta 0.5.0"
 
 ///////////////
 // Game Play //
@@ -37,13 +38,13 @@ let timeInAfterLevelScene = 10.0
 
 let secondsBetweenLosses = 10
 
-
 let numSRMVoices: UInt32 = 22
 let musicVolume: Float = 0.2
 let endGameVolume: Float = 0.5
-let thumpTopVolume: Float = 0.6
+let thumpTopVolume: Float = 0.9
 let srmVoiceVolume: Float = 1.0
 let operatorVolume: Float = 0.5
+let touchBadNodeVolume: Float = 1.0
 
 /////////////////
 // Level World //

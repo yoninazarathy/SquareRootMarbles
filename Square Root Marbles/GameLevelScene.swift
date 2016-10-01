@@ -57,6 +57,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     var dimPanel: SKSpriteNode!
     
+    var lastTimeWallHit: Double = -100.0
+    var currentTime: Double = 0.0
+    
     //////////////////
     // Game Control //
     //////////////////
@@ -74,7 +77,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func startAction(){
         //QQQQ give thought to memory leak with this closure (or not???)... the "weak story"
         //QQQQ note sure how exact this time is
-        run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.25), SKAction.run(){self.oneSecondWakeUp()}])),
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.1), SKAction.run(){self.oneSecondWakeUp()}])),
                                                    withKey: "timerAction")
         
         //QQQQ This is crazy - idea is to delay 100ms till start
@@ -86,9 +89,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                     //QQQQ not sure if this should be here or elsewhere
                     //QQQQ not sure these four lines of code do anything. Maybe remove (or modify)
                     let sceneBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-                    sceneBody.friction = 1000
+                    //sceneBody.friction = 1000
                     sceneBody.categoryBitMask = PhysicsCategory.Background
                     sceneBody.contactTestBitMask = PhysicsCategory.Player
+                    self.name = "sceneNode"
                     self.physicsBody = sceneBody
                     
                     motionManager.startDeviceMotionUpdates()
@@ -124,6 +128,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         let numLifes = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel()).numMarbles
         print("Resetting level with \(numLifes) lifes")
         lifesNode.setLifes(numLifes)
+        
+      //  [GameAnalytics addProgressionEventWithProgressionStatus:GAProgressionStatusStart progression01:@"world01" progression02:@"stage01" progression03:@"level01"];
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusStart, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(numLifes)", progression03: "")
     }
     
     func playGame(){
@@ -141,14 +148,14 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func oneSecondWakeUp(){ //QQQQ change name
-        centiSecondsPlayed = centiSecondsPlayed + 25
+        centiSecondsPlayed = centiSecondsPlayed + 10
         
-        lifeRemaining = lifeRemaining  - 0.25
+        lifeRemaining = lifeRemaining  - 0.1
         lifesNode.currentLife = Double(lifeRemaining)/Double(secondsBetweenLosses)
         lifesNode.refreshDisplay()
         
         
-        if lifeRemaining == 0{
+        if lifeRemaining < 0{
             lastTimeLost = centiSecondsPlayed
             lifeRemaining = Double(secondsBetweenLosses)
             
@@ -182,14 +189,16 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playing = false
         finishingSteps = 200//QQQQ
         sinkNode.removeAllActions()
-        self.run(SKAction.playSoundFileNamed("0015_game_event_03_achieve.wav",waitForCompletion:false))
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "gotLevel", volume: 1.0) //QQQQ volume
+
         haultAction()
         physicsWorld.speed = 1.0 //QQQQ have done this on other one too - fix...
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 
         let newNumMarbles = lifesNode.numLifes
-        print("newNumMarbles: \(newNumMarbles)")
-  
+        
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "")
+        
         let currentLevel = gameLevelModel!.levelNumber
         if currentLevel < numLevels{
             let nextLevel = gameAppDelegate!.getGameLevelModel(currentLevel + 1)
@@ -212,12 +221,19 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func finalizeSceneWithFailure(){
         playing = false
-        self.run(SKAction.playSoundFileNamed("0015_game_event_02_victory.wav",waitForCompletion:false))
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "die", volume: 1.0) //QQQQ volume
         let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
+        playerNode.color = SKColor.red
+        let colorAction = SKAction.colorize(with: SKColor.red, colorBlendFactor: 0.8, duration: 0.7)
+        playerNode.run(colorAction)
+        playerNode.labelNode.fontColor = SKColor.red
         playerNode.addChild(badExplosionEmitterNode!)
         haultAction()
         physicsWorld.speed = 1.0 //undo what is done in haultAction (to allow some extra spinning)
 
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "", progression03: "")
+
+        
         //QQQQ Get rid of NSTimer
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(moveToAfterLevelScene), userInfo: nil, repeats: false)
     }
@@ -289,6 +305,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         for i in 0..<gameLevelModel!.designInfo.numOperators{
             operatorNodes[i] = OperatorNode(operatorActionString: gameLevelModel!.designInfo.operatorTypes[i])
             let node = operatorNodes[i]
+            node?.name = "operatorNode"
             node?.position = gameLevelModel!.designInfo.operatorLocations[i]!.point()
             node?.zPosition = GameLevelZPositions.operatorZ
             node?.physicsBody = SKPhysicsBody(circleOfRadius: (node?.size.width)!/2)
@@ -316,7 +333,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playerNode.physicsBody?.linearDamping = 0.3
         //QQQQ not sure we need the background collision
         playerNode.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Background
-            //| PhysicsCategory.BlockingOperator
+            | PhysicsCategory.BlockingOperator
         playerNode.physicsBody?.contactTestBitMask = PhysicsCategory.All
         self.addChild(playerNode)
     }
@@ -335,7 +352,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         setHighBackgroundMusicVolume()
         
         dimPanel = SKSpriteNode(color: UIColor.black, size: self.size)
-        dimPanel.alpha = 0.75
+        dimPanel.alpha = 0.82
         dimPanel.zPosition = GameLevelZPositions.dimPanelZ
         dimPanel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
 
@@ -387,6 +404,13 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             let node = operatorNodes[i]
             if node!.operatorAction!.isValid(playerNode.value){
                 node?.setAsValid()
+                
+                //this is for making nodes that will turn invalid (red) blocking
+                //QQQQ the problem with this "solution" is that can't pass through such nodes
+//                if node!.operatorAction!.willBeValidAfterOp(playerNode.value) == false{
+//                    node!.setAsLastTimeValid()
+//                }
+                
             }else{
                 node?.setAsInvalid()
             }
@@ -402,6 +426,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if !playing {return} //this is mostly a safety guard QQQQ
         
         var actionNode: SKNode?
+        //print("A: \(contact.bodyA.node!.name!) B: \(contact.bodyB.node!.name!)")
         if contact.bodyA.node!.name! == "playerNode"{
             actionNode = contact.bodyB.node
         } else{
@@ -410,12 +435,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         switch(actionNode!.name!){
         case "obstacleNode":
-            if contact.collisionImpulse > 6{//QQQQ make this 2 a constant
-                //QQQQ handle muting globally
-                if gameAppDelegate?.isMuted() == false{ //QQQQ throw all these checks up to baseClass
-                    //playWallHit(Float(contact.collisionImpulse))
-                   self.run(SKAction.playSoundFileNamed("knock.wav",waitForCompletion:false))
-                }
+            if lastTimeWallHit + 0.05 < currentTime{
+                playWallHit(Float(contact.collisionImpulse))
+                lastTimeWallHit = currentTime
             }
         case "sinkNode":
             if playerNode.value == sinkNode.targetValue{
@@ -423,6 +445,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             }else{
                 hitBadNode(sinkNode)
             }
+        case "sceneNode":
+            print("hit scene (error???)")
         default:
             let op = actionNode as! OperatorNode
             if op.active{
@@ -505,17 +529,25 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         }
     }
 
-    func hitBadNode(_ badNode: SKSpriteNode){
-        
-        self.run(SKAction.playSoundFileNamed("electricshock.wav",waitForCompletion:false))
-        
+    func repelFromSprite(sprite: SKSpriteNode, magnitude: CGFloat){
         let playerPos = playerNode.position
-        let operatorPos = badNode.position
-        playerNode.physicsBody!.applyImpulse(CGVector(dx: playerPos.x - operatorPos.x, dy: playerPos.y - operatorPos.y), at: CGPoint(x:0,y:0))
+        let operatorPos = sprite.position
+        playerNode.physicsBody!.applyImpulse(
+            CGVector(dx: magnitude*(playerPos.x - operatorPos.x), dy: magnitude*(playerPos.y - operatorPos.y)),
+            at: CGPoint(x:0,y:0))
+    }
+    
+    func hitBadNode(_ badNode: SKSpriteNode){
+
+        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "touchBadNode", volume: touchBadNodeVolume)
+
+        repelFromSprite(sprite: badNode, magnitude: 0.6)
+
         
         lastTimeLost = centiSecondsPlayed //since decrementing life, reset counter
         lifesNode.decrementLifes()
-        if lifesNode.numLifes == 1{
+        lifeRemaining  = Double(secondsBetweenLosses)
+        if lifesNode.numLifes == 0{
             finalizeSceneWithFailure()
         }
     }
@@ -576,13 +608,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         stopButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         popUpNode!.addChild(stopButtonNode)
 
-        let audioButtonNode: AudioButtonNode
-        if gameAppDelegate!.isMuted(){
-            audioButtonNode = AudioButtonNode(imageNamed: "audio")
-        }else{
-            audioButtonNode = AudioButtonNode(imageNamed: "audioOff")
-        }
-        
+        let audioButtonNode = AudioButtonNode(imageNamed: "audio")
         audioButtonNode.isUserInteractionEnabled = true
         audioButtonNode.name = "audioButton"
         audioButtonNode.size = CGSize(width:buttonSize, height: buttonSize)
@@ -799,6 +825,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        self.currentTime = currentTime
+        
         /* Called before each frame is rendered */
         if finishingSteps > 0{
             finishingSteps = finishingSteps - 1
@@ -807,10 +835,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             playerNode.physicsBody!.applyForce(CGVector(dx: -2.5*(playerPos.x - destPos.x), dy: -2.5*(playerPos.y - destPos.y)))
             playerNode.physicsBody!.linearDamping = 0.2
             playerNode.physicsBody!.applyTorque(-0.01*playerNode.zRotation)
-            
-//            if abs(playerNode.physicsBody!.angularVelocity) < 20{
-//                playerNode.physicsBody!.applyTorque(0.05)
-//            }
         }
     }
     
@@ -821,12 +845,14 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     class HelpButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            (scene as! GameLevelScene).playButtonClick()
             (scene as! GameLevelScene).gameAppDelegate!.setReturnAppState(AppState.gameActionPaused)
             (scene as! GameLevelScene).gameAppDelegate!.changeView(AppState.instructionScene)
         }
     }
     class PlayButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            (scene as! GameLevelScene).playButtonClick()
             (scene as! GameLevelScene).dimPanel.removeFromParent()
             (scene as! GameLevelScene).setHighBackgroundMusicVolume()
             (scene as! GameLevelScene).playGame()
@@ -834,21 +860,21 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     class StopButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            (scene as! GameLevelScene).playTrashSound()
             (scene as! GameLevelScene).finalizeSceneWithAbort()
         }
     }
     class AudioButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            (scene as! GameLevelScene).gameAppDelegate!.toggleMute()
-            if (scene as! GameLevelScene).gameAppDelegate!.isMuted(){
-                self.texture = SKTexture(imageNamed: "audio")
+            (scene as! GameLevelScene).playButtonClick()
+            (scene as! GameLevelScene).toggleAudio()
+            
+            if GeneralScene.audioOff{
                 (scene as! GameLevelScene).messageLabelNode.displayFadingMessage("Audio Off", duration: 2.0)
-                (scene as! GameLevelScene).stopBackgroundMusic()
             }else{
-                self.texture = SKTexture(imageNamed: "audioOff")
                 (scene as! GameLevelScene).messageLabelNode.displayFadingMessage("Audio On", duration: 2.0)
-                (scene as! GameLevelScene).playBackgroundMusic()
             }
+
         }
     }
     class EditButtonNode : SKSpriteNode{
@@ -912,4 +938,25 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    ////////////
+    // Sounds //
+    ///////////
+    
+    func playWallHit(_ impulse: Float){
+        if GeneralScene.audioOff{
+            return
+        }
+        let imp = impulse - 1
+        if imp < 0{
+            return
+        }
+        let temp = 0.05*imp //make these global constants
+        let vol = temp < thumpTopVolume ? temp : thumpTopVolume
+        if vol > 0.0{
+            //print("wallHit with volume \(vol)")
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "wallHit", volume: vol)
+        }
+    }
+    
 }//end of class

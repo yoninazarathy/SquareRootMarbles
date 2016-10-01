@@ -17,6 +17,11 @@ class MessageNode: SKSpriteNode{
     //QQQQ How to preallocate 10?
     var squareRootTextures: [SKTexture]=[]
     
+    //QQQQ do this as a computed propery
+    func hasFaded() -> Bool{
+        return label.alpha < 0.02
+    }
+    
     func displayMessage(_ text: String){
         image.removeFromParent()
         self.addChild(label)

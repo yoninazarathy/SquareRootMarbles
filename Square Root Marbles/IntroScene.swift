@@ -20,7 +20,7 @@ class IntroScene: GeneralScene {
     }
     
     func timerExpired(){
-        stopBackgroundMusic()
+        setLowBackgroundMusicVolume()
         gameAppDelegate!.changeView(AppState.menuScene)
     }
 
