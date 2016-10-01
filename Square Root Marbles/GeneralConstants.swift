@@ -13,8 +13,8 @@ import SpriteKit
 //Make true only for development purpuses
 let editModeEnabled = false
 let allowAllLevels = false //also for development
-let showFPSFlag = true
-let showNodCountFlag = true
+let showFPSFlag = false
+let showNodCountFlag = false
 
 let buildStringForGA = "Beta 0.5.0"
 
@@ -38,8 +38,8 @@ let timeInAfterLevelScene = 10.0
 
 let secondsBetweenLosses = 10
 
-let numSRMVoices: UInt32 = 22
-let musicVolume: Float = 0.2
+let numSRMVoices: UInt32 = 51
+let musicVolume: Float = 0.7
 let endGameVolume: Float = 0.5
 let thumpTopVolume: Float = 0.9
 let srmVoiceVolume: Float = 1.0
@@ -93,6 +93,7 @@ enum AppState{
     case gameActionPlaying //QQQQ implement the state (playing/paused)
     case gameActionPaused
     case afterLevelScene
+    case victoryScene
     case instructionScene
     case settingsScene
 }

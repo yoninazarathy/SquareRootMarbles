@@ -35,6 +35,10 @@ open class SKTAudio {
     var avAudioPlayers = [String: [AVAudioPlayer?]]()
     var playerIndex = [String: Int]()
     
+    var srmAudioPlayers = [Int: AVAudioPlayer]()
+    
+    static var playingMusic: Bool = false
+    
     func loadSound(fileName: String, key: String){
         let url = Bundle.main.url(forResource: fileName, withExtension: nil)
         if (url == nil) {
@@ -57,6 +61,39 @@ open class SKTAudio {
         }
     }
     
+    func loadSRM(num: Int){
+        let fileNameMP3 = "srm_\(num).mp3"
+        let fileNameM4A = "srm_\(num).m4a"
+        var url = Bundle.main.url(forResource: fileNameMP3, withExtension: nil)
+        if (url == nil) {
+            url = Bundle.main.url(forResource: fileNameM4A, withExtension: nil)
+            if (url == nil){
+                print("Could not find file for SRM: \(num)")
+                srmAudioPlayers[num] = nil
+                return
+            }
+        }
+        var error: NSError? = nil
+        do {
+            for _ in 1...numPlayersDepth{
+                let player = try AVAudioPlayer(contentsOf: url!)
+                srmAudioPlayers[num] = player
+                player.prepareToPlay() //QQQQ
+                print("loaded \(url!)")
+            }
+        } catch let error1 as NSError {
+            error = error1
+            srmAudioPlayers[num] = nil
+        }
+    }
+
+    func onEnteringForegroud(){
+        if SKTAudio.playingMusic{
+            resumeBackgroundMusic()
+        }
+    }
+    
+    
     func preLoadSounds(){
         loadSound(fileName: "click.wav", key: "buttonClick")
         loadSound(fileName: "knock.wav", key: "wallHit")
@@ -66,7 +103,9 @@ open class SKTAudio {
         loadSound(fileName: "0015_game_event_03_achieve.wav", key: "gotLevel")
         loadSound(fileName: "0015_game_event_02_victory.wav", key: "die")
         
-        //QQQQ load srm sounds here - make it automatic
+        for i in 1...Int(numSRMVoices){
+            loadSRM(num: i)
+        }
       }
     
     open class func sharedInstance() -> SKTAudio {
@@ -106,14 +145,14 @@ open class SKTAudio {
     }
     
     open func setLowBackgroundMusicVolume(){
-        volume = 0.05 //QQQQ constant
+        volume = 0.04 //QQQQ constant
         if let player = backgroundMusicPlayer {
             player.volume = volume
         }
     }
     
     open func setHighBackgroundMusicVolume(){
-        volume = 0.8 //QQQQ constant
+        volume = 0.5 //QQQQ constant
         if let player = backgroundMusicPlayer{
             player.volume = volume
         }
@@ -126,6 +165,11 @@ open class SKTAudio {
                 player.play()
             }
         }
+    }
+    
+    open func playSRM(num: Int, volume: Float){
+        srmAudioPlayers[num]?.volume = volume
+        srmAudioPlayers[num]?.play() //QQQQ underxtand how conditonal unwrapping works
     }
     
     open func playSoundEffect(fromLabel label: String, volume: Float){

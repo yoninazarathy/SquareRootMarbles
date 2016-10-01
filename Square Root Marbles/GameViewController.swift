@@ -27,7 +27,6 @@ protocol GameAppDelegate{
 class GeneralScene: SKScene {
     var gameAppDelegate: GameAppDelegate?
     
-    static var playingMusic: Bool = false
     static var audioOff: Bool = false
     
     func initAudio(){
@@ -57,9 +56,9 @@ class GeneralScene: SKScene {
     }
     
     func playBackgroundMusic() {
-        if !GeneralScene.playingMusic && !GeneralScene.audioOff{
+        if !SKTAudio.playingMusic && !GeneralScene.audioOff{
             SKTAudio.sharedInstance().playBackgroundMusic("136_full_efficiency_0159.mp3",volume: musicVolume ) // Start the music
-            GeneralScene.playingMusic = true
+            SKTAudio.playingMusic = true
         }
     }
     
@@ -73,21 +72,39 @@ class GeneralScene: SKScene {
     
     func stopBackgroundMusic(){
         SKTAudio.sharedInstance().pauseBackgroundMusic() // Pause the music
-        GeneralScene.playingMusic = false
+        SKTAudio.playingMusic = false
     }
     
     
     func playButtonClick(){
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "buttonClick", volume: 0.7)
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "buttonClick", volume: 0.7)
+        }
     }
     
     func playTrashSound(){
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "trash", volume: 0.7)
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "trash", volume: 0.7)
+        }
+    }
+    
+    func playOperatorSound(){
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "mathOperator", volume: 0.7)
+        }        
+    }
+    
+    func playBadNodeTouchSound(){
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "touchBadNode", volume: 0.7)
+        }
     }
     
     func playRandomSRM(){
-        let diceRoll = arc4random_uniform(numSRMVoices) + 1
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "srm_\(diceRoll).mp3", volume: srmVoiceVolume)
+        if !GeneralScene.audioOff{
+            let diceRoll = Int(arc4random_uniform(numSRMVoices) + 1)
+            SKTAudio.sharedInstance().playSRM(num: diceRoll, volume: srmVoiceVolume)
+        }
     }
 }
 
@@ -203,6 +220,15 @@ class GameViewController: UIViewController, GameAppDelegate {
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
             }
+            case AppState.victoryScene:
+            //QQQQ? Don't know what to do if this fails
+                if let currentGameScene = AfterLevelScene(fileNamed:"VictoryScene") {
+                    /* Set the scale mode to scale to fit the window */
+                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.gameAppDelegate = self
+                    skView.presentScene(currentGameScene, transition: transitionSlow)
+                }
+            
             case AppState.settingsScene:
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = SettingsScene(fileNamed:"SettingsScene") {

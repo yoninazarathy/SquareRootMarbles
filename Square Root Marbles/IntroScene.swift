@@ -17,6 +17,9 @@ class IntroScene: GeneralScene {
         timer = Timer.scheduledTimer(timeInterval: timeInIntroScreen, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
         playBackgroundMusic()
         setHighBackgroundMusicVolume()
+        
+        SKTAudio.sharedInstance().preLoadSounds()
+
     }
     
     func timerExpired(){

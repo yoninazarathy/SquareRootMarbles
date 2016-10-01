@@ -1,5 +1,5 @@
 //
-//  AfterLevelScene.swift
+//  VictoryScene.swift
 //  Square Root Marbles
 //
 //  Created by Yoni Nazarathy on 2/09/2016.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class AfterLevelScene: GeneralScene {
+class VictoryScene: GeneralScene {
     
     var timer: Timer? = nil
     
@@ -22,8 +22,7 @@ class AfterLevelScene: GeneralScene {
         let model = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
                 
         var messageText: [String?] = Array(repeating: nil, count: 0)
-        
-        messageText.append("I love you Miriam!")
+        messageText.append("You did it!!!")
 //        if model.newScoreString == ""{
 //            messageText.append("No success for level \(model.levelNumber)")
 //            messageText.append("Level record: \(model.bestScoreString)")

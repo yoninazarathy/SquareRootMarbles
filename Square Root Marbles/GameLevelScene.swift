@@ -224,6 +224,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         SKTAudio.sharedInstance().playSoundEffect(fromLabel: "die", volume: 1.0) //QQQQ volume
         let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
         playerNode.color = SKColor.red
+        playerNode.underline.fillColor = SKColor.red
+        playerNode.underline.strokeColor = SKColor.red
         let colorAction = SKAction.colorize(with: SKColor.red, colorBlendFactor: 0.8, duration: 0.7)
         playerNode.run(colorAction)
         playerNode.labelNode.fontColor = SKColor.red
@@ -250,9 +252,15 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
  
     func moveToNextLevelScene(){
-        //QQQQ funny transition mechanism but it works...
-        gameAppDelegate!.setLevel(gameAppDelegate!.getLevel()+1)
-        gameAppDelegate!.changeView(AppState.gameActionPlaying)
+        
+        let level = gameAppDelegate!.getLevel()
+        if level < numLevels{
+            //QQQQ funny transition mechanism but it works...
+            gameAppDelegate!.setLevel(level+1)
+            gameAppDelegate!.changeView(AppState.gameActionPlaying)
+        }else{
+            gameAppDelegate!.changeView(AppState.victoryScene)//!!!!! Victory!!!!
+        }
     }
 
     
@@ -509,9 +517,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                 
                 
             }else{
-                //QQQQ do a non square root shot here
-                self.run(SKAction.playSoundFileNamed("robotBlip",waitForCompletion:false))
-                
+                playOperatorSound()
             }
             playerNode.changeValue(newValue)
             updateOperatorsAndSinkStatus()
@@ -539,7 +545,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func hitBadNode(_ badNode: SKSpriteNode){
 
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "touchBadNode", volume: touchBadNodeVolume)
+        playBadNodeTouchSound()
 
         repelFromSprite(sprite: badNode, magnitude: 0.6)
 
@@ -881,6 +887,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             if (scene as! GameLevelScene).inEditMode == false{
                 (scene as! GameLevelScene).inEditMode = true
+                
+                (scene as! GameLevelScene).dimPanel.alpha = 0.1
+                
                 self.texture = SKTexture(imageNamed: "editOff")
                 (scene as! GameLevelScene).popUpNode!.position = CGPoint(x: (scene as! GameLevelScene).popUpDesiredPosition.x, y: CGFloat(0.955*screenHeight))
                 (scene as! GameLevelScene).messageLabelNode.displayFadingMessage("", duration: 1.0)
