@@ -33,6 +33,21 @@ class LifesNode: SKSpriteNode{
             return
         }
         
+        //QQQQ Didn't implement this...
+//        if numLifes == 1{
+//            if nil == lifeSprites[0]?.action(forKey: "playerAlmostDead"){
+//                lifeSprites[0]?.color = SKColor.red
+//                let almostDeadAction1 = SKAction.colorize(withColorBlendFactor: 1.0, duration: 0.15)
+//                let almostDeadAction2 = almostDeadAction1.reversed()
+//                let sequence = SKAction.sequence([almostDeadAction1, almostDeadAction2])
+//                lifeSprites[0]?.run(SKAction.repeatForever(sequence), withKey: "playerAlmostDead")
+//            }
+//        }else{
+//            lifeSprites[0]?.removeAction(forKey: "playerAlmostDead")
+//        }
+
+        
+        
         removeAllChildren()
         for i in 0..<numLifes{
             let sprite = lifeSprites[i]
@@ -68,7 +83,7 @@ class LifesNode: SKSpriteNode{
     
     func incrementLifes(_ startPosition: CGPoint){
         let srmNode = SKSpriteNode(imageNamed: "BlueSRmarble")
-        srmNode.size = CGSize(width: diameter, height: diameter)
+        srmNode.size = CGSize(width: 43, height: 43) //QQQQ const like operator node
         srmNode.position = startPosition
         srmNode.zPosition = 100 //QQQQ use constants
         scene!.addChild(srmNode)
@@ -78,13 +93,16 @@ class LifesNode: SKSpriteNode{
         numLifes = numLifes + 1
         moveLifeInProgress = true
         let dest = convert(nextFreePoint, to: scene!)
-        let move = SKAction.move(to: dest, duration: 0.8)
+        let move = SKAction.move(to: dest, duration: 1.2)
+        let shrink = SKAction.resize(toWidth: CGFloat(diameter), height: CGFloat(diameter), duration: 1.2)
         let endMove = SKAction.run(){
             srmNode.removeFromParent()//QQQQ
+            // NOTE NEEDED srmNode.size = CGSize(width: self.diameter, height: self.diameter)
             self.refreshDisplay()
             self.moveLifeInProgress = false
         }
         srmNode.run(SKAction.sequence([move, endMove]))
+        srmNode.run(shrink)
     }
     
 

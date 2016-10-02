@@ -18,6 +18,7 @@ class SinkNode: SKSpriteNode{
     
     func setAsValid(){
         valid = true
+        physicsBody!.categoryBitMask = PhysicsCategory.Sink
         color = SKColor.green
         colorBlendFactor = 0.75
     }

@@ -190,8 +190,6 @@ class OperatorNode: SKSpriteNode{
     
     func setAsInvalid(){
         valid = false
-        //QQQQ not sure this is the best 
-        run(SKAction.sequence([SKAction.wait(forDuration: 0.5),SKAction.run(){self.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator}]))
         color = SKColor.red
         colorBlendFactor = 1
         alpha = 1.0
@@ -214,7 +212,7 @@ class OperatorNode: SKSpriteNode{
     }
     
     convenience init(operatorActionString: String){
-        self.init(texture: nil, color: SKColor.red, size: CGSize(width:43, height:43))
+        self.init(texture: nil, color: SKColor.red, size: CGSize(width:43, height:43)) //QQQQ const
         switch operatorActionString{
         case SqrtNode.operationString():
             operatorAction = SqrtNode()

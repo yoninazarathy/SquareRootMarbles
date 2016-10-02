@@ -145,6 +145,13 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if let popUp = popUpNode{
             popUp.removeFromParent()
         }
+        
+        let grow = SKAction.scale(by: 2.2, duration: 0.4)
+        let shrink = grow.reversed()
+        let makeDynamic = SKAction.run(){self.playerNode.physicsBody!.isDynamic = true
+        }
+        playerNode.physicsBody!.isDynamic = false
+        playerNode.run(SKAction.sequence([grow, shrink, makeDynamic]))
     }
     
     func oneSecondWakeUp(){ //QQQQ change name
@@ -429,6 +436,30 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             sinkNode.setAsInvalid()
         }
     }
+    
+    //this is here to make nodes blocking after they become invalid
+    func didEnd(_ contact: SKPhysicsContact) {
+        if !playing {return} //this is mostly a safety guard QQQQ
+        var actionNode: SKNode?
+        if contact.bodyA.node!.name! == "playerNode"{
+            actionNode = contact.bodyB.node
+        } else{
+            actionNode = contact.bodyA.node
+        }
+        
+        switch(actionNode!.name!){
+        case "sinkNode":
+            if sinkNode.valid == false{
+                sinkNode?.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator
+            }
+        case "operatorNode":
+            if (actionNode as! OperatorNode).valid == false{
+                actionNode?.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator
+            }
+        default:
+            break
+        }
+    }
 
     func didBegin(_ contact: SKPhysicsContact) {
         if !playing {return} //this is mostly a safety guard QQQQ
@@ -455,11 +486,13 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             }
         case "sceneNode":
             print("hit scene (error???)")
-        default:
+        case "operatorNode":
             let op = actionNode as! OperatorNode
             if op.active{
                 handleOperatorPass(op)
             }
+        default:
+            print("error")//QQQQ report
         }
     }
     
@@ -553,6 +586,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         lastTimeLost = centiSecondsPlayed //since decrementing life, reset counter
         lifesNode.decrementLifes()
         lifeRemaining  = Double(secondsBetweenLosses)
+        
         if lifesNode.numLifes == 0{
             finalizeSceneWithFailure()
         }
@@ -829,12 +863,36 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         drawObstacleStartPos = squareOfPoint(positionInScene)
         startSquareCoordsAddObstacle = squareCoords
     }
+
     
+
     override func update(_ currentTime: TimeInterval) {
         self.currentTime = currentTime
+
+        let almostDeadAction1 = SKAction.colorize(withColorBlendFactor: 1.0, duration: 0.25)
+        let almostDeadAction2 = almostDeadAction1.reversed()
+        let sequence = SKAction.sequence([almostDeadAction1, almostDeadAction2])
+        
+        
+        if lifesNode.numLifes == 1{
+            if playerNode.action(forKey: "playerAlmostDead") == nil{
+                playerNode.run(SKAction.repeatForever(sequence), withKey: "playerAlmostDead")
+//                playerNode.labelNode.fontColor = SKColor.red
+//                playerNode.underline.fillColor = SKColor.red
+            }
+        }else{
+            if playerNode.action(forKey: "playerAlmostDead") != nil{
+                playerNode.removeAction(forKey: "playerAlmostDead")
+                playerNode.run(almostDeadAction2) //take away color
+//                playerNode.labelNode.fontColor = SKColor.white
+//                playerNode.underline.fillColor = SKColor.white //return color QQQQ 
+            }
+        }
+
         
         /* Called before each frame is rendered */
         if finishingSteps > 0{
+            print("applying finalization forces")
             finishingSteps = finishingSteps - 1
             let playerPos = playerNode.position
             let destPos = sinkNode.position

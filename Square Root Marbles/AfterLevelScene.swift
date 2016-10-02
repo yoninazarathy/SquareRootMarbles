@@ -23,7 +23,6 @@ class AfterLevelScene: GeneralScene {
                 
         var messageText: [String?] = Array(repeating: nil, count: 0)
         
-        messageText.append("I love you Miriam!")
 //        if model.newScoreString == ""{
 //            messageText.append("No success for level \(model.levelNumber)")
 //            messageText.append("Level record: \(model.bestScoreString)")
