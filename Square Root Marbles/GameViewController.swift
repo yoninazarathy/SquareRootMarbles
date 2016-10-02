@@ -22,6 +22,10 @@ protocol GameAppDelegate{
     //used when going (for e.g.) to instructions - need to know if to return to game or to menu...
     func getReturnAppState() -> AppState!
     func setReturnAppState(_ returnState: AppState)
+    
+    func recordOperation(op: String, oldValue: Int, newValue: Int)
+    func clearOperationLog()
+    func getOperationLog() -> [(String,Int,Int)]
 }
 
 class GeneralScene: SKScene {
@@ -117,6 +121,21 @@ class GameViewController: UIViewController, GameAppDelegate {
     var gameLevelModels: [GameLevelModel?] = Array(repeating: nil, count: numLevels+1)
     
     var returnAppState: AppState! = nil
+
+    var operationLog: [(String,Int,Int)] = []
+    
+    func recordOperation(op: String, oldValue: Int, newValue: Int){
+        operationLog.append((op,oldValue,newValue))
+    }
+    
+    func clearOperationLog(){
+        operationLog.removeAll()
+    }
+    
+    func getOperationLog() -> [(String,Int,Int)]{
+        return operationLog
+    }
+
     
     func getReturnAppState() -> AppState!{
             return returnAppState
@@ -175,6 +194,7 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
+                    clearOperationLog()
                     skView.presentScene(currentGameScene, transition: transitionFast)
                 }
             case AppState.gameActionPlaying:                

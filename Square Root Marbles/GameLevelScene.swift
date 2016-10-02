@@ -274,7 +274,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func moveToAfterLevelScene(){
         //QQQQ will want this when failing...
         gameAppDelegate!.changeView(AppState.afterLevelScene)
-        stopBackgroundMusic()
+        setLowBackgroundMusicVolume()
     }
 
     
@@ -504,6 +504,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                                                   oldValue: playerNode.value,
                                                   newValue: newValue,
                                                   duration: 4.0) //QQQQ use globalConst
+            
+            gameAppDelegate!.recordOperation(
+                op: operatorNode.operatorAction.operationString(),
+                oldValue: playerNode.value,
+                newValue: newValue)            
             
             operatorNode.active = false
             
@@ -925,7 +930,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     class StopButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! GameLevelScene).playTrashSound()
-            (scene as! GameLevelScene).finalizeSceneWithAbort()
+            //(scene as! GameLevelScene).finalizeSceneWithAbort()
+            (scene as! GameLevelScene).moveToAfterLevelScene()
         }
     }
     class AudioButtonNode : SKSpriteNode{

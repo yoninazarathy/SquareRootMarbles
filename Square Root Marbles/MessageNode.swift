@@ -17,6 +17,8 @@ class MessageNode: SKSpriteNode{
     //QQQQ How to preallocate 10?
     var squareRootTextures: [SKTexture]=[]
     
+    static var messageLog: [(String,Int,Int)] = []
+    
     //QQQQ do this as a computed propery
     func hasFaded() -> Bool{
         return label.alpha < 0.02
@@ -77,7 +79,7 @@ class MessageNode: SKSpriteNode{
         label.fontName = "AmericanTypewriter-Bold"
         
         image = SKSpriteNode()
-        image.size = CGSize(width: 120, height: 35)
+        image.size = CGSize(width: 120, height: 40)
         image.zPosition = 1;
         image.position = CGPoint(x: 40, y:15) //????
         image.color = SKColor.white

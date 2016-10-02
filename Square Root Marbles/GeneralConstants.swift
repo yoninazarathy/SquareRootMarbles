@@ -11,10 +11,10 @@ import SpriteKit
 
 
 //Make true only for development purpuses
-let editModeEnabled = false
+let editModeEnabled = true
 let allowAllLevels = false //also for development
-let showFPSFlag = false
-let showNodCountFlag = false
+let showFPSFlag = true
+let showNodCountFlag = true
 
 let buildStringForGA = "Beta 0.5.0"
 
@@ -34,7 +34,7 @@ let upperBoundNumOperators = 15
 
 //QQQQ make naming common (scene/screen)
 let timeInIntroScreen = 15.0
-let timeInAfterLevelScene = 10.0
+let timeInAfterLevelScene = 300.0 //very long
 
 let secondsBetweenLosses = 10
 
