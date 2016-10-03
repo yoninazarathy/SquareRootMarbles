@@ -195,10 +195,6 @@ class OperatorNode: SKSpriteNode{
         alpha = 1.0
     }
     
-    func setAsLastTimeValid(){
-        self.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator
-    }
-    
     override init(texture: SKTexture!,
                   color: UIColor,
                   size: CGSize){

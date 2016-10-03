@@ -64,7 +64,7 @@ class OperationRecordSprite: SKSpriteNode{
             labelNode.fontName = "AmericanTypewriter-Bold"
             labelNode.fontColor = SKColor.white
             labelNode.fontSize = 38
-            labelNode.position = CGPoint(x:0,y:-10) //QQQQ not sure
+            labelNode.position = CGPoint(x:0,y:-14) //QQQQ not sure
             labelNode.zPosition = 1
             self.addChild(labelNode)
         }
@@ -75,21 +75,13 @@ class OperationRecordSprite: SKSpriteNode{
 
 class AfterLevelScene: GeneralScene {
     
-    var timer: Timer? = nil
-    
     var operationSprites: [OperationRecordSprite] = []
     
     var currentOpIndex = 0
     
     override func didMove(to view: SKView) {
-        //QQQQ problem if clicked before - need to kill timer
-        timer = Timer.scheduledTimer(timeInterval: timeInAfterLevelScene, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
-        
         self.backgroundColor = SKColor.black
-        
-        //QQQQ slightly improve the appDelgate so that compositions such as this aren't needed (they are used elsewhere also
-        let model = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
-                
+                        
         var messageText: [String?] = Array(repeating: nil, count: 0)
         
         let log = gameAppDelegate!.getOperationLog()
@@ -97,8 +89,13 @@ class AfterLevelScene: GeneralScene {
         if log.count == 0{
             messageText.append("Try again")
         }else{
-            messageText.append("Good Effort!")
-            messageText.append("See your moves:")
+            if gameAppDelegate!.getAppState() == AppState.afterLevelSceneFinished{
+                messageText.append("Good Effort!")
+                messageText.append("Your last moves:")
+            }else{
+                messageText.append("Going Good!!!")
+                messageText.append("Your last moves:")
+            }
             
             for ev in log{
                 let sprite = OperationRecordSprite(initValue: (ev.0,ev.1,ev.2))
@@ -112,10 +109,9 @@ class AfterLevelScene: GeneralScene {
         
         var y = 0.85*screenHeight
         for txt in messageText{
-            print(txt)
             let label = SKLabelNode(text: txt)
             label.position = CGPoint(x: screenCenterPointX, y: y)
-            label.fontSize = 30
+            label.fontSize = 32
             label.fontColor = SKColor.white
             label.fontName = "AmericanTypewriter-Bold"
             y = y - 45
@@ -147,16 +143,49 @@ class AfterLevelScene: GeneralScene {
     }
     
     class OKButtonNode : SKSpriteNode{
+        
+        var active: Bool = true
+        
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            if !active{
+                return
+            }
+            
+            
             let ms = (scene as! AfterLevelScene) //mother scene
             ms.playButtonClick()
+            
+            self.active = false
+            
+            var sqrtSoundPlaying = false
+
+            
             if ms.currentOpIndex < ms.operationSprites.count-1{
                 ms.operationSprites[ms.currentOpIndex].removeFromParent()
                 ms.currentOpIndex = ms.currentOpIndex + 1
                 ms.addChild(ms.operationSprites[ms.currentOpIndex])
+                if ms.operationSprites[ms.currentOpIndex].imageNode != nil{
+                    ms.playRandomSRM()
+                    sqrtSoundPlaying = true
+                }
             }else{
-                ms.gameAppDelegate!.changeView(AppState.menuScene)
+                let delegate = ms.gameAppDelegate!
+                delegate.clearOperationLog()
+                if delegate.getAppState() == AppState.afterLevelSceneFinished{
+                    delegate.changeView(AppState.menuScene)
+                }else{
+                    delegate.setLevel(delegate.getLevel()+1)
+                    delegate.changeView(AppState.gameActionPlaying)
+                }
             }
+            
+            let fade = SKAction.fadeOut(withDuration: sqrtSoundPlaying ? 1.0 : 0.4)
+            let rFade = fade.reversed()
+            let enable = SKAction.run {
+                self.active = true
+            }
+            self.run(SKAction.sequence([fade, rFade, enable]))
+
         }
         
     }

@@ -47,8 +47,9 @@ class PlayerNode: SKSpriteNode{
         self.value = initValue
         labelNode = SKLabelNode(text: "\(value)")
         labelNode.fontName = "AmericanTypewriter-Bold"
+        labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         labelNode.fontColor = SKColor.white
-        labelNode.fontSize = 23
+        labelNode.fontSize = 22
         labelNode.position = CGPoint(x:0,y:-8)
         labelNode.zPosition = 1
         self.addChild(labelNode)

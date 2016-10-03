@@ -12,9 +12,9 @@ import SpriteKit
 
 //Make true only for development purpuses
 let editModeEnabled = true
-let allowAllLevels = false //also for development
-let showFPSFlag = true
-let showNodCountFlag = true
+let allowAllLevels = true //also for development
+let showFPSFlag = false
+let showNodCountFlag = false
 
 let buildStringForGA = "Beta 0.5.0"
 
@@ -37,6 +37,8 @@ let timeInIntroScreen = 15.0
 let timeInAfterLevelScene = 300.0 //very long
 
 let secondsBetweenLosses = 10
+
+let minNumOperationsBetweenAfterScreen = 15
 
 let numSRMVoices: UInt32 = 51
 let musicVolume: Float = 0.7
@@ -86,17 +88,6 @@ let gameLevelCenterPointY = screenCenterPointY - offGameVerticalSpare
 let gameHorzSize = cubeSize*Double(numCubesWidth)
 let gameVertSize = cubeSize*Double(numCubesHeight)
 
-
-enum AppState{
-    case introScene
-    case menuScene
-    case gameActionPlaying //QQQQ implement the state (playing/paused)
-    case gameActionPaused
-    case afterLevelScene
-    case victoryScene
-    case instructionScene
-    case settingsScene
-}
 
 
 

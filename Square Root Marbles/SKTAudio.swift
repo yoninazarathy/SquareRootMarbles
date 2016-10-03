@@ -46,7 +46,6 @@ open class SKTAudio {
             avAudioPlayers[key] = nil
             return
         }
-        var error: NSError? = nil
         do {
             avAudioPlayers[key] = Array<AVAudioPlayer>()
             for _ in 1...numPlayersDepth{
@@ -55,8 +54,7 @@ open class SKTAudio {
                 avAudioPlayers[key]?.append(player)
                 playerIndex[key] = 0
             }
-        } catch let error1 as NSError {
-            error = error1
+        } catch _ as NSError {
             avAudioPlayers[key] = nil
         }
     }
@@ -73,7 +71,6 @@ open class SKTAudio {
                 return
             }
         }
-        var error: NSError? = nil
         do {
             for _ in 1...numPlayersDepth{
                 let player = try AVAudioPlayer(contentsOf: url!)
@@ -81,8 +78,7 @@ open class SKTAudio {
                 player.prepareToPlay() //QQQQ
                 print("loaded \(url!)")
             }
-        } catch let error1 as NSError {
-            error = error1
+        } catch _ as NSError {
             srmAudioPlayers[num] = nil
         }
     }

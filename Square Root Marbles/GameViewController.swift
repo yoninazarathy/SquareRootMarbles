@@ -12,6 +12,20 @@ import CoreMotion
 
 let motionManager = CMMotionManager()
 
+enum AppState{
+    case introScene
+    case menuScene
+    case gameActionPlaying //QQQQ implement the state (playing/paused)
+    case gameActionPaused
+    case afterLevelSceneFinished //the after level scene 
+    case afterLevelSceneBreak
+    case victoryScene
+    case instructionScene
+    case settingsScene
+}
+
+
+
 protocol GameAppDelegate{
     func changeView(_ newState: AppState)
     func getAppState() -> AppState
@@ -104,10 +118,37 @@ class GeneralScene: SKScene {
         }
     }
     
+    func playWinSound(){
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "gotLevel", volume: 0.8)
+        }
+    }
+
+    func playDieSound(){
+        if !GeneralScene.audioOff{
+            SKTAudio.sharedInstance().playSoundEffect(fromLabel: "die", volume: 0.8)
+        }
+    }
+    
+
+    let topList = [40, 43, 45, 10, 18, 17, 28, 32, 33]
+    let goodList = [1, 2 , 4, 6, 9 , 11, 12 , 13, 16,  23, 26, 27,  32, 34, 36, 37,38, 39, 44, 46 , 48, 51]
+    let okList = [3,5 ,7 , 8 , 14 , 15, 19, 20, 21, 22, 24, 25, 29, 30, 31, 35, 41, 42, 47, 49, 50]
+
+    
     func playRandomSRM(){
         if !GeneralScene.audioOff{
-            let diceRoll = Int(arc4random_uniform(numSRMVoices) + 1)
-            SKTAudio.sharedInstance().playSRM(num: diceRoll, volume: srmVoiceVolume)
+            let firstRoll = arc4random_uniform(10) + 1
+            var track: Int
+            if (5 <= firstRoll ) {
+                track = topList[Int(arc4random_uniform(UInt32(topList.count)))]
+            }else if 2 <= firstRoll {
+                track = goodList[Int(arc4random_uniform(UInt32(goodList.count)))]
+            }else{
+                track = okList[Int(arc4random_uniform(UInt32(goodList.count)))]
+            }
+            
+            SKTAudio.sharedInstance().playSRM(num: track, volume: srmVoiceVolume)
         }
     }
 }
@@ -194,7 +235,6 @@ class GameViewController: UIViewController, GameAppDelegate {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
-                    clearOperationLog()
                     skView.presentScene(currentGameScene, transition: transitionFast)
                 }
             case AppState.gameActionPlaying:                
@@ -232,7 +272,7 @@ class GameViewController: UIViewController, GameAppDelegate {
 
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
-            case AppState.afterLevelScene:
+            case AppState.afterLevelSceneFinished:
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = AfterLevelScene(fileNamed:"AfterLevelScene") {
                     /* Set the scale mode to scale to fit the window */
@@ -240,9 +280,19 @@ class GameViewController: UIViewController, GameAppDelegate {
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
             }
+            case AppState.afterLevelSceneBreak: //QQQQ this clause just as above (merge)
+            //QQQQ? Don't know what to do if this fails
+            if let currentGameScene = AfterLevelScene(fileNamed:"AfterLevelScene") {
+                /* Set the scale mode to scale to fit the window */
+                currentGameScene.scaleMode = .aspectFill
+                currentGameScene.gameAppDelegate = self
+                skView.presentScene(currentGameScene, transition: transitionSlow)
+            }
+
+            
             case AppState.victoryScene:
             //QQQQ? Don't know what to do if this fails
-                if let currentGameScene = AfterLevelScene(fileNamed:"VictoryScene") {
+                if let currentGameScene = VictoryScene(fileNamed:"VictoryScene") {
                     /* Set the scale mode to scale to fit the window */
                     currentGameScene.scaleMode = .aspectFill
                     currentGameScene.gameAppDelegate = self
@@ -295,9 +345,5 @@ class GameViewController: UIViewController, GameAppDelegate {
 
     override var prefersStatusBarHidden : Bool {
         return true
-    }
-    
-    deinit{
-        //print("deinit of GameViewController")
     }
 }

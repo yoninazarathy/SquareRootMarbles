@@ -26,6 +26,7 @@ class SinkNode: SKSpriteNode{
     func setAsInvalid(){
         valid = false
         color = SKColor.red
+        physicsBody!.categoryBitMask = PhysicsCategory.Sink | PhysicsCategory.BlockingOperator
         colorBlendFactor = 0.75
     }
     
@@ -42,14 +43,15 @@ class SinkNode: SKSpriteNode{
     
     
     convenience init(target: Int){
-        self.init(texture: SKTexture(imageNamed: "sink"), color: SKColor.red, size: CGSize(width:50, height:50))
+        self.init(texture: SKTexture(imageNamed: "sink"), color: SKColor.red, size: CGSize(width:55, height:55)) //QQQQ
         self.targetValue = target
         labelNode = SKLabelNode(text: "\(targetValue)")
         
         labelNode.fontName = "AmericanTypewriter-Bold"
         labelNode.fontColor = SKColor.white
-        labelNode.fontSize = 40
-        labelNode.position = CGPoint(x:0, y: -15) //QQQQ
+        labelNode.fontSize = 31
+        labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        labelNode.position = CGPoint(x:0, y: -12) //QQQQ
         labelNode.blendMode = SKBlendMode.add
         labelNode.colorBlendFactor = 0
         //labelNode.position = ???

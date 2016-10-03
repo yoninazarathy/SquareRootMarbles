@@ -11,47 +11,25 @@ import SpriteKit
 class VictoryScene: GeneralScene {
     
     var timer: Timer? = nil
-    
+        
     override func didMove(to view: SKView) {
-        //QQQQ problem if clicked before - need to kill timer
-        timer = Timer.scheduledTimer(timeInterval: timeInAfterLevelScene, target: self, selector: #selector(timerExpired), userInfo: nil, repeats: false)
         
         self.backgroundColor = SKColor.black
-        
-        //QQQQ slightly improve the appDelgate so that compositions such as this aren't needed (they are used elsewhere also
-        let model = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel())
-                
+                        
         var messageText: [String?] = Array(repeating: nil, count: 0)
         messageText.append("You did it!!!")
-//        if model.newScoreString == ""{
-//            messageText.append("No success for level \(model.levelNumber)")
-//            messageText.append("Level record: \(model.bestScoreString)")
-//        }else{
-//            messageText.append("Level \(model.levelNumber) in \(model.newScoreString)")
-//
-//            if model.newScoreCentiSecond < model.bestScoreCentiSecond{
-//                if model.bestScoreString == ""{
-//                    messageText.append("First completion time. Record Set.")
-//                }else{
-//                    messageText.append("New record!!! Previous was \(model.bestScoreString)")
-//                }
-//                
-//                //update and store in UserDefaults
-//                model.bestScoreString = model.newScoreString
-//                let defaults = UserDefaults.standard
-//                defaults.set(model.bestScoreString, forKey: "level\(model.levelNumber)best")
-//                
-//            }else{
-//                messageText.append("Record for level \(model.bestScoreString)")
-//                messageText.append("You didn't beat that time")
-//            }
-//            
-//        }
+        messageText.append("You got through all the levels")
+        messageText.append("of Square Root Marbles!!!")
+        messageText.append("")
+        messageText.append("Now try to think of ")
+        messageText.append("the square root of -1 ...")
+        messageText.append("")
+        messageText.append("Does such a number exist?")
+        messageText.append("Ask your friends, teachers or family.")
 
         let x = screenWidth/2
-        var y = 0.8*screenHeight
+        var y = 0.9*screenHeight
         for txt in messageText{
-            print(txt)
             let label = SKLabelNode(text: txt)
             label.position = CGPoint(x: x, y: y)
             label.fontSize = 20
@@ -62,13 +40,7 @@ class VictoryScene: GeneralScene {
         }
     }
     
-    func timerExpired(){
-        gameAppDelegate!.changeView(AppState.menuScene)
-    }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        timer!.invalidate()
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         gameAppDelegate!.changeView(AppState.menuScene)
     }
     

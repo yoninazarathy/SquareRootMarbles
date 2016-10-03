@@ -100,8 +100,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                     motionManager.startDeviceMotionUpdates(to: OperationQueue.main ) {
                         (data, error) in
                         //QQQQ adjust and organize these constants
-                        self.physicsWorld.gravity = CGVector(dx: 15 * CGFloat(sin(data!.attitude.roll)),dy: -15 * CGFloat(sin(data!.attitude.pitch)))
-                        self.playerNode.physicsBody!.applyForce(CGVector(dx: CGFloat(data!.userAcceleration.x*500), dy: CGFloat(data!.userAcceleration.y*500)))
+                        self.physicsWorld.gravity = CGVector(dx: 20 * CGFloat(sin(data!.attitude.roll)),dy: -20 * CGFloat(sin(data!.attitude.pitch)))
+                        //QQQQ disabled acceleartion
+                        //self.playerNode.physicsBody!.applyForce(CGVector(dx: CGFloat(data!.userAcceleration.x*500), dy: CGFloat(data!.userAcceleration.y*500)))
                         if let error = error { // Might as well handle the optional error as well
                             print(error.localizedDescription)
                             return
@@ -126,10 +127,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         centiSecondsPlayed = 0
         finishingSteps = 0
         let numLifes = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel()).numMarbles
-        print("Resetting level with \(numLifes) lifes")
         lifesNode.setLifes(numLifes)
         
-      //  [GameAnalytics addProgressionEventWithProgressionStatus:GAProgressionStatusStart progression01:@"world01" progression02:@"stage01" progression03:@"level01"];
+        //QQQQ this does not work... on the GA website (I think it generates error events... maybe Swift 3???)
         GameAnalytics.addProgressionEvent(with: GAProgressionStatusStart, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(numLifes)", progression03: "")
     }
     
@@ -196,7 +196,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         playing = false
         finishingSteps = 200//QQQQ
         sinkNode.removeAllActions()
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "gotLevel", volume: 1.0) //QQQQ volume
+        playWinSound()
 
         haultAction()
         physicsWorld.speed = 1.0 //QQQQ have done this on other one too - fix...
@@ -228,7 +228,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func finalizeSceneWithFailure(){
         playing = false
-        SKTAudio.sharedInstance().playSoundEffect(fromLabel: "die", volume: 1.0) //QQQQ volume
+        playDieSound()
         let badExplosionEmitterNode = SKEmitterNode(fileNamed:"BadExplosionParticle")
         playerNode.color = SKColor.red
         playerNode.underline.fillColor = SKColor.red
@@ -261,6 +261,14 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     func moveToNextLevelScene(){
         
         let level = gameAppDelegate!.getLevel()
+        
+        if gameAppDelegate!.getOperationLog().count >= minNumOperationsBetweenAfterScreen &&
+            level < numLevels{
+            gameAppDelegate!.changeView(AppState.afterLevelSceneBreak)
+            setLowBackgroundMusicVolume() //QQQQ the volume should be set as part of the scene
+            return
+        }
+        
         if level < numLevels{
             //QQQQ funny transition mechanism but it works...
             gameAppDelegate!.setLevel(level+1)
@@ -273,8 +281,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func moveToAfterLevelScene(){
         //QQQQ will want this when failing...
-        gameAppDelegate!.changeView(AppState.afterLevelScene)
-        setLowBackgroundMusicVolume()
+        gameAppDelegate!.changeView(AppState.afterLevelSceneFinished)
+        setLowBackgroundMusicVolume() //QQQQ the volume should be set as part of the scene
     }
 
     
@@ -304,7 +312,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         sinkNode.zPosition = GameLevelZPositions.sinkZ
         sinkNode.physicsBody = SKPhysicsBody(circleOfRadius: sinkNode.size.width/2)
         sinkNode.physicsBody!.isDynamic = false
-        sinkNode.physicsBody!.categoryBitMask = PhysicsCategory.Sink
+        sinkNode.physicsBody!.categoryBitMask = PhysicsCategory.Sink | PhysicsCategory.BlockingOperator
         sinkNode.physicsBody!.collisionBitMask = PhysicsCategory.None
         sinkNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
         self.addChild(sinkNode)
@@ -419,13 +427,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             let node = operatorNodes[i]
             if node!.operatorAction!.isValid(playerNode.value){
                 node?.setAsValid()
-                
-                //this is for making nodes that will turn invalid (red) blocking
-                //QQQQ the problem with this "solution" is that can't pass through such nodes
-//                if node!.operatorAction!.willBeValidAfterOp(playerNode.value) == false{
-//                    node!.setAsLastTimeValid()
-//                }
-                
             }else{
                 node?.setAsInvalid()
             }
@@ -449,6 +450,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         switch(actionNode!.name!){
         case "sinkNode":
+            //QQQQ no reason for this to be here...
             if sinkNode.valid == false{
                 sinkNode?.physicsBody!.categoryBitMask = PhysicsCategory.BlockingOperator
             }
@@ -465,7 +467,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if !playing {return} //this is mostly a safety guard QQQQ
         
         var actionNode: SKNode?
-        //print("A: \(contact.bodyA.node!.name!) B: \(contact.bodyB.node!.name!)")
         if contact.bodyA.node!.name! == "playerNode"{
             actionNode = contact.bodyB.node
         } else{
@@ -897,7 +898,6 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         /* Called before each frame is rendered */
         if finishingSteps > 0{
-            print("applying finalization forces")
             finishingSteps = finishingSteps - 1
             let playerPos = playerNode.position
             let destPos = sinkNode.position
@@ -1024,10 +1024,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         if imp < 0{
             return
         }
-        let temp = 0.05*imp //make these global constants
+        let temp = 0.02*imp //make these global constants
         let vol = temp < thumpTopVolume ? temp : thumpTopVolume
         if vol > 0.0{
-            //print("wallHit with volume \(vol)")
             SKTAudio.sharedInstance().playSoundEffect(fromLabel: "wallHit", volume: vol)
         }
     }
