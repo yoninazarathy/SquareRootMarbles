@@ -22,7 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GameAnalytics.configureBuild(buildStringForGA)
         GameAnalytics.initialize(withGameKey: "1e75a275b87ca5a01120b4b550842b78", gameSecret: "6859815157d477b16031b3b91bb0d28e96b9bdc4")
-                
+        
+        GameAnalytics.setEnabledInfoLog(gameAnalyticsInfoLog);
+
+        
         return true
     }
 

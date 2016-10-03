@@ -130,7 +130,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         lifesNode.setLifes(numLifes)
         
         //QQQQ this does not work... on the GA website (I think it generates error events... maybe Swift 3???)
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusStart, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(numLifes)", progression03: "")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusStart, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(numLifes)", progression03: "NothingToSay")
     }
     
     func playGame(){
@@ -204,7 +204,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 
         let newNumMarbles = lifesNode.numLifes
         
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "NothingToSay")
         
         let currentLevel = gameLevelModel!.levelNumber
         if currentLevel < numLevels{
@@ -240,7 +240,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         haultAction()
         physicsWorld.speed = 1.0 //undo what is done in haultAction (to allow some extra spinning)
 
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "", progression03: "")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "NothingToSay", progression03: "NothingToSay")
 
         
         //QQQQ Get rid of NSTimer

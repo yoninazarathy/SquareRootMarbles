@@ -10,11 +10,8 @@ import SpriteKit
 
 class InstructionsScene: GeneralScene {
     
-    var sceneCam: SKCameraNode!
-    
-    
     override func didMove(to view: SKView) {
-        self.backgroundColor = SKColor.orange
+        self.backgroundColor = SKColor.black
         
         //QQQQ synch this code with the code in GameLevelScene and MenuScene
         let buttonSize = 45.0
@@ -28,51 +25,23 @@ class InstructionsScene: GeneralScene {
         backButtonNode.position = CGPoint(x: buttonSize/2 + buttonSpacing, y:screenHeight - (buttonSize/2 + buttonSpacing))
         backButtonNode.zPosition = GameLevelZPositions.popUpMenuButtonsZ
         self.addChild(backButtonNode)
-
         
+        let grow = SKAction.scale(by: 1.3, duration: 2.0)
+        let shrink = grow.reversed()
+        backButtonNode.run(SKAction.repeatForever(SKAction.sequence([grow, shrink])))
         
-        sceneCam = SKCameraNode() //initialize your camera
-        sceneCam.position = CGPoint(x: size.width/2, y: size.height/2)
-        self.camera = sceneCam  //set the scene's camera
-        addChild(sceneCam) //add camera to scene
+        GameAnalytics.addDesignEvent(withEventId: "instructionsEnter")
         
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        
-        let positionInScene = touch!.location(in: self)
-        let previousPosition = touch!.previousLocation(in: self)
-        let translation = CGPoint(x: 0, y: positionInScene.y - previousPosition.y)
-        
-        var newYPosition = sceneCam.position.y - translation.y
-        //QQQQ adjust these constants and any others...
-        
-        //upper bound for scrolling up
-        if newYPosition > CGFloat(screenHeight){
-            newYPosition = CGFloat(screenHeight)
-        }
-        
-        //lower bound for scrolling down
-        if newYPosition < 0{
-            newYPosition = 0
-        }
-        
-        sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        /* Called before each frame is rendered */
     }
     
     class BackButtonNode : SKSpriteNode{
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             (scene as! InstructionsScene).playButtonClick()
             //QQQQ this is silly code...
-            (scene as! InstructionsScene).gameAppDelegate!.changeView((scene as! InstructionsScene).gameAppDelegate!.getReturnAppState())        }
+            (scene as! InstructionsScene).gameAppDelegate!.changeView((scene as! InstructionsScene).gameAppDelegate!.getReturnAppState())
+            GameAnalytics.addDesignEvent(withEventId: "instructionsExit")
+
+        }
     }
 
 }

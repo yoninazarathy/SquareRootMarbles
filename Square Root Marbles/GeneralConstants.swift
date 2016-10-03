@@ -12,9 +12,10 @@ import SpriteKit
 
 //Make true only for development purpuses
 let editModeEnabled = true
-let allowAllLevels = true //also for development
+let allowAllLevels = true 
 let showFPSFlag = false
 let showNodCountFlag = false
+let gameAnalyticsInfoLog = true
 
 let buildStringForGA = "Beta 0.5.0"
 
