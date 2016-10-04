@@ -11,11 +11,11 @@ import SpriteKit
 
 
 //Make true only for development purpuses
-let editModeEnabled = true
-let allowAllLevels = true 
+let editModeEnabled = false
+let allowAllLevels = false
 let showFPSFlag = false
 let showNodCountFlag = false
-let gameAnalyticsInfoLog = true
+let gameAnalyticsInfoLog = false
 
 let buildStringForGA = "Beta 0.5.0"
 
@@ -73,10 +73,13 @@ let defaultSinkLocation =  SquareCoordinates(sx: 14,sy: 26)
 
 //QQQ Deal with this issue - but for now, fixed for Iphone 6/6s
 //Here is where screenSpecsFallIn.... QQQQ update.... QQQQ maybe need all these calcs in a setup module
-let screenWidth: Double = 375
-let screenHeight: Double = 667
-let screenCenterPointX: Double = screenWidth/2
-let screenCenterPointY: Double = screenHeight/2
+
+var screenWidth: Double = 375
+var screenHeight: Double = 667
+var actualScreenWidth: Double = 375   //will be set in AppDeleagte
+var actualScreenHeight: Double = 667  //will be set in AppDeleagte
+var screenCenterPointX: Double = screenWidth/2
+var screenCenterPointY: Double = screenHeight/2
 
 
 let cubeSize: Double = screenWidth/Double(numCubesWidth)  //9.1464

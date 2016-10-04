@@ -96,7 +96,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                     self.physicsBody = sceneBody
                     
                     motionManager.startDeviceMotionUpdates()
-                    motionManager.deviceMotionUpdateInterval = 0.03
+                    motionManager.deviceMotionUpdateInterval = 0.02
                     motionManager.startDeviceMotionUpdates(to: OperationQueue.main ) {
                         (data, error) in
                         //QQQQ adjust and organize these constants

@@ -24,7 +24,9 @@ class MenuScene: GeneralScene {
         self.backgroundColor = SKColor.black
         
         sceneCam = SKCameraNode() //initialize your camera
-        sceneCam.position = CGPoint(x: size.width/2, y: size.height/2)
+        //sceneCam.xScale = CGFloat(screenWidth/actualScreenWidth)
+        //sceneCam.yScale = CGFloat(screenHeight/actualScreenHeight)
+        sceneCam.position = CGPoint(x: size.width/2, y:CGFloat(1340 - screenHeight/2)) //size.height/2) //
         self.camera = sceneCam  //set the scene's camera
         addChild(sceneCam) //add camera to scene
         
@@ -179,6 +181,12 @@ class MenuScene: GeneralScene {
         
     }
     
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch = touches.first!
+//        //print("LOCATION: \(touch.location(in: self))")
+//    }
+
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if dragging{
             dragging = false
@@ -210,16 +218,17 @@ class MenuScene: GeneralScene {
         //QQQQ adjust these constants and any others...
         
         //upper bound for scrolling up
-        if newYPosition > CGFloat(screenHeight){
-            newYPosition = CGFloat(screenHeight)
+        if newYPosition > CGFloat(1340 - screenHeight/2){
+            newYPosition = CGFloat(1340 - screenHeight/2)
         }
         
         //lower bound for scrolling down
-        if newYPosition < 0{
-            newYPosition = 0
+        if newYPosition < CGFloat(screenHeight/2){
+            newYPosition = CGFloat(screenHeight/2)
         }
         
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)
+//        print("sceneCamPosition: \(sceneCam.pos)")
     }
     
     override func update(_ currentTime: TimeInterval) {

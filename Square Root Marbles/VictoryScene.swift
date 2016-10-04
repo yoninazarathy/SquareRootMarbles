@@ -14,6 +14,8 @@ class VictoryScene: GeneralScene {
         
     override func didMove(to view: SKView) {
         
+        gameAppDelegate!.clearOperationLog()
+        
         self.backgroundColor = SKColor.black
                         
         var messageText: [String?] = Array(repeating: nil, count: 0)

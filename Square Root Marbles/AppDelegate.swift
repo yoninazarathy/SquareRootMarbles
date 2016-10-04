@@ -26,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GameAnalytics.setEnabledInfoLog(gameAnalyticsInfoLog);
 
         
+        
+        //QQQQ these are setup in AppDelagte - probably very bad... QQQQ
+        let screenSize = UIScreen.main.bounds
+        actualScreenWidth = Double(screenSize.width)
+        actualScreenHeight = Double(screenSize.height)
+        print("Found screen: \(actualScreenWidth) x \(actualScreenHeight)")
+        
+        
         return true
     }
 
