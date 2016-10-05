@@ -37,7 +37,7 @@ let upperBoundNumOperators = 15
 let timeInIntroScreen = 15.0
 let timeInAfterLevelScene = 300.0 //very long
 
-let secondsBetweenLosses = 10
+let secondsBetweenLosses = 15
 
 let minNumOperationsBetweenAfterScreen = 15
 

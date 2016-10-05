@@ -50,7 +50,6 @@
 		2040A1E51DA5149500B45985 /* operators21.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2040A1E31DA5149500B45985 /* operators21.plist */; };
 		2040A1E81DA5178500B45985 /* obstacles22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2040A1E61DA5178500B45985 /* obstacles22.plist */; };
 		2040A1E91DA5178500B45985 /* operators22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2040A1E71DA5178500B45985 /* operators22.plist */; };
-		2040A1EC1DA5198000B45985 /* obstacles26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2040A1EA1DA5198000B45985 /* obstacles26.plist */; };
 		2040A1ED1DA5198000B45985 /* operators26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2040A1EB1DA5198000B45985 /* operators26.plist */; };
 		20415C791D8A1D4000AB1F0D /* SinkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20415C781D8A1D4000AB1F0D /* SinkNode.swift */; };
 		204663D31D795A4C0019B96A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204663D21D795A4C0019B96A /* AppDelegate.swift */; };
@@ -100,6 +99,7 @@
 		2097BFA51D7E3C5500E59D12 /* GameLevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA41D7E3C5500E59D12 /* GameLevelScene.sks */; };
 		2097BFA71D7E3C9800E59D12 /* IntroScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA61D7E3C9800E59D12 /* IntroScene.sks */; };
 		2097BFA91D7E3CBB00E59D12 /* InstructionsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2097BFA81D7E3CBB00E59D12 /* InstructionsScene.sks */; };
+		20A8788A1DA53B8000E57A5A /* obstacles26.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20A878891DA53B8000E57A5A /* obstacles26.plist */; };
 		20AEB33D1D8E41B500FC40D8 /* robotBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20AEB33C1D8E41B500FC40D8 /* robotBlip.wav */; };
 		20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20B1257E1D8CAE4C0022EAFA /* AfterLevelScene.sks */; };
 		20B125821D8CB97C0022EAFA /* AfterLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */; };
@@ -209,7 +209,6 @@
 		2040A1E31DA5149500B45985 /* operators21.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators21.plist; sourceTree = "<group>"; };
 		2040A1E61DA5178500B45985 /* obstacles22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles22.plist; sourceTree = "<group>"; };
 		2040A1E71DA5178500B45985 /* operators22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators22.plist; sourceTree = "<group>"; };
-		2040A1EA1DA5198000B45985 /* obstacles26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles26.plist; sourceTree = "<group>"; };
 		2040A1EB1DA5198000B45985 /* operators26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = operators26.plist; sourceTree = "<group>"; };
 		20415C781D8A1D4000AB1F0D /* SinkNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinkNode.swift; sourceTree = "<group>"; };
 		204663CF1D795A4C0019B96A /* Square Root Marbles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square Root Marbles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +260,7 @@
 		2097BFA41D7E3C5500E59D12 /* GameLevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameLevelScene.sks; sourceTree = "<group>"; };
 		2097BFA61D7E3C9800E59D12 /* IntroScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IntroScene.sks; sourceTree = "<group>"; };
 		2097BFA81D7E3CBB00E59D12 /* InstructionsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionsScene.sks; sourceTree = "<group>"; };
+		20A878891DA53B8000E57A5A /* obstacles26.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = obstacles26.plist; sourceTree = "<group>"; };
 		20AEB33C1D8E41B500FC40D8 /* robotBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = robotBlip.wav; sourceTree = "<group>"; };
 		20B1257E1D8CAE4C0022EAFA /* AfterLevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AfterLevelScene.sks; sourceTree = "<group>"; };
 		20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterLevelScene.swift; sourceTree = "<group>"; };
@@ -491,6 +491,7 @@
 				2091D9741DA4F63300ABE5EF /* obstacles16.plist */,
 				2040A1D61DA50F0700B45985 /* obstacles17.plist */,
 				2040A1D41DA50D7F00B45985 /* obstacles18.plist */,
+				20A878891DA53B8000E57A5A /* obstacles26.plist */,
 				2040A1D71DA50F0700B45985 /* obstacles19.plist */,
 				2040A1DE1DA5125600B45985 /* obstacles20.plist */,
 				2040A1E21DA5149500B45985 /* obstacles21.plist */,
@@ -498,7 +499,6 @@
 				200286401DA527D000EE6D7A /* obstacles23.plist */,
 				200286441DA5299C00EE6D7A /* obstacles24.plist */,
 				200286481DA52A8800EE6D7A /* obstacles25.plist */,
-				2040A1EA1DA5198000B45985 /* obstacles26.plist */,
 				204B11891DA29D4200F3F481 /* obstacles27.plist */,
 				204B11791DA2949300F3F481 /* obstacles28.plist */,
 				204B11751DA291C600F3F481 /* obstacles29.plist */,
@@ -725,9 +725,9 @@
 				201E3CDE1D909FAD006C18C6 /* 136_full_efficiency_0159.mp3 in Resources */,
 				200286421DA527D000EE6D7A /* obstacles23.plist in Resources */,
 				20F525221D9FBDB9002A4507 /* srm_46.mp3 in Resources */,
-				2040A1EC1DA5198000B45985 /* obstacles26.plist in Resources */,
 				2040A1D51DA50D7F00B45985 /* obstacles18.plist in Resources */,
 				20F525021D9FBDB9002A4507 /* srm_14.mp3 in Resources */,
+				20A8788A1DA53B8000E57A5A /* obstacles26.plist in Resources */,
 				20F525001D9FBDB9002A4507 /* srm_12.mp3 in Resources */,
 				20F524FD1D9FBDB9002A4507 /* srm_9.mp3 in Resources */,
 				20F525231D9FBDB9002A4507 /* srm_47.mp3 in Resources */,
