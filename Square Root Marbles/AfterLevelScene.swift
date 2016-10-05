@@ -87,13 +87,15 @@ class AfterLevelScene: GeneralScene {
         let log = gameAppDelegate!.getOperationLog()
 
         if log.count == 0{
-            messageText.append("Try again")
+            //messageText.append("Try again")
+            gameAppDelegate!.changeView(AppState.menuScene)
+            //QQQQ not sure this is what to do here
         }else{
             if gameAppDelegate!.getAppState() == AppState.afterLevelSceneFinished{
                 messageText.append("Good Effort!")
                 messageText.append("Your last moves:")
             }else{
-                messageText.append("Going Good!!!")
+                messageText.append("Going Good!")
                 messageText.append("Your last moves:")
             }
             
@@ -128,11 +130,6 @@ class AfterLevelScene: GeneralScene {
         
     }
     
-    func timerExpired(){
-        gameAppDelegate!.changeView(AppState.menuScene)
-    }
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        timer!.invalidate()
 //        gameAppDelegate!.changeView(AppState.menuScene)
@@ -155,7 +152,8 @@ class AfterLevelScene: GeneralScene {
             let ms = (scene as! AfterLevelScene) //mother scene
             ms.playButtonClick()
             
-            self.active = false
+            //had this here when had a wait, but now no.
+            //self.active = false
             
             var sqrtSoundPlaying = false
 
@@ -179,12 +177,13 @@ class AfterLevelScene: GeneralScene {
                 }
             }
             
-            let fade = SKAction.fadeOut(withDuration: sqrtSoundPlaying ? 1.0 : 0.4)
-            let rFade = fade.reversed()
-            let enable = SKAction.run {
-                self.active = true
-            }
-            self.run(SKAction.sequence([fade, rFade, enable]))
+            //removed the wait...
+//            let fade = SKAction.fadeOut(withDuration: sqrtSoundPlaying ? 1.0 : 0.4)
+//            let rFade = fade.reversed()
+//            let enable = SKAction.run {
+//                self.active = true
+//            }
+//            self.run(SKAction.sequence([fade, rFade, enable]))
 
         }
         

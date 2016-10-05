@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>0</key>
-	<string>(16,1)</string>
+	<string>(17,27)</string>
 	<key>1</key>
-	<string>(-15,14)</string>
+	<string>(8,-16)</string>
 	<key>2</key>
-	<string>(17,29)</string>
+	<string>(-16,16)</string>
 	<key>3</key>
-	<string>(5,17)</string>
+	<string>(0,-7)</string>
 	<key>4</key>
-	<string>(17,-13)</string>
+	<string>(0,-26)</string>
 	<key>5</key>
-	<string>(-17,-27)</string>
+	<string>(0,29)</string>
 	<key>6</key>
-	<string>(0,-18)</string>
+	<string>(-16,3)</string>
 	<key>7</key>
 	<string>(0,0)</string>
 </dict>

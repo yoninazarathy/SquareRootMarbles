@@ -60,6 +60,11 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     var lastTimeWallHit: Double = -100.0
     var currentTime: Double = 0.0
     
+    var totalTilt: Double = 0.0
+    var prevTilt1: Double = 0.0
+    var prevTilt2: Double = 0.0
+    var tiltMessageDisplayed: Bool = false
+    
     //////////////////
     // Game Control //
     //////////////////
@@ -101,6 +106,10 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                         (data, error) in
                         //QQQQ adjust and organize these constants
                         self.physicsWorld.gravity = CGVector(dx: 20 * CGFloat(sin(data!.attitude.roll)),dy: -20 * CGFloat(sin(data!.attitude.pitch)))
+                        self.totalTilt = self.totalTilt + abs(self.prevTilt1 - data!.attitude.roll) + abs(self.prevTilt2 - data!.attitude.pitch)
+                        self.prevTilt1 = data!.attitude.roll
+                        self.prevTilt2 = data!.attitude.pitch
+                        
                         //QQQQ disabled acceleartion
                         //self.playerNode.physicsBody!.applyForce(CGVector(dx: CGFloat(data!.userAcceleration.x*500), dy: CGFloat(data!.userAcceleration.y*500)))
                         if let error = error { // Might as well handle the optional error as well
@@ -146,7 +155,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             popUp.removeFromParent()
         }
         
-        let grow = SKAction.scale(by: 2.2, duration: 0.4)
+        let grow = SKAction.scale(by: 2.2, duration: 1.2)
         let shrink = grow.reversed()
         let makeDynamic = SKAction.run(){self.playerNode.physicsBody!.isDynamic = true
         }
@@ -204,7 +213,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 
         let newNumMarbles = lifesNode.numLifes
         
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "NothingToSay")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "Centiseconds:\(centiSecondsPlayed)")
         
         let currentLevel = gameLevelModel!.levelNumber
         if currentLevel < numLevels{
@@ -240,7 +249,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         haultAction()
         physicsWorld.speed = 1.0 //undo what is done in haultAction (to allow some extra spinning)
 
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "NothingToSay", progression03: "NothingToSay")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "NothingToSay", progression03: "Centiseconds:\(centiSecondsPlayed)")
 
         
         //QQQQ Get rid of NSTimer
@@ -414,6 +423,9 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             playGame()
         }else{//assert it is paused QQQQ
             pauseGame()
+            dimPanel.removeFromParent() //needed??? QQQQ
+            self.addChild(dimPanel)
+
         }
     }
     
@@ -879,7 +891,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         let almostDeadAction2 = almostDeadAction1.reversed()
         let sequence = SKAction.sequence([almostDeadAction1, almostDeadAction2])
         
-        
+        if totalTilt <= 0.6 && centiSecondsPlayed > 500 && !tiltMessageDisplayed{
+            tiltMessageDisplayed = true
+            messageLabelNode.displayFadingMessage("Tilt device", duration: 4.0)
+            GameAnalytics.addDesignEvent(withEventId: "tilt message level\(gameAppDelegate!.getLevel())")
+        }
+       
         if lifesNode.numLifes == 1{
             if playerNode.action(forKey: "playerAlmostDead") == nil{
                 playerNode.run(SKAction.repeatForever(sequence), withKey: "playerAlmostDead")

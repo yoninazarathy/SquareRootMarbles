@@ -188,8 +188,9 @@ class GameLevelDesignInfo{
         //////////
         // Helpers for design only .... (horizontal and vertical grid)
         
-        let makeHorzGrid = (level % 3 != 0)     && false
-        let makeVertGrid = (!makeHorzGrid)      && false
+        //QQQQ remove this code
+        let makeHorzGrid = (level % 2 != 0)     && false
+        let makeVertGrid = !makeHorzGrid      && false
         
         
         

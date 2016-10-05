@@ -19,9 +19,9 @@ class VictoryScene: GeneralScene {
         self.backgroundColor = SKColor.black
                         
         var messageText: [String?] = Array(repeating: nil, count: 0)
-        messageText.append("You did it!!!")
+        messageText.append("You did it!")
         messageText.append("You got through all the levels")
-        messageText.append("of Square Root Marbles!!!")
+        messageText.append("of Square Root Marbles!")
         messageText.append("")
         messageText.append("Now try to think of ")
         messageText.append("the square root of -1 ...")
@@ -40,6 +40,7 @@ class VictoryScene: GeneralScene {
             y = y - 50
             self.addChild(label)
         }
+        GameAnalytics.addDesignEvent(withEventId: "victoryScene")
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
