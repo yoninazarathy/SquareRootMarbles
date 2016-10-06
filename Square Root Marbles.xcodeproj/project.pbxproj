@@ -103,6 +103,7 @@
 		20AEB33D1D8E41B500FC40D8 /* robotBlip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20AEB33C1D8E41B500FC40D8 /* robotBlip.wav */; };
 		20B1257F1D8CAE4C0022EAFA /* AfterLevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20B1257E1D8CAE4C0022EAFA /* AfterLevelScene.sks */; };
 		20B125821D8CB97C0022EAFA /* AfterLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */; };
+		20B3D7661DA696B4009A3743 /* times2g.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B3D7651DA696B4009A3743 /* times2g.png */; };
 		20C565741D8105380011846E /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C565731D8105380011846E /* Plist.swift */; };
 		20CB3AEA1D902C870005C590 /* knock.wav in Resources */ = {isa = PBXBuildFile; fileRef = 20CB3AE91D902C870005C590 /* knock.wav */; };
 		20D2F9851D894D360081AA19 /* OperatorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D2F9841D894D360081AA19 /* OperatorNode.swift */; };
@@ -264,6 +265,7 @@
 		20AEB33C1D8E41B500FC40D8 /* robotBlip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = robotBlip.wav; sourceTree = "<group>"; };
 		20B1257E1D8CAE4C0022EAFA /* AfterLevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AfterLevelScene.sks; sourceTree = "<group>"; };
 		20B125811D8CB97C0022EAFA /* AfterLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterLevelScene.swift; sourceTree = "<group>"; };
+		20B3D7651DA696B4009A3743 /* times2g.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = times2g.png; sourceTree = "<group>"; };
 		20C565731D8105380011846E /* Plist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		20CB3AE91D902C870005C590 /* knock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = knock.wav; sourceTree = "<group>"; };
 		20D2F9841D894D360081AA19 /* OperatorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OperatorNode.swift; path = ../OperatorNode.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				20B125881D8CBB410022EAFA /* Infrastructure */,
 				20B125871D8CBAC60022EAFA /* LevelStructure */,
 				204663DD1D795A4C0019B96A /* Assets.xcassets */,
+				20B3D7651DA696B4009A3743 /* times2g.png */,
 				20B125891D8CBC8F0022EAFA /* Sounds */,
 			);
 			path = "Square Root Marbles";
@@ -798,6 +801,7 @@
 				201E09531D8E685B0088B86E /* SettingsScene.sks in Resources */,
 				2009D03C1D952843004984ED /* obstacles4.plist in Resources */,
 				2040A1E91DA5178500B45985 /* operators22.plist in Resources */,
+				20B3D7661DA696B4009A3743 /* times2g.png in Resources */,
 				201E3CDC1D909E77006C18C6 /* 0015_game_event_03_achieve.wav in Resources */,
 				20F5251C1D9FBDB9002A4507 /* srm_40.mp3 in Resources */,
 			);
@@ -889,9 +893,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -931,9 +936,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -941,7 +948,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4G9VZ63NB7;
 				INFOPLIST_FILE = "Square Root Marbles/Info.plist";
@@ -962,7 +968,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 4G9VZ63NB7;
 				INFOPLIST_FILE = "Square Root Marbles/Info.plist";

@@ -141,12 +141,12 @@ class AfterLevelScene: GeneralScene {
     
     class OKButtonNode : SKSpriteNode{
         
-        var active: Bool = true
+     //   var active: Bool = true
         
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if !active{
-                return
-            }
+//            if !active{
+//                return
+//            }
             
             
             let ms = (scene as! AfterLevelScene) //mother scene
@@ -155,7 +155,7 @@ class AfterLevelScene: GeneralScene {
             //had this here when had a wait, but now no.
             //self.active = false
             
-            var sqrtSoundPlaying = false
+    //        var sqrtSoundPlaying = false
 
             
             if ms.currentOpIndex < ms.operationSprites.count-1{
@@ -164,7 +164,7 @@ class AfterLevelScene: GeneralScene {
                 ms.addChild(ms.operationSprites[ms.currentOpIndex])
                 if ms.operationSprites[ms.currentOpIndex].imageNode != nil{
                     ms.playRandomSRM()
-                    sqrtSoundPlaying = true
+            //        sqrtSoundPlaying = true
                 }
             }else{
                 let delegate = ms.gameAppDelegate!

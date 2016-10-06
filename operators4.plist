@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>5</key>
+	<string>(0,0)</string>
 	<key>0</key>
 	<string>(8,17)</string>
 	<key>1</key>
@@ -9,8 +11,8 @@
 	<key>2</key>
 	<string>(-15,-27)</string>
 	<key>3</key>
-	<string>(1,-10)</string>
+	<string>(0,-17)</string>
 	<key>4</key>
-	<string>(0,0)</string>
+	<string>(8,-19)</string>
 </dict>
 </plist>

@@ -155,7 +155,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
             popUp.removeFromParent()
         }
         
-        let grow = SKAction.scale(by: 2.2, duration: 1.2)
+        let grow = SKAction.scale(by: 2.2, duration: 0.9)
         let shrink = grow.reversed()
         let makeDynamic = SKAction.run(){self.playerNode.physicsBody!.isDynamic = true
         }
