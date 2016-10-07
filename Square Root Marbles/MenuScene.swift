@@ -17,6 +17,8 @@ class MenuScene: GeneralScene {
     
     var messageLabelNode: MessageNode! = nil
     
+    var camVertTranlation: Double = 0.0
+    var scenePatchAdd: Double = 0.0
     
     override func didMove(to view: SKView) {
         setLowBackgroundMusicVolume()
@@ -26,7 +28,20 @@ class MenuScene: GeneralScene {
         sceneCam = SKCameraNode() //initialize your camera
         //sceneCam.xScale = CGFloat(screenWidth/actualScreenWidth)
         //sceneCam.yScale = CGFloat(screenHeight/actualScreenHeight)
-        sceneCam.position = CGPoint(x: size.width/2, y:CGFloat(1340 - screenHeight/2)) //size.height/2) //
+        print("YYYY:\(view.frame.size) -- \(actualScreenWidth)--\(actualScreenHeight))")
+        print("XXXXX: \(screenWidth/actualScreenWidth) -- \(screenHeight/actualScreenHeight)")
+        if  (screenWidth/actualScreenWidth) > (screenHeight/actualScreenHeight){
+            camVertTranlation = actualScreenHeight/2
+        }else{
+            camVertTranlation = screenHeight/2
+        }
+        
+        //QQQQ nasty iPadAir patch
+        if actualScreenWidth == 320 && actualScreenHeight == 480{
+            scenePatchAdd = 40
+        }
+
+        sceneCam.position = CGPoint(x: size.width/2, y:CGFloat(1340 + scenePatchAdd - camVertTranlation))
         self.camera = sceneCam  //set the scene's camera
         addChild(sceneCam) //add camera to scene
         
@@ -218,13 +233,13 @@ class MenuScene: GeneralScene {
         //QQQQ adjust these constants and any others...
         
         //upper bound for scrolling up
-        if newYPosition > CGFloat(1340 - screenHeight/2){
-            newYPosition = CGFloat(1340 - screenHeight/2)
+        if newYPosition > CGFloat(1340 + scenePatchAdd - camVertTranlation){
+            newYPosition = CGFloat(1340 + scenePatchAdd - camVertTranlation)
         }
         
         //lower bound for scrolling down
-        if newYPosition < CGFloat(screenHeight/2){
-            newYPosition = CGFloat(screenHeight/2)
+        if newYPosition < CGFloat(camVertTranlation - scenePatchAdd){
+            newYPosition = CGFloat(camVertTranlation - scenePatchAdd)
         }
         
         sceneCam.position = CGPoint(x: sceneCam.position.x , y: newYPosition)

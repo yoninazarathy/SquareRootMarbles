@@ -225,7 +225,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 if let currentGameScene = IntroScene(fileNamed:"IntroScene") {
                     currentGameScene.initAudio()
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -241,7 +245,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = GameLevelScene(fileNamed:"GameLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
                                                         //it was after using SKTransition...
@@ -255,7 +263,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ Need to "resume game" (currently restarting game in paused mode)
                 if let currentGameScene = GameLevelScene(fileNamed:"GameLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -263,7 +275,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = InstructionsScene(fileNamed:"InstructionsScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
                     //it was after using SKTransition...
@@ -276,7 +292,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = AfterLevelScene(fileNamed:"AfterLevelScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
             }
@@ -284,7 +304,11 @@ class GameViewController: UIViewController, GameAppDelegate {
             //QQQQ? Don't know what to do if this fails
             if let currentGameScene = AfterLevelScene(fileNamed:"AfterLevelScene") {
                 /* Set the scale mode to scale to fit the window */
-                currentGameScene.scaleMode = .aspectFill
+                currentGameScene.scaleMode = .fill//.aspectFill
+                //QQQQ nasty iPadAir patch
+                if actualScreenWidth == 320 && actualScreenHeight == 480{
+                    currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                }
                 currentGameScene.gameAppDelegate = self
                 skView.presentScene(currentGameScene, transition: transitionSlow)
             }
@@ -294,7 +318,11 @@ class GameViewController: UIViewController, GameAppDelegate {
             //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = VictoryScene(fileNamed:"VictoryScene") {
                     /* Set the scale mode to scale to fit the window */
-                    currentGameScene.scaleMode = .aspectFill
+                    currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                     currentGameScene.gameAppDelegate = self
                     skView.presentScene(currentGameScene, transition: transitionSlow)
                 }
@@ -303,7 +331,11 @@ class GameViewController: UIViewController, GameAppDelegate {
                 //QQQQ? Don't know what to do if this fails
                 if let currentGameScene = SettingsScene(fileNamed:"SettingsScene") {
                 /* Set the scale mode to scale to fit the window */
-                currentGameScene.scaleMode = .aspectFill
+                currentGameScene.scaleMode = .fill//.aspectFill
+                    //QQQQ nasty iPadAir patch
+                    if actualScreenWidth == 320 && actualScreenHeight == 480{
+                        currentGameScene.scaleMode = .aspectFit//.fill//.aspectFill
+                    }
                 currentGameScene.gameAppDelegate = self
                     skView.scene!.removeAllChildren() //QQQQ not clear why this is needed here (to remove menu boxes)
                     //it was after using SKTransition...
