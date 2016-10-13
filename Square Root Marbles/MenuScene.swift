@@ -9,14 +9,14 @@
 import SpriteKit
 
 
+class SelectionNode: SKShapeNode{
+    //QQQQ will make all node content here
+}
+
 class MenuScene: GeneralScene {
-        
-    var selectionNodes = [SKShapeNode?]()
     
+    var selectionNodes = [SelectionNode?]()
     var sceneCam: SKCameraNode!
-    
-    var messageLabelNode: MessageNode! = nil
-    
     var camVertTranlation: Double = 0.0
     var scenePatchAdd: Double = 0.0
     
@@ -28,8 +28,8 @@ class MenuScene: GeneralScene {
         sceneCam = SKCameraNode() //initialize your camera
         //sceneCam.xScale = CGFloat(screenWidth/actualScreenWidth)
         //sceneCam.yScale = CGFloat(screenHeight/actualScreenHeight)
-        print("YYYY:\(view.frame.size) -- \(actualScreenWidth)--\(actualScreenHeight))")
-        print("XXXXX: \(screenWidth/actualScreenWidth) -- \(screenHeight/actualScreenHeight)")
+        //print("YYYY:\(view.frame.size) -- \(actualScreenWidth)--\(actualScreenHeight))")
+        //print("XXXXX: \(screenWidth/actualScreenWidth) -- \(screenHeight/actualScreenHeight)")
         if  (screenWidth/actualScreenWidth) > (screenHeight/actualScreenHeight){
             camVertTranlation = actualScreenHeight/2
         }else{
@@ -54,7 +54,6 @@ class MenuScene: GeneralScene {
         
         let margin = (screenWidth - 3*buttonSize - 2*buttonSpacing)/2
      
-    
         var currentY = Double(self.size.height) - 2*menuButtonSpacing - menuButtonSize/2
         
         let helpButtonNode = HelpButtonNode(imageNamed: "help")
@@ -93,6 +92,11 @@ class MenuScene: GeneralScene {
         
         currentY = currentY - menuButtonSize/2 - 2 * menuButtonSpacing
         
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tap.numberOfTapsRequired = 1
+        self.view?.addGestureRecognizer(tap)
+
+        
         selectionNodes.append(nil)
         for i in stride(from: 1, to: numLevels, by: 3) {
             let y = currentY-60-40*(Double(i)-1)
@@ -113,7 +117,7 @@ class MenuScene: GeneralScene {
             lifesNode.numLifes = numMarbles
             lifesNode.refreshDisplay()
             self.addChild(lifesNode)
-            var shapeNode = SKShapeNode()
+            var shapeNode = SelectionNode()
             shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
             shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
@@ -147,7 +151,7 @@ class MenuScene: GeneralScene {
             lifesNode.numLifes = numMarbles
             lifesNode.refreshDisplay()
             self.addChild(lifesNode)
-            shapeNode = SKShapeNode()
+            shapeNode = SelectionNode()
             shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
             shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
@@ -177,7 +181,7 @@ class MenuScene: GeneralScene {
             lifesNode.numLifes = numMarbles
             lifesNode.refreshDisplay()
             self.addChild(lifesNode)
-            shapeNode = SKShapeNode()
+            shapeNode = SelectionNode()
             shapeNode.path = UIBezierPath(roundedRect: CGRect(x: x, y:y-30, width: buttonSize, height: buttonSize),cornerRadius: 8).cgPath
             shapeNode.zPosition = -5
             shapeNode.fillColor = (levelOpen ? SKColor.orange : SKColor.darkGray)
@@ -196,33 +200,24 @@ class MenuScene: GeneralScene {
         
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first!
-//        //print("LOCATION: \(touch.location(in: self))")
-//    }
-
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if dragging{
-            dragging = false
-            return
-        }
-        let touch = touches.first!
-        for i in 1..<selectionNodes.count{
-            if let node = selectionNodes[i] {
-                if node.contains(touch.location(in: self)){
-                    gameAppDelegate!.setLevel(i)
-                    gameAppDelegate!.changeView(AppState.gameActionPlaying)
-                    return
+    func handleTap(_ sender:UITapGestureRecognizer){
+        if sender.state == .ended {
+            var touchLocation: CGPoint = sender.location(in: sender.view)
+            touchLocation = self.convertPoint(fromView: touchLocation)
+            for i in 1..<selectionNodes.count{
+                if let node = selectionNodes[i] {
+                    if node.contains(touchLocation){
+                        node.fillColor = SKColor.green
+                        gameAppDelegate!.setLevel(i)
+                        gameAppDelegate!.changeView(AppState.gameActionPlaying)
+                        return
+                    }
                 }
             }
         }
     }
     
-    var dragging = false
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dragging = true
         let touch = touches.first
         
         let positionInScene = touch!.location(in: self)
