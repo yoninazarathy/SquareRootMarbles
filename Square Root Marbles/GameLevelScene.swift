@@ -61,9 +61,12 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     var currentTime: Double = 0.0
     
     var totalTilt: Double = 0.0
-    var prevTilt1: Double = 0.0
-    var prevTilt2: Double = 0.0
     var tiltMessageDisplayed: Bool = false
+    
+    var motionReads = CGVector()
+    var prevMotionReads = CGVector()
+    var numMotionReads: Int = 0
+
     
     //////////////////
     // Game Control //
@@ -104,16 +107,17 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
                     motionManager.deviceMotionUpdateInterval = 0.02
                     motionManager.startDeviceMotionUpdates(to: OperationQueue.main ) {
                         (data, error) in
-                        //QQQQ adjust and organize these constants
-                        self.physicsWorld.gravity = CGVector(dx: 20 * CGFloat(sin(data!.attitude.roll)),dy: -20 * CGFloat(sin(data!.attitude.pitch)))
-                        self.totalTilt = self.totalTilt + abs(self.prevTilt1 - data!.attitude.roll) + abs(self.prevTilt2 - data!.attitude.pitch)
-                        self.prevTilt1 = data!.attitude.roll
-                        self.prevTilt2 = data!.attitude.pitch
                         
-                        //QQQQ disabled acceleartion
-                        //self.playerNode.physicsBody!.applyForce(CGVector(dx: CGFloat(data!.userAcceleration.x*500), dy: CGFloat(data!.userAcceleration.y*500)))
+                        self.prevMotionReads = self.motionReads
+                        self.motionReads.dx = CGFloat(20*sin(data!.attitude.roll))
+                        self.motionReads.dy = CGFloat(-20*sin(data!.attitude.pitch))
+                        
+                        self.numMotionReads = self.numMotionReads + 1
+                        
                         if let error = error { // Might as well handle the optional error as well
                             print(error.localizedDescription)
+                            GameAnalytics.addErrorEvent(with: GAErrorSeverityCritical, message: "ErrorWithCoreMotion")
+                            GameAnalytics.addErrorEvent(with: GAErrorSeverityCritical, message: error.localizedDescription)
                             return
                         }
                     }
@@ -133,6 +137,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     }
     
     func resetLevel(){
+        numMotionReads = 0
         centiSecondsPlayed = 0
         finishingSteps = 0
         let numLifes = gameAppDelegate!.getGameLevelModel(gameAppDelegate!.getLevel()).numMarbles
@@ -213,7 +218,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 
         let newNumMarbles = lifesNode.numLifes
         
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "Centiseconds:\(centiSecondsPlayed)")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusComplete, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "Lifes\(newNumMarbles)", progression03: "Centiseconds_\(centiSecondsPlayed)")
         
         let currentLevel = gameLevelModel!.levelNumber
         if currentLevel < numLevels{
@@ -249,7 +254,7 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         haultAction()
         physicsWorld.speed = 1.0 //undo what is done in haultAction (to allow some extra spinning)
 
-        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "NothingToSay", progression03: "Centiseconds:\(centiSecondsPlayed)")
+        GameAnalytics.addProgressionEvent(with: GAProgressionStatusFail, progression01: "Level\(gameAppDelegate!.getLevel())", progression02: "NothingToSay", progression03: "Centiseconds_\(centiSecondsPlayed)")
 
         
         //QQQQ Get rid of NSTimer
@@ -271,13 +276,14 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
         
         let level = gameAppDelegate!.getLevel()
         
-        if gameAppDelegate!.getOperationLog().count >= minNumOperationsBetweenAfterScreen &&
-            level < numLevels{
-            gameAppDelegate!.changeView(AppState.afterLevelSceneBreak)
-            setLowBackgroundMusicVolume() //QQQQ the volume should be set as part of the scene
-            return
-        }
-        
+        //QQQQ disabled after level scene
+//        if gameAppDelegate!.getOperationLog().count >= minNumOperationsBetweenAfterScreen &&
+//            level < numLevels{
+//            gameAppDelegate!.changeView(AppState.afterLevelSceneBreak)
+//            setLowBackgroundMusicVolume() //QQQQ the volume should be set as part of the scene
+//            return
+//        }
+//        
         if level < numLevels{
             //QQQQ funny transition mechanism but it works...
             gameAppDelegate!.setLevel(level+1)
@@ -290,7 +296,8 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
     
     func moveToAfterLevelScene(){
         //QQQQ will want this when failing...
-        gameAppDelegate!.changeView(AppState.afterLevelSceneFinished)
+        //QQQQ disabled after level scene gameAppDelegate!.changeView(AppState.afterLevelSceneFinished)
+        gameAppDelegate!.changeView(AppState.menuScene)
         setLowBackgroundMusicVolume() //QQQQ the volume should be set as part of the scene
     }
 
@@ -886,12 +893,22 @@ class GameLevelScene: GeneralScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         self.currentTime = currentTime
+        
+        
+        self.physicsWorld.gravity = motionReads
+        if numMotionReads > 10{
+            totalTilt = totalTilt + abs(Double(motionReads.dx-prevMotionReads.dx)) + abs(Double(motionReads.dy-prevMotionReads.dy))
+        }
+        
+        //QQQQ disabled acceleartion
+        //self.playerNode.physicsBody!.applyForce(CGVector(dx: CGFloat(data!.userAcceleration.x*500), dy: CGFloat(data!.userAcceleration.y*500)))
+        
 
         let almostDeadAction1 = SKAction.colorize(withColorBlendFactor: 1.0, duration: 0.25)
         let almostDeadAction2 = almostDeadAction1.reversed()
         let sequence = SKAction.sequence([almostDeadAction1, almostDeadAction2])
         
-        if totalTilt <= 0.6 && centiSecondsPlayed > 500 && !tiltMessageDisplayed{
+        if totalTilt <= 10.0 && centiSecondsPlayed > 400 && !tiltMessageDisplayed{
             tiltMessageDisplayed = true
             messageLabelNode.displayFadingMessage("Tilt device", duration: 4.0)
             GameAnalytics.addDesignEvent(withEventId: "tilt message level\(gameAppDelegate!.getLevel())")

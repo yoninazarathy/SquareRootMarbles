@@ -17,7 +17,7 @@ let showFPSFlag = false
 let showNodCountFlag = false
 let gameAnalyticsInfoLog = false
 
-let buildStringForGA = "Beta 0.5.0"
+let buildStringForGA = "1.2.1"
 
 ///////////////
 // Game Play //
@@ -37,7 +37,7 @@ let upperBoundNumOperators = 15
 let timeInIntroScreen = 15.0
 let timeInAfterLevelScene = 300.0 //very long
 
-let secondsBetweenLosses = 12
+let secondsBetweenLosses = 20
 
 let minNumOperationsBetweenAfterScreen = 15
 
