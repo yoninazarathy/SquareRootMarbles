@@ -17,7 +17,7 @@ let showFPSFlag = false
 let showNodCountFlag = false
 let gameAnalyticsInfoLog = false
 
-let buildStringForGA = "1.2.1"
+let buildStringForGA = "1.2.2"
 
 ///////////////
 // Game Play //
